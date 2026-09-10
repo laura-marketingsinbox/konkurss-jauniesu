@@ -147,7 +147,7 @@
       .select('id, mascot_name, file_path, file_type')
       .eq('status', 'approved')
       .order('created_at', { ascending: false })
-      .limit(24);
+      .limit(4);
 
     if (error || !data || data.length === 0) return;
 
