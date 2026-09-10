@@ -1,5 +1,6 @@
 -- Konkursa "Radi nākamo Inbox.lv talismanu" datubāzes shēma
 -- Palaid šo VIENU REIZI Supabase panelī: SQL Editor -> New query -> ielīmē -> Run
+-- (Šo failu var palaist atkārtoti bez riska — tas katru reizi pārraksta noteikumus, nevis dublē tos.)
 
 create extension if not exists "pgcrypto";
 
@@ -46,6 +47,21 @@ create trigger trg_force_pending
   before insert on public.submissions
   for each row execute function public.force_pending_status();
 
+-- Palīgfunkcija, kas pārbauda, vai pieteikušais lietotājs ir administrators.
+-- "security definer" ir svarīgs: tas ļauj funkcijai pašai izlasīt admins tabulu,
+-- neizraisot bezgalīgu ciklu ar admins tabulas pašas RLS noteikumu.
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1 from public.admins where email = auth.jwt() ->> 'email'
+  );
+$$;
+
 alter table public.submissions enable row level security;
 
 -- Jebkurš var iesniegt pieteikumu, ja atzīmēti obligātie piekrišanas lauki
@@ -64,18 +80,18 @@ create policy "public can view approved" on public.submissions
   for select to anon
   using (status = 'approved');
 
--- Administratori (no admins saraksta) redz un pārvalda visu
+-- Administratori redz un pārvalda visu
 drop policy if exists "admins manage all" on public.submissions;
 create policy "admins manage all" on public.submissions
   for all to authenticated
-  using (auth.jwt() ->> 'email' in (select email from public.admins))
-  with check (auth.jwt() ->> 'email' in (select email from public.admins));
+  using (public.is_admin())
+  with check (public.is_admin());
 
 alter table public.admins enable row level security;
 drop policy if exists "admins can read allow-list" on public.admins;
 create policy "admins can read allow-list" on public.admins
   for select to authenticated
-  using (auth.jwt() ->> 'email' in (select email from public.admins));
+  using (public.is_admin());
 
 -- Failu krātuve (attēli/video) — privāta, pieeja tikai caur RLS noteikumiem
 insert into storage.buckets (id, name, public)
@@ -90,10 +106,7 @@ create policy "public can upload submissions" on storage.objects
 drop policy if exists "admins can read submissions" on storage.objects;
 create policy "admins can read submissions" on storage.objects
   for select to authenticated
-  using (
-    bucket_id = 'submissions'
-    and auth.jwt() ->> 'email' in (select email from public.admins)
-  );
+  using (bucket_id = 'submissions' and public.is_admin());
 
 drop policy if exists "public can view approved files" on storage.objects;
 create policy "public can view approved files" on storage.objects
@@ -111,7 +124,4 @@ create policy "public can view approved files" on storage.objects
 drop policy if exists "admins can delete submissions" on storage.objects;
 create policy "admins can delete submissions" on storage.objects
   for delete to authenticated
-  using (
-    bucket_id = 'submissions'
-    and auth.jwt() ->> 'email' in (select email from public.admins)
-  );
+  using (bucket_id = 'submissions' and public.is_admin());
