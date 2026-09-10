@@ -168,12 +168,47 @@
   }
   .field { margin-bottom: 18px; }
   .field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--gray); margin-bottom: 6px; }
-  .field .input {
-    background: var(--white); border: 1px solid rgba(0,0,0,0.12); border-radius: 8px;
-    padding: 12px 14px; font-size: 14px; color: #b4aea6;
+  .field .input,
+  input.input, select.input, textarea.input {
+    width: 100%; background: var(--white); border: 1px solid rgba(0,0,0,0.12); border-radius: 8px;
+    padding: 12px 14px; font-size: 14px; color: var(--ink); font-family: var(--font-base);
   }
-  .field .input.upload { border-style: dashed; text-align: center; padding: 22px; }
-  .field textarea.input { min-height: 70px; }
+  input.input::placeholder, textarea.input::placeholder { color: #b4aea6; }
+  .field .input.upload { border-style: dashed; text-align: center; padding: 22px; cursor: pointer; }
+  .field textarea.input { min-height: 70px; resize: vertical; }
+  .field-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; font-size: 13.5px; color: #514c47; }
+  .field-check input { margin-top: 3px; }
+  .field-hidden { display: none; }
+  .form-msg { margin-top: 16px; font-size: 13.5px; padding: 12px 14px; border-radius: 8px; display: none; }
+  .form-msg.ok { display: block; background: #eaf6ec; color: #1e5e2e; }
+  .form-msg.err { display: block; background: #fbeceb; color: #8a2a22; }
+  .submit-btn { background: var(--red); color: var(--white); font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 10px; width: 100%; }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .gcard.filled { border-style: solid; overflow: hidden; padding: 0; position: relative; }
+  .gcard.filled img, .gcard.filled video { width: 100%; height: 100%; object-fit: cover; }
+  .gcard.filled .gname { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, rgba(0,0,0,0.65), transparent); color: #fff; font-size: 12.5px; padding: 8px 10px; text-align: left; }
+
+  /* ---------- WINNERS ---------- */
+  .winners { padding: 90px 0 70px; background: linear-gradient(180deg, var(--ink) 0%, #2a1450 100%); color: var(--white); text-align: center; }
+  .winners h2 { font-size: 32px; }
+  .winners p.sub { color: rgba(255,255,255,0.65); font-size: 15px; margin: 10px auto 40px; max-width: 40ch; }
+  .podium { display: flex; align-items: flex-end; justify-content: center; gap: 18px; max-width: 720px; margin: 0 auto; }
+  .podium-spot { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 18px; flex: 1; }
+  .podium-spot .media { width: 100%; aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; margin-bottom: 12px; background: rgba(255,255,255,0.08); }
+  .podium-spot .media img, .podium-spot .media video { width: 100%; height: 100%; object-fit: cover; }
+  .podium-spot .medal { font-size: 26px; margin-bottom: 6px; }
+  .podium-spot h3 { font-size: 16px; margin-bottom: 4px; }
+  .podium-spot .author { font-size: 12.5px; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .podium-spot .prize { font-size: 12.5px; color: var(--violet-soft); font-weight: 700; }
+  .podium-spot.rank-1 { order: 2; padding-top: 6px; transform: translateY(-16px); }
+  .podium-spot.rank-2 { order: 1; }
+  .podium-spot.rank-3 { order: 3; }
+  @media (max-width: 860px) {
+    .podium { flex-direction: column; max-width: 320px; }
+    .podium-spot.rank-1 { transform: none; order: 0; }
+    .podium-spot.rank-2 { order: 1; }
+    .podium-spot.rank-3 { order: 2; }
+  }
 
   /* ---------- GALLERY ---------- */
   .gallery { padding: 90px 0; background: var(--bg-light); }
@@ -236,7 +271,7 @@
       <h1 class="hero-fade d2" data-key="title">Radi nākamo<br>Inbox.lv talismanu</h1>
       <p class="sub hero-fade d3" data-key="sub">Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu — tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.</p>
       <div class="hero-actions hero-fade d3">
-        <button class="btn-primary" data-key="cta">Piesakies konkursam</button>
+        <button class="btn-primary" data-key="cta" onclick="document.getElementById('entryForm').scrollIntoView({behavior:'smooth'})">Piesakies konkursam</button>
         <div class="hero-dates"><b data-key="dates">30.09.–30.10.2026</b> <span data-key="dates2">· pieteikšanās periods</span></div>
       </div>
     </div>
@@ -330,11 +365,62 @@
       <p class="sub" data-key="subS">Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.</p>
       <div class="consent-note" data-key="subNote">Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.</div>
     </div>
-    <div class="form-mock">
-      <div class="field"><label data-key="f1">Talismana vizuālais tēls</label><div class="input upload" data-key="f1p">Ievelc failu šeit vai izvēlies no ierīces</div></div>
-      <div class="field"><label data-key="f2">Talismana vārds</label><div class="input" data-key="f2p">piem., Vēstulis</div></div>
-      <div class="field"><label data-key="f3">Personība un stāsts</label><div class="input" style="min-height:70px" data-key="f3p">Pastāsti, kas viņš ir...</div></div>
-    </div>
+    <form class="form-mock" id="entryForm" novalidate>
+      <div class="field">
+        <label data-key="fName">Tavs vārds vai segvārds</label>
+        <input class="input" type="text" name="display_name" required maxlength="80">
+      </div>
+      <div class="field">
+        <label data-key="fEmail">E-pasts</label>
+        <input class="input" type="email" name="email" required maxlength="200">
+      </div>
+      <div class="field">
+        <label data-key="fAge">Vecuma grupa</label>
+        <select class="input" name="age_bracket" required>
+          <option value="" data-key="fAgeChoose">— izvēlies —</option>
+          <option value="minor" data-key="fAgeMinor">14–17 gadi</option>
+          <option value="adult" data-key="fAgeAdult">18–30 gadi</option>
+        </select>
+      </div>
+      <div class="field field-hidden" id="parentFields">
+        <label data-key="fParentName">Vecāka/aizbildņa vārds, uzvārds</label>
+        <input class="input" type="text" name="parent_name" maxlength="120">
+        <div style="height:10px"></div>
+        <label data-key="fParentEmail">Vecāka/aizbildņa e-pasts</label>
+        <input class="input" type="email" name="parent_email" maxlength="200">
+      </div>
+      <div class="field">
+        <label data-key="f1">Talismana vizuālais tēls (attēls vai video)</label>
+        <input class="input" type="file" name="file" accept="image/*,video/*" required style="padding:10px 14px;">
+        <div style="font-size:12px;color:var(--gray);margin-top:6px;" data-key="f1hint">Attēls vai video, līdz 50MB</div>
+      </div>
+      <div class="field">
+        <label data-key="f2">Talismana vārds</label>
+        <input class="input" type="text" name="mascot_name" required maxlength="80">
+      </div>
+      <div class="field">
+        <label data-key="f3">Personība un stāsts</label>
+        <textarea class="input" name="story" required maxlength="2000"></textarea>
+      </div>
+      <label class="field-check">
+        <input type="checkbox" name="consent_rules" required>
+        <span data-key="cRules">Piekrītu <a href="rules.html" target="_blank">konkursa nolikumam</a></span>
+      </label>
+      <label class="field-check">
+        <input type="checkbox" name="consent_rights" required>
+        <span data-key="cRights">Piekrītu nodot Inbox.lv izmantošanas tiesības uz iesniegto darbu, kā aprakstīts nolikumā</span>
+      </label>
+      <button type="submit" class="submit-btn" data-key="fSubmit">Iesniegt pieteikumu</button>
+      <div class="form-msg" id="formMsg"></div>
+    </form>
+  </div>
+</section>
+
+<section class="winners" id="winnersSection" hidden>
+  <div class="wrap">
+    <h2 data-key="winT">Uzvarētāji</h2>
+    <p class="sub" data-key="winS">Apsveicam! Šie ir konkursa uzvarētāji.</p>
+    <div class="podium" id="podiumGrid"></div>
   </div>
 </section>
 
@@ -342,7 +428,7 @@
   <div class="wrap">
     <h2 data-key="galT">Dalībnieku darbi</h2>
     <p class="sub" data-key="galS">Šeit pēc 30. septembra parādīsies iesniegtie talismani. Pirmais taps tavs?</p>
-    <div class="gallery-grid">
+    <div class="gallery-grid" id="galleryGrid">
       <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
       <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
       <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
@@ -363,7 +449,7 @@
 </footer>
 
 <script>
-const dict = {
+window.dict = {
   lv: {
     pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
     sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu — tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
@@ -382,10 +468,23 @@ const dict = {
     prizeT:'Galvenā balva — jaunā Samsung planšete', prizeS:'Tirgū no 30.09.2026 · modelis tiks precizēts',
     subT:'Kā pieteikties', subS:'Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.',
     subNote:'Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.',
-    f1:'Talismana vizuālais tēls', f1p:'Ievelc failu šeit vai izvēlies no ierīces',
+    f1:'Talismana vizuālais tēls (attēls vai video)', f1hint:'Attēls vai video, līdz 50MB',
     f2:'Talismana vārds', f2p:'piem., Vēstulis',
     f3:'Personība un stāsts', f3p:'Pastāsti, kas viņš ir...',
+    fName:'Tavs vārds vai segvārds', fEmail:'E-pasts',
+    fAge:'Vecuma grupa', fAgeChoose:'— izvēlies —', fAgeMinor:'14–17 gadi', fAgeAdult:'18–30 gadi',
+    fParentName:'Vecāka/aizbildņa vārds, uzvārds', fParentEmail:'Vecāka/aizbildņa e-pasts',
+    cRules:'Piekrītu <a href="rules.html" target="_blank">konkursa nolikumam</a>',
+    cRights:'Piekrītu nodot Inbox.lv izmantošanas tiesības uz iesniegto darbu, kā aprakstīts nolikumā',
+    fSubmit:'Iesniegt pieteikumu',
+    msgOk:'Paldies! Tavs pieteikums saņemts un tiks pārskatīts pirms publicēšanas.',
+    msgErr:'Neizdevās nosūtīt. Pārbaudi laukus un mēģini vēlreiz.',
+    msgErrAge:'Lūdzu, izvēlies vecuma grupu.',
+    msgErrParent:'Dalībniekiem 14–17 gadu vecumā jānorāda arī vecāka/aizbildņa vārds un e-pasts.',
+    msgErrFile:'Fails ir pārāk liels (maks. 50MB) vai nav atbalstīta formāta.',
+    msgSending:'Sūta...',
     galT:'Dalībnieku darbi', galS:'Šeit pēc 30. septembra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu',
+    winT:'Uzvarētāji', winS:'Apsveicam! Šie ir konkursa uzvarētāji.',
     fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Kontakti'
   },
   ru: {
@@ -406,10 +505,23 @@ const dict = {
     prizeT:'Главный приз — новый планшет Samsung', prizeS:'В продаже с 30.09.2026 · модель уточняется',
     subT:'Как участвовать', subS:'Три шага: визуальный образ, имя и история. Займёт около 10 минут.',
     subNote:'Если тебе меньше 18 лет, форма также запросит согласие родителя или опекуна.',
-    f1:'Визуальный образ талисмана', f1p:'Перетащи файл сюда или выбери с устройства',
+    f1:'Визуальный образ талисмана (изображение или видео)', f1hint:'Изображение или видео, до 50МБ',
     f2:'Имя талисмана', f2p:'например, Вестулис',
     f3:'Характер и история', f3p:'Расскажи, кто он...',
+    fName:'Твоё имя или псевдоним', fEmail:'Эл. почта',
+    fAge:'Возрастная группа', fAgeChoose:'— выбери —', fAgeMinor:'14–17 лет', fAgeAdult:'18–30 лет',
+    fParentName:'Имя и фамилия родителя/опекуна', fParentEmail:'Эл. почта родителя/опекуна',
+    cRules:'Согласен(на) с <a href="rules.html" target="_blank">правилами конкурса</a>',
+    cRights:'Согласен(на) передать Inbox.lv права на использование присланной работы, как описано в правилах',
+    fSubmit:'Отправить заявку',
+    msgOk:'Спасибо! Твоя заявка получена и будет рассмотрена перед публикацией.',
+    msgErr:'Не удалось отправить. Проверь поля и попробуй снова.',
+    msgErrAge:'Пожалуйста, выбери возрастную группу.',
+    msgErrParent:'Участникам 14–17 лет нужно также указать имя и эл. почту родителя/опекуна.',
+    msgErrFile:'Файл слишком большой (макс. 50МБ) или неподдерживаемый формат.',
+    msgSending:'Отправка...',
     galT:'Работы участников', galS:'Здесь после 30 сентября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку',
+    winT:'Победители', winS:'Поздравляем! Это победители конкурса.',
     fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
   },
   en: {
@@ -430,10 +542,23 @@ const dict = {
     prizeT:'Main prize — the new Samsung tablet', prizeS:'On sale from 30 Sep 2026 · exact model to be confirmed',
     subT:'How to enter', subS:'Three steps: visual character, name, and story. Takes about 10 minutes.',
     subNote:'If you\'re under 18, the form will also ask for a parent or guardian\'s consent.',
-    f1:'Mascot visual character', f1p:'Drag a file here or choose from device',
+    f1:'Mascot visual character (image or video)', f1hint:'Image or video, up to 50MB',
     f2:'Mascot name', f2p:'e.g., Vestulis',
     f3:'Personality & story', f3p:'Tell us who they are...',
+    fName:'Your name or nickname', fEmail:'Email',
+    fAge:'Age group', fAgeChoose:'— choose —', fAgeMinor:'14–17 years old', fAgeAdult:'18–30 years old',
+    fParentName:"Parent/guardian's full name", fParentEmail:"Parent/guardian's email",
+    cRules:'I agree to the <a href="rules.html" target="_blank">contest rules</a>',
+    cRights:'I agree to transfer usage rights of the submitted work to Inbox.lv, as described in the rules',
+    fSubmit:'Submit entry',
+    msgOk:'Thank you! Your entry has been received and will be reviewed before publishing.',
+    msgErr:'Could not submit. Please check the fields and try again.',
+    msgErrAge:'Please choose an age group.',
+    msgErrParent:'Entrants aged 14–17 must also provide a parent/guardian name and email.',
+    msgErrFile:'File is too large (max 50MB) or an unsupported format.',
+    msgSending:'Sending...',
     galT:'Entries', galS:'Submitted mascots will appear here after 30 September. Will the first one be yours?', gEmpty:'Waiting for the first entry',
+    winT:'Winners', winS:'Congratulations! These are the contest winners.',
     fRules:'Rules', fPrivacy:'Privacy Policy', fContact:'Contact'
   }
 };
@@ -452,6 +577,10 @@ document.querySelectorAll('#langSwitch button').forEach(b => {
   b.addEventListener('click', () => setLang(b.getAttribute('data-lang')));
 });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script src="assets/app.js"></script>
 
 </body>
 </html>

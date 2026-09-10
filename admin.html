@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konkursa administrēšana — Inbox.lv</title>
+<style>
+  :root {
+    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --bg: #F5F3F0; --ink: #17151C; --red: #CC0717; --gray: #8C8279; --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font-base); background: var(--bg); color: var(--ink); }
+  header { background: var(--ink); color: var(--white); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; }
+  header h1 { font-size: 17px; margin: 0; }
+  header button { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 24px; }
+
+  #loginBox { max-width: 360px; margin: 80px auto; background: var(--white); padding: 30px; border-radius: 14px; border: 1px solid rgba(0,0,0,0.08); }
+  #loginBox h2 { margin: 0 0 18px; font-size: 18px; }
+  #loginBox input { width: 100%; padding: 11px 13px; margin-bottom: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 8px; font-size: 14px; }
+  #loginBox button { width: 100%; background: var(--red); color: var(--white); border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+  #loginErr { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+  .tabs button { background: var(--white); border: 1px solid rgba(0,0,0,0.1); padding: 8px 16px; border-radius: 999px; font-size: 13px; cursor: pointer; font-weight: 600; color: var(--gray); }
+  .tabs button.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+  .card { background: var(--white); border-radius: 12px; padding: 18px; margin-bottom: 14px; border: 1px solid rgba(0,0,0,0.06); display: grid; grid-template-columns: 140px 1fr auto; gap: 18px; align-items: start; }
+  .card .media { width: 140px; height: 140px; border-radius: 8px; overflow: hidden; background: #eee; display: flex; align-items: center; justify-content: center; }
+  .card .media img, .card .media video { width: 100%; height: 100%; object-fit: cover; }
+  .card h3 { margin: 0 0 6px; font-size: 16px; }
+  .card .meta { font-size: 12.5px; color: var(--gray); margin-bottom: 8px; }
+  .card p.story { font-size: 13.5px; line-height: 1.5; margin: 0 0 8px; white-space: pre-wrap; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 999px; text-transform: uppercase; }
+  .badge.pending { background: #fff3cd; color: #8a6215; }
+  .badge.approved { background: #eaf6ec; color: #1e5e2e; }
+  .badge.rejected { background: #fbeceb; color: #8a2a22; }
+  .actions { display: flex; flex-direction: column; gap: 8px; min-width: 130px; }
+  .actions button, .actions a { font-size: 13px; padding: 9px 12px; border-radius: 8px; border: none; cursor: pointer; text-align: center; text-decoration: none; font-weight: 600; }
+  .btn-approve { background: #1e5e2e; color: #fff; }
+  .btn-reject { background: #8a2a22; color: #fff; }
+  .btn-download { background: var(--bg); color: var(--ink); border: 1px solid rgba(0,0,0,0.15) !important; }
+  .btn-delete { background: var(--white); color: #8a2a22; border: 1px solid #8a2a22 !important; }
+  .empty { text-align: center; color: var(--gray); padding: 60px 0; }
+  .winner-controls { margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(0,0,0,0.12); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12.5px; color: var(--gray); }
+  .winner-controls select, .winner-controls input[type="text"] { font-size: 12.5px; padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.15); }
+  .winner-controls input[type="text"] { flex: 1; min-width: 160px; }
+  .winner-controls button { font-size: 12.5px; padding: 6px 12px; border-radius: 6px; border: none; background: var(--ink); color: var(--white); cursor: pointer; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Konkursa administrēšana</h1>
+  <button id="signOutBtn" style="display:none">Iziet</button>
+</header>
+
+<div id="loginBox">
+  <h2>Pieteikšanās administratoriem</h2>
+  <input type="email" id="loginEmail" placeholder="E-pasts" autocomplete="username">
+  <input type="password" id="loginPassword" placeholder="Parole" autocomplete="current-password">
+  <button id="loginBtn">Pieteikties</button>
+  <div id="loginErr">Nepareizs e-pasts vai parole.</div>
+</div>
+
+<div id="resetBox" style="display:none; max-width: 360px; margin: 80px auto; background: var(--white); padding: 30px; border-radius: 14px; border: 1px solid rgba(0,0,0,0.08);">
+  <h2 style="margin:0 0 18px; font-size:18px;">Iestati jaunu paroli</h2>
+  <input type="password" id="newPassword" placeholder="Jaunā parole (min. 6 rakstzīmes)" autocomplete="new-password" style="width:100%; padding:11px 13px; margin-bottom:12px; border:1px solid rgba(0,0,0,0.15); border-radius:8px; font-size:14px;">
+  <button id="saveNewPasswordBtn" style="width:100%; background: var(--red); color: var(--white); border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer;">Saglabāt paroli</button>
+  <div id="resetMsg" style="font-size:13px; margin-top:10px; display:none;"></div>
+</div>
+
+<div class="wrap" id="dashboard" style="display:none">
+  <div class="tabs">
+    <button data-status="pending" class="active">Gaida pārbaudi</button>
+    <button data-status="approved">Apstiprināti</button>
+    <button data-status="rejected">Noraidīti</button>
+    <button data-status="all">Visi</button>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/supabase-config.js"></script>
+<script>
+(function () {
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const loginBox = document.getElementById('loginBox');
+  const resetBox = document.getElementById('resetBox');
+  const dashboard = document.getElementById('dashboard');
+  const signOutBtn = document.getElementById('signOutBtn');
+  const loginErr = document.getElementById('loginErr');
+  let currentStatus = 'pending';
+  let inRecoveryFlow = false;
+
+  sb.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') {
+      inRecoveryFlow = true;
+      loginBox.style.display = 'none';
+      dashboard.style.display = 'none';
+      resetBox.style.display = 'block';
+    }
+  });
+
+  document.getElementById('saveNewPasswordBtn').addEventListener('click', async () => {
+    const resetMsg = document.getElementById('resetMsg');
+    const pw = document.getElementById('newPassword').value;
+    if (pw.length < 6) {
+      resetMsg.textContent = 'Parolei jābūt vismaz 6 rakstzīmes garai.';
+      resetMsg.style.display = 'block';
+      resetMsg.style.color = '#8a2a22';
+      return;
+    }
+    const { error } = await sb.auth.updateUser({ password: pw });
+    if (error) {
+      resetMsg.textContent = 'Neizdevās saglabāt: ' + error.message;
+      resetMsg.style.color = '#8a2a22';
+    } else {
+      resetMsg.textContent = 'Parole saglabāta! Ielādē paneli...';
+      resetMsg.style.color = '#1e5e2e';
+      inRecoveryFlow = false;
+      setTimeout(checkSession, 1000);
+    }
+    resetMsg.style.display = 'block';
+  });
+
+  async function checkSession() {
+    if (inRecoveryFlow) return;
+    resetBox.style.display = 'none';
+    const { data } = await sb.auth.getSession();
+    if (data.session) {
+      loginBox.style.display = 'none';
+      dashboard.style.display = 'block';
+      signOutBtn.style.display = 'inline-block';
+      loadList();
+    } else {
+      loginBox.style.display = 'block';
+      dashboard.style.display = 'none';
+      signOutBtn.style.display = 'none';
+    }
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    loginErr.style.display = 'none';
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) { loginErr.style.display = 'block'; return; }
+    checkSession();
+  });
+
+  signOutBtn.addEventListener('click', async () => {
+    await sb.auth.signOut();
+    checkSession();
+  });
+
+  document.querySelectorAll('.tabs button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tabs button').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentStatus = btn.getAttribute('data-status');
+      loadList();
+    });
+  });
+
+  async function loadList() {
+    const list = document.getElementById('list');
+    list.innerHTML = '<div class="empty">Ielādē...</div>';
+
+    let query = sb.from('submissions').select('*').order('created_at', { ascending: false });
+    if (currentStatus !== 'all') query = query.eq('status', currentStatus);
+    const { data, error } = await query;
+
+    if (error) { list.innerHTML = '<div class="empty">Kļūda ielādējot datus.</div>'; console.error(error); return; }
+    if (!data || data.length === 0) { list.innerHTML = '<div class="empty">Šeit nekā nav.</div>'; return; }
+
+    list.innerHTML = '';
+    for (const row of data) {
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const { data: signed } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrl(row.file_path, 3600);
+      const { data: signedDl } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrl(row.file_path, 3600, { download: true });
+      const url = signed && signed.signedUrl;
+      const dlUrl = signedDl && signedDl.signedUrl;
+      const mediaHtml = url
+        ? (row.file_type === 'video'
+            ? `<video src="${url}" controls preload="metadata"></video>`
+            : `<img src="${url}" alt="">`)
+        : '';
+
+      const created = new Date(row.created_at).toLocaleString('lv-LV');
+      const minorInfo = row.is_minor
+        ? `<br>Nepilngadīgs · vecāks: ${escapeHtml(row.parent_name || '—')} (${escapeHtml(row.parent_email || '—')})`
+        : '';
+
+      const winnerBlock = row.status === 'approved' ? `
+        <div class="winner-controls">
+          <label>Uzvarētāja vieta:
+            <select data-field="winner_rank">
+              <option value="">— nav —</option>
+              <option value="1" ${row.winner_rank === 1 ? 'selected' : ''}>🥇 1. vieta</option>
+              <option value="2" ${row.winner_rank === 2 ? 'selected' : ''}>🥈 2. vieta</option>
+              <option value="3" ${row.winner_rank === 3 ? 'selected' : ''}>🥉 3. vieta</option>
+            </select>
+          </label>
+          <input type="text" data-field="prize_label" placeholder="Balvas apraksts (piem., Samsung planšete)" value="${escapeHtml(row.prize_label || '')}">
+          <button data-action="save-winner">Saglabāt</button>
+        </div>` : '';
+
+      card.innerHTML = `
+        <div class="media">${mediaHtml}</div>
+        <div>
+          <h3>${escapeHtml(row.mascot_name)} <span class="badge ${row.status}">${row.status}</span></h3>
+          <div class="meta">${created} · ${escapeHtml(row.display_name)} · ${escapeHtml(row.email)}${minorInfo}</div>
+          <p class="story">${escapeHtml(row.story)}</p>
+          ${winnerBlock}
+        </div>
+        <div class="actions">
+          ${row.status !== 'approved' ? '<button class="btn-approve" data-action="approve">Apstiprināt</button>' : ''}
+          ${row.status !== 'rejected' ? '<button class="btn-reject" data-action="reject">Noraidīt</button>' : ''}
+          ${dlUrl ? `<a class="btn-download" href="${dlUrl}" target="_blank" rel="noopener">Lejupielādēt</a>` : ''}
+          <button class="btn-delete" data-action="delete">Dzēst pavisam</button>
+        </div>
+      `;
+
+      card.querySelectorAll('[data-action="approve"], [data-action="reject"]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const newStatus = btn.getAttribute('data-action') === 'approve' ? 'approved' : 'rejected';
+          await sb.from('submissions').update({ status: newStatus }).eq('id', row.id);
+          loadList();
+        });
+      });
+
+      const saveWinnerBtn = card.querySelector('[data-action="save-winner"]');
+      if (saveWinnerBtn) {
+        saveWinnerBtn.addEventListener('click', async () => {
+          const rankVal = card.querySelector('[data-field="winner_rank"]').value;
+          const prizeVal = card.querySelector('[data-field="prize_label"]').value.trim();
+          await sb.from('submissions').update({
+            winner_rank: rankVal ? Number(rankVal) : null,
+            prize_label: prizeVal || null,
+          }).eq('id', row.id);
+          loadList();
+        });
+      }
+
+      card.querySelector('[data-action="delete"]').addEventListener('click', async () => {
+        if (!confirm('Vai tiešām neatgriezeniski dzēst šo iesniegumu un failu?')) return;
+        await sb.storage.from(SUPABASE_BUCKET).remove([row.file_path]);
+        await sb.from('submissions').delete().eq('id', row.id);
+        loadList();
+      });
+
+      list.appendChild(card);
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    }[c]));
+  }
+
+  checkSession();
+})();
+</script>
+
+</body>
+</html>
