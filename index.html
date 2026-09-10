@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radi nākamo Inbox.lv talismanu — dizaina makets</title>
+<style>
+  :root {
+    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; /* TODO: nomainīt, kad zināms precīzs inbox.lv fonts */
+    --bg-dark: #0D0D14;
+    --bg-dark-2: #1a1030;
+    --bg-light: #F5F3F0;
+    --red: #CC0717;
+    --violet: #6C4FE0;
+    --violet-soft: #a48af0;
+    --gray: #8C8279;
+    --white: #FFFFFF;
+    --ink: #17151C;
+    --max: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-base);
+    color: var(--ink);
+    background: var(--bg-light);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display {
+    font-family: var(--font-base);
+    font-weight: 800;
+    line-height: 1.05;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  p { line-height: 1.55; margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+  button { font-family: var(--font-base); cursor: pointer; border: none; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13,13,20,0.88);
+    backdrop-filter: blur(8px);
+  }
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 18px; padding-bottom: 18px;
+  }
+  .logo { height: 26px; width: auto; display: block; }
+  .logo path { fill: #FFFFFF; }
+  .lang-switch { display: flex; gap: 4px; background: rgba(255,255,255,0.08); padding: 4px; border-radius: 999px; }
+  .lang-switch button {
+    background: transparent; color: rgba(255,255,255,0.6);
+    font-size: 13px; padding: 6px 13px; border-radius: 999px; font-weight: 600;
+    transition: background .2s, color .2s;
+  }
+  .lang-switch button.active { background: var(--white); color: var(--ink); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(155deg, var(--bg-dark) 0%, #2a1450 42%, #4a0e28 78%, var(--bg-dark) 100%);
+    color: var(--white);
+    padding: 86px 0 70px;
+  }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
+  .partner-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(255,255,255,0.25); border-radius: 999px;
+    padding: 7px 14px; font-size: 13px; color: rgba(255,255,255,0.85);
+    margin-bottom: 26px;
+  }
+  .partner-pill b { color: var(--white); }
+  .hero h1 { font-size: 54px; letter-spacing: -0.01em; max-width: 11ch; }
+  .hero p.sub { margin-top: 22px; font-size: 18px; color: rgba(255,255,255,0.72); max-width: 46ch; }
+  .hero-actions { margin-top: 34px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--red); color: var(--white); font-weight: 700; font-size: 15px;
+    padding: 15px 30px; border-radius: 10px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(204,7,23,0.35); }
+  .hero-dates { font-size: 14px; color: rgba(255,255,255,0.6); }
+  .hero-dates b { color: var(--white); }
+
+  .mascot-wrap { display: flex; justify-content: center; }
+  .mascot-wrap svg { width: 100%; max-width: 260px; filter: drop-shadow(0 20px 40px rgba(108,79,224,0.35)); }
+
+  .hero-fade { opacity: 0; transform: translateY(14px); animation: heroIn .7s ease forwards; }
+  .hero-fade.d2 { animation-delay: .12s; }
+  .hero-fade.d3 { animation-delay: .22s; }
+  @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade { animation: none; opacity: 1; transform: none; }
+  }
+
+  /* ---------- PHILOSOPHY ---------- */
+  .philosophy { background: var(--bg-light); padding: 90px 0; text-align: center; }
+  .philosophy .display {
+    font-size: 40px; max-width: 18ch; margin: 0 auto; letter-spacing: -0.01em;
+  }
+  .philosophy p.sub {
+    max-width: 52ch; margin: 22px auto 0; color: #514c47; font-size: 17px;
+  }
+
+  /* ---------- JOURNEY ---------- */
+  .journey { background: var(--ink); color: var(--white); padding: 90px 0; }
+  .journey h2 { font-size: 32px; margin-bottom: 46px; }
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; position: relative; }
+  .steps::before {
+    content: ''; position: absolute; top: 21px; left: 6%; right: 6%; height: 1px;
+    background: rgba(255,255,255,0.18);
+  }
+  .step { position: relative; padding-right: 18px; }
+  .step .num {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-family: var(--font-base); font-size: 15px;
+    background: var(--ink); border: 1.5px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.75);
+    position: relative; z-index: 2; margin-bottom: 18px;
+  }
+  .step.active .num { background: var(--red); border-color: var(--red); color: var(--white); }
+  .step h3 { font-size: 16px; margin-bottom: 8px; }
+  .step p { font-size: 13.5px; color: rgba(255,255,255,0.6); }
+  .step .tag {
+    display: inline-block; margin-top: 10px; font-size: 11.5px; font-weight: 700;
+    color: var(--violet-soft);
+  }
+
+  /* ---------- PARTNERSHIP ---------- */
+  .partnership { padding: 90px 0; background: var(--bg-light); }
+  .partnership h2 { font-size: 32px; max-width: 16ch; margin-bottom: 46px; }
+  .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .partner-card {
+    background: var(--white); border-radius: 14px; padding: 32px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .partner-card.samsung { border-top: 3px solid var(--ink); }
+  .partner-card.inbox { border-top: 3px solid var(--red); }
+  .partner-card h3 { font-size: 19px; margin-bottom: 16px; }
+  .partner-card ul { margin: 0; padding-left: 18px; color: #514c47; font-size: 14.5px; line-height: 1.7; }
+  .prize-strip {
+    margin-top: 28px; background: var(--ink); color: var(--white);
+    border-radius: 14px; padding: 26px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  }
+  .prize-strip .tablet {
+    width: 54px; height: 72px; border: 2px solid var(--violet-soft); border-radius: 8px; position: relative; flex-shrink: 0;
+  }
+  .prize-strip .tablet::after { content:''; position:absolute; bottom:6px; left:50%; width:12px; height:2px; background: var(--violet-soft); transform: translateX(-50%); border-radius:2px; }
+  .prize-strip .text b { display: block; font-size: 15px; }
+  .prize-strip .text span { font-size: 13px; color: rgba(255,255,255,0.6); }
+
+  /* ---------- SUBMIT PREVIEW ---------- */
+  .submit { padding: 90px 0; background: var(--white); }
+  .submit .wrap { display: grid; grid-template-columns: 0.85fr 1fr; gap: 50px; align-items: start; }
+  .submit h2 { font-size: 32px; margin-bottom: 16px; }
+  .submit p.sub { color: #514c47; font-size: 15.5px; max-width: 38ch; }
+  .consent-note {
+    margin-top: 22px; padding: 14px 16px; background: #fbf3ee; border-left: 3px solid var(--red);
+    border-radius: 6px; font-size: 13px; color: #6b3327;
+  }
+  .form-mock {
+    background: var(--bg-light); border-radius: 16px; padding: 30px; border: 1px solid rgba(0,0,0,0.06);
+  }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 700; color: var(--gray); margin-bottom: 6px; }
+  .field .input {
+    background: var(--white); border: 1px solid rgba(0,0,0,0.12); border-radius: 8px;
+    padding: 12px 14px; font-size: 14px; color: #b4aea6;
+  }
+  .field .input.upload { border-style: dashed; text-align: center; padding: 22px; }
+  .field textarea.input { min-height: 70px; }
+
+  /* ---------- GALLERY ---------- */
+  .gallery { padding: 90px 0; background: var(--bg-light); }
+  .gallery h2 { font-size: 32px; margin-bottom: 8px; }
+  .gallery p.sub { color: #514c47; font-size: 15px; margin-bottom: 36px; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gcard {
+    aspect-ratio: 3/4; border-radius: 12px; background: var(--white);
+    border: 1.5px dashed rgba(0,0,0,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gray); font-size: 13px; text-align: center; padding: 12px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 50px 0 34px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+  footer .links { display: flex; gap: 24px; font-size: 13.5px; }
+  footer .brands { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 38px; max-width: none; }
+    .mascot-wrap { order: -1; }
+    .mascot-wrap svg { max-width: 160px; }
+    .steps { grid-template-columns: 1fr 1fr; row-gap: 34px; }
+    .steps::before { display: none; }
+    .partner-grid { grid-template-columns: 1fr; }
+    .submit .wrap { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 539.479 148.144" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 68.324219 105.949219 C 64.945312 105.949219 63.257812 104.210938 63.257812 100.734375 L 63.257812 57.050781 C 63.257812 53.574219 64.945312 51.835938 68.324219 51.835938 C 71.832031 51.835938 73.585938 53.574219 73.585938 57.050781 L 73.585938 100.734375 C 73.585938 104.210938 71.832031 105.949219 68.324219 105.949219 "/>
+      <path d="M 68.324219 47.703125 C 64.945312 47.703125 63.257812 45.96875 63.257812 42.492188 C 63.257812 39.015625 64.945312 37.277344 68.324219 37.277344 C 71.832031 37.277344 73.585938 39.015625 73.585938 42.492188 C 73.585938 45.96875 71.832031 47.703125 68.324219 47.703125 "/>
+      <path d="M 144.515625 105.949219 C 141.136719 105.949219 139.449219 104.210938 139.449219 100.734375 L 139.449219 67.480469 C 132.5625 62.628906 124.996094 60.199219 116.75 60.199219 C 108.433594 60.199219 100.898438 62.628906 94.144531 67.480469 L 94.144531 100.734375 C 94.144531 104.210938 92.390625 105.949219 88.882812 105.949219 C 85.503906 105.949219 83.816406 104.210938 83.816406 100.734375 L 83.816406 64.921875 C 83.816406 63.347656 84.464844 62.003906 85.765625 60.886719 C 94.792969 53.476562 105.121094 49.769531 116.75 49.769531 C 128.375 49.769531 138.703125 53.476562 147.730469 60.886719 C 149.03125 62.003906 149.679688 63.347656 149.679688 64.921875 L 149.679688 100.734375 C 149.679688 104.210938 147.957031 105.949219 144.515625 105.949219 "/>
+      <path d="M 215.640625 90.304688 C 208.820312 95.222656 201.253906 97.683594 192.941406 97.683594 C 184.5625 97.683594 177.023438 95.222656 170.335938 90.304688 L 170.335938 67.480469 C 177.089844 62.625 184.625 60.199219 192.941406 60.199219 C 201.1875 60.199219 208.753906 62.625 215.640625 67.480469 Z M 223.921875 60.886719 C 214.894531 53.476562 204.566406 49.769531 192.941406 49.769531 C 184.886719 49.769531 177.351562 51.640625 170.335938 55.378906 L 170.335938 42.492188 C 170.335938 39.015625 168.582031 37.277344 165.074219 37.277344 C 161.695312 37.277344 160.007812 39.015625 160.007812 42.492188 L 160.007812 92.863281 C 160.007812 94.4375 160.65625 95.78125 161.957031 96.898438 C 170.855469 104.308594 181.183594 108.015625 192.941406 108.015625 C 204.695312 108.015625 215.023438 104.308594 223.921875 96.898438 C 225.222656 95.78125 225.871094 94.4375 225.871094 92.863281 L 225.871094 64.921875 C 225.871094 63.347656 225.222656 62.003906 223.921875 60.886719 "/>
+      <path d="M 291.832031 90.304688 C 285.011719 95.222656 277.445312 97.683594 269.132812 97.683594 C 260.753906 97.683594 253.214844 95.222656 246.527344 90.304688 L 246.527344 67.480469 C 253.28125 62.625 260.816406 60.199219 269.132812 60.199219 C 277.378906 60.199219 284.949219 62.625 291.832031 67.480469 Z M 300.113281 60.886719 C 291.085938 53.476562 280.757812 49.769531 269.132812 49.769531 C 257.503906 49.769531 247.175781 53.476562 238.148438 60.886719 C 236.847656 62.003906 236.199219 63.347656 236.199219 64.921875 L 236.199219 92.863281 C 236.199219 94.4375 236.847656 95.78125 238.148438 96.898438 C 247.046875 104.308594 257.375 108.015625 269.132812 108.015625 C 280.886719 108.015625 291.214844 104.308594 300.113281 96.898438 C 301.414062 95.78125 302.0625 94.4375 302.0625 92.863281 L 302.0625 64.921875 C 302.0625 63.347656 301.414062 62.003906 300.113281 60.886719 "/>
+      <path d="M 373.382812 61.183594 L 350.875 78.992188 L 373.382812 96.601562 C 374.941406 97.914062 375.722656 99.226562 375.722656 100.539062 C 375.722656 101.191406 375.574219 101.863281 375.28125 102.554688 C 374.992188 103.242188 374.601562 103.847656 374.113281 104.375 C 373.628906 104.902344 373.058594 105.34375 372.410156 105.703125 C 371.757812 106.0625 371.109375 106.242188 370.460938 106.242188 C 369.421875 106.242188 368.285156 105.785156 367.050781 104.867188 L 342.496094 85.484375 L 317.847656 104.867188 C 316.613281 105.785156 315.476562 106.242188 314.4375 106.242188 C 313.851562 106.242188 313.234375 106.0625 312.585938 105.703125 C 311.9375 105.34375 311.367188 104.882812 310.878906 104.324219 C 310.394531 103.769531 309.988281 103.144531 309.664062 102.457031 C 309.335938 101.765625 309.175781 101.128906 309.175781 100.539062 C 309.175781 99.226562 309.957031 97.914062 311.511719 96.601562 L 334.019531 78.992188 L 311.511719 61.183594 C 309.957031 59.9375 309.175781 58.660156 309.175781 57.347656 C 309.175781 56.757812 309.335938 56.117188 309.664062 55.425781 C 309.988281 54.738281 310.394531 54.117188 310.878906 53.558594 C 311.367188 53.003906 311.9375 52.542969 312.585938 52.179688 C 313.234375 51.820312 313.851562 51.640625 314.4375 51.640625 C 315.476562 51.640625 316.613281 52.097656 317.847656 53.019531 L 342.496094 72.398438 L 367.050781 53.019531 C 368.285156 52.097656 369.421875 51.640625 370.460938 51.640625 C 371.046875 51.640625 371.660156 51.820312 372.3125 52.179688 C 372.960938 52.542969 373.527344 53.003906 374.015625 53.558594 C 374.503906 54.117188 374.910156 54.738281 375.234375 55.425781 C 375.558594 56.117188 375.722656 56.757812 375.722656 57.347656 C 375.722656 58.660156 374.941406 59.9375 373.382812 61.183594 "/>
+      <path d="M 385.269531 105.949219 C 381.824219 105.949219 380.105469 104.210938 380.105469 100.734375 C 380.105469 97.324219 381.824219 95.617188 385.269531 95.617188 C 388.644531 95.617188 390.335938 97.324219 390.335938 100.734375 C 390.335938 104.210938 388.644531 105.949219 385.269531 105.949219 "/>
+      <path d="M 403.097656 105.949219 C 399.71875 105.949219 398.03125 104.210938 398.03125 100.734375 L 398.03125 42.292969 C 398.03125 38.820312 399.71875 37.078125 403.097656 37.078125 C 406.605469 37.078125 408.359375 38.820312 408.359375 42.292969 L 408.359375 100.734375 C 408.359375 104.210938 406.605469 105.949219 403.097656 105.949219 "/>
+      <path d="M 484.84375 60.003906 L 455.027344 103.488281 C 453.988281 105.128906 452.558594 105.949219 450.742188 105.949219 C 448.988281 105.949219 447.558594 105.195312 446.453125 103.6875 L 416.542969 60.003906 C 415.765625 58.953125 415.375 57.871094 415.375 56.757812 C 415.375 55.316406 416.21875 54 417.90625 52.820312 C 419.074219 52.035156 420.148438 51.640625 421.121094 51.640625 C 422.683594 51.640625 423.980469 52.460938 425.019531 54.097656 L 450.644531 91.585938 L 476.367188 54.097656 C 477.40625 52.460938 478.707031 51.640625 480.261719 51.640625 C 481.238281 51.640625 482.308594 52.035156 483.480469 52.820312 C 485.167969 54 486.011719 55.316406 486.011719 56.757812 C 486.011719 57.871094 485.621094 58.953125 484.84375 60.003906 "/>
+    </svg>
+    <div class="lang-switch" id="langSwitch">
+      <button data-lang="lv" class="active">LV</button>
+      <button data-lang="ru">RU</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="partner-pill hero-fade">🤝 <span data-key="pill">Sadarbībā ar <b>Samsung</b></span></div>
+      <h1 class="hero-fade d2" data-key="title">Radi nākamo<br>Inbox.lv talismanu</h1>
+      <p class="sub hero-fade d3" data-key="sub">Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu — tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.</p>
+      <div class="hero-actions hero-fade d3">
+        <button class="btn-primary" data-key="cta">Piesakies konkursam</button>
+        <div class="hero-dates"><b data-key="dates">30.09.–30.10.2026</b> <span data-key="dates2">· pieteikšanās periods</span></div>
+      </div>
+    </div>
+    <div class="mascot-wrap hero-fade d3">
+      <svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="152" rx="66" ry="76" fill="#6C4FE0"/>
+        <circle cx="62" cy="76" r="20" fill="#6C4FE0"/>
+        <circle cx="138" cy="76" r="20" fill="#6C4FE0"/>
+        <text x="100" y="178" font-family="-apple-system, Arial, sans-serif" font-size="92" font-weight="800" text-anchor="middle" fill="#1a1030">?</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="wrap">
+    <h2 class="display" data-key="philTitle">AI palīdz. Ideja ir tava.</h2>
+    <p class="sub" data-key="philSub">Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts — jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.</p>
+  </div>
+</section>
+
+<section class="journey">
+  <div class="wrap">
+    <h2 data-key="journeyTitle">Konkursa gaita</h2>
+    <div class="steps">
+      <div class="step active">
+        <div class="num">01</div>
+        <h3 data-key="s1t">Radi</h3>
+        <p data-key="s1d">Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to.</p>
+        <span class="tag" data-key="s1tag">Notiek tagad</span>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3 data-key="s2t">Atklāj</h3>
+        <p data-key="s2d">Žūrija izvēlas spēcīgākos konceptus par finālistiem.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3 data-key="s3t">Balso</h3>
+        <p data-key="s3d">Latvija balso par favorītu sociālajos tīklos.</p>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h3 data-key="s4t">Atklāšana</h3>
+        <p data-key="s4d">Uzvarētājs tiek paziņots digitālā pasākumā.</p>
+      </div>
+      <div class="step">
+        <div class="num">05</div>
+        <h3 data-key="s5t">Iedzīvina</h3>
+        <p data-key="s5d">Koncepts kļūst par īstu Inbox.lv zīmola tēlu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="partnership">
+  <div class="wrap">
+    <h2 data-key="partTitle">Ekskluzīvs tehnoloģiju partneris</h2>
+    <div class="partner-grid">
+      <div class="partner-card samsung">
+        <h3 data-key="samT">Samsung dod</h3>
+        <ul>
+          <li data-key="samL1">Tehnoloģiju balvu klāstu, kas domāts jauniešiem un radošai ambīcijai</li>
+          <li data-key="samL2">Galaxy AI rīkus tēla radīšanai (nav obligāti, bet pieejami)</li>
+        </ul>
+      </div>
+      <div class="partner-card inbox">
+        <h3 data-key="inbT">Inbox.lv dod</h3>
+        <ul>
+          <li data-key="inbL1">Platformu un auditoriju visā Latvijā</li>
+          <li data-key="inbL2">Redzamību sociālajos tīklos un PR atbalstu uzvarētājam</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prize-strip">
+      <div style="display:flex; align-items:center; gap:18px;">
+        <div class="tablet"></div>
+        <div class="text">
+          <b data-key="prizeT">Galvenā balva — jaunā Samsung planšete</b>
+          <span data-key="prizeS">Tirgū no 30.09.2026 · modelis tiks precizēts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="submit">
+  <div class="wrap">
+    <div>
+      <h2 data-key="subT">Kā pieteikties</h2>
+      <p class="sub" data-key="subS">Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.</p>
+      <div class="consent-note" data-key="subNote">Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.</div>
+    </div>
+    <div class="form-mock">
+      <div class="field"><label data-key="f1">Talismana vizuālais tēls</label><div class="input upload" data-key="f1p">Ievelc failu šeit vai izvēlies no ierīces</div></div>
+      <div class="field"><label data-key="f2">Talismana vārds</label><div class="input" data-key="f2p">piem., Vēstulis</div></div>
+      <div class="field"><label data-key="f3">Personība un stāsts</label><div class="input" style="min-height:70px" data-key="f3p">Pastāsti, kas viņš ir...</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="wrap">
+    <h2 data-key="galT">Dalībnieku darbi</h2>
+    <p class="sub" data-key="galS">Šeit pēc 30. septembra parādīsies iesniegtie talismani. Pirmais taps tavs?</p>
+    <div class="gallery-grid">
+      <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
+      <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
+      <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
+      <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="#" data-key="fRules">Nolikums</a>
+      <a href="#" data-key="fPrivacy">Privātuma politika</a>
+      <a href="#" data-key="fContact">Kontakti</a>
+    </div>
+    <div class="brands">Samsung × Inbox.lv — 2026</div>
+  </div>
+</footer>
+
+<script>
+const dict = {
+  lv: {
+    pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
+    sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu — tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
+    cta: 'Piesakies konkursam', dates: '30.09.–30.10.2026', dates2: '· pieteikšanās periods',
+    philTitle: 'AI palīdz. Ideja ir tava.',
+    philSub: 'Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts — jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.',
+    journeyTitle: 'Konkursa gaita',
+    s1t:'Radi', s1d:'Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to.', s1tag:'Notiek tagad',
+    s2t:'Atklāj', s2d:'Žūrija izvēlas spēcīgākos konceptus par finālistiem.',
+    s3t:'Balso', s3d:'Latvija balso par favorītu sociālajos tīklos.',
+    s4t:'Atklāšana', s4d:'Uzvarētājs tiek paziņots digitālā pasākumā.',
+    s5t:'Iedzīvina', s5d:'Koncepts kļūst par īstu Inbox.lv zīmola tēlu.',
+    partTitle: 'Ekskluzīvs tehnoloģiju partneris',
+    samT:'Samsung dod', samL1:'Tehnoloģiju balvu klāstu, kas domāts jauniešiem un radošai ambīcijai', samL2:'Galaxy AI rīkus tēla radīšanai (nav obligāti, bet pieejami)',
+    inbT:'Inbox.lv dod', inbL1:'Platformu un auditoriju visā Latvijā', inbL2:'Redzamību sociālajos tīklos un PR atbalstu uzvarētājam',
+    prizeT:'Galvenā balva — jaunā Samsung planšete', prizeS:'Tirgū no 30.09.2026 · modelis tiks precizēts',
+    subT:'Kā pieteikties', subS:'Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.',
+    subNote:'Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.',
+    f1:'Talismana vizuālais tēls', f1p:'Ievelc failu šeit vai izvēlies no ierīces',
+    f2:'Talismana vārds', f2p:'piem., Vēstulis',
+    f3:'Personība un stāsts', f3p:'Pastāsti, kas viņš ir...',
+    galT:'Dalībnieku darbi', galS:'Šeit pēc 30. septembra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu',
+    fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Kontakti'
+  },
+  ru: {
+    pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
+    sub: 'С помощью ИИ создай образ, имя и историю — твоя идея может стать настоящим лицом бренда Inbox.lv.',
+    cta: 'Участвовать', dates: '30.09–30.10.2026', dates2: '· приём заявок',
+    philTitle: 'ИИ помогает. Идея — твоя.',
+    philSub: 'С помощью ИИ ты создаёшь визуальный образ талисмана, придумываешь имя и пишешь его характер и историю. Результат — новый герой бренда Inbox.lv, которого выберет Латвия.',
+    journeyTitle: 'Этапы конкурса',
+    s1t:'Создай', s1d:'Создай образ, имя и историю с помощью ИИ и отправь заявку.', s1tag:'Идёт сейчас',
+    s2t:'Отбор', s2d:'Жюри выбирает сильнейшие идеи в финал.',
+    s3t:'Голосование', s3d:'Латвия голосует за фаворита в соцсетях.',
+    s4t:'Раскрытие', s4d:'Победитель объявляется на цифровом мероприятии.',
+    s5t:'Воплощение', s5d:'Идея становится настоящим героем бренда Inbox.lv.',
+    partTitle: 'Эксклюзивный технологический партнёр',
+    samT:'Samsung даёт', samL1:'Призовой фонд технологий для молодёжи и творческих идей', samL2:'Инструменты Galaxy AI для создания образа (не обязательно)',
+    inbT:'Inbox.lv даёт', inbL1:'Платформу и аудиторию по всей Латвии', inbL2:'Продвижение в соцсетях и PR-поддержку победителя',
+    prizeT:'Главный приз — новый планшет Samsung', prizeS:'В продаже с 30.09.2026 · модель уточняется',
+    subT:'Как участвовать', subS:'Три шага: визуальный образ, имя и история. Займёт около 10 минут.',
+    subNote:'Если тебе меньше 18 лет, форма также запросит согласие родителя или опекуна.',
+    f1:'Визуальный образ талисмана', f1p:'Перетащи файл сюда или выбери с устройства',
+    f2:'Имя талисмана', f2p:'например, Вестулис',
+    f3:'Характер и история', f3p:'Расскажи, кто он...',
+    galT:'Работы участников', galS:'Здесь после 30 сентября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку',
+    fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
+  },
+  en: {
+    pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
+    sub: 'Using AI tools, design a character, name and story — your idea could become the real face of the Inbox.lv brand.',
+    cta: 'Enter the contest', dates: '30 Sep–30 Oct 2026', dates2: '· submission period',
+    philTitle: 'AI helps. The idea is yours.',
+    philSub: 'Using AI tools, you create your mascot\'s visual character, give it a name, and write its personality and story. The result — a new Inbox.lv brand hero, chosen by Latvia.',
+    journeyTitle: 'How it works',
+    s1t:'Create', s1d:'Design a character, name and story with AI and submit it.', s1tag:'Happening now',
+    s2t:'Discover', s2d:'A jury selects the strongest concepts as finalists.',
+    s3t:'Vote', s3d:'Latvia votes for its favourite on social media.',
+    s4t:'Reveal', s4d:'The winner is announced in a digital reveal.',
+    s5t:'Bring to life', s5d:'The concept becomes a real Inbox.lv brand character.',
+    partTitle: 'Exclusive technology partner',
+    samT:'Samsung brings', samL1:'A technology prize pool built around youth and creative ambition', samL2:'Galaxy AI tools for creating your character (optional)',
+    inbT:'Inbox.lv brings', inbL1:'The platform and audience across Latvia', inbL2:'Social media reach and PR support for the winner',
+    prizeT:'Main prize — the new Samsung tablet', prizeS:'On sale from 30 Sep 2026 · exact model to be confirmed',
+    subT:'How to enter', subS:'Three steps: visual character, name, and story. Takes about 10 minutes.',
+    subNote:'If you\'re under 18, the form will also ask for a parent or guardian\'s consent.',
+    f1:'Mascot visual character', f1p:'Drag a file here or choose from device',
+    f2:'Mascot name', f2p:'e.g., Vestulis',
+    f3:'Personality & story', f3p:'Tell us who they are...',
+    galT:'Entries', galS:'Submitted mascots will appear here after 30 September. Will the first one be yours?', gEmpty:'Waiting for the first entry',
+    fRules:'Rules', fPrivacy:'Privacy Policy', fContact:'Contact'
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (dict[lang][key] !== undefined) el.innerHTML = dict[lang][key];
+  });
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  document.documentElement.lang = lang;
+}
+document.querySelectorAll('#langSwitch button').forEach(b => {
+  b.addEventListener('click', () => setLang(b.getAttribute('data-lang')));
+});
+</script>
+
+</body>
+</html>
