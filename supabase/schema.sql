@@ -33,6 +33,19 @@ create table if not exists public.submissions (
 alter table public.submissions add column if not exists winner_rank int;
 alter table public.submissions add column if not exists prize_label text;
 
+-- TOP 5 finālista atzīme (balsošanas posmam)
+alter table public.submissions add column if not exists is_finalist boolean not null default false;
+
+-- Lapas sadaļu ieslēgšana/izslēgšana (TOP 5 un uzvarētāju podests) — pārvalda admin panelī
+create table if not exists public.site_settings (
+  key text primary key,
+  value boolean not null default false
+);
+insert into public.site_settings (key, value) values
+  ('show_top5', false),
+  ('show_winners', false)
+on conflict (key) do nothing;
+
 -- Katrs jauns iesniegums vienmēr sākas kā "pending", lai nevarētu apiet moderāciju
 create or replace function public.force_pending_status()
 returns trigger language plpgsql as $$
@@ -125,3 +138,17 @@ drop policy if exists "admins can delete submissions" on storage.objects;
 create policy "admins can delete submissions" on storage.objects
   for delete to authenticated
   using (bucket_id = 'submissions' and public.is_admin());
+
+-- Lapas sadaļu ieslēgšanas/izslēgšanas iestatījumi: visi var lasīt, tikai admin var mainīt
+alter table public.site_settings enable row level security;
+
+drop policy if exists "anyone can read settings" on public.site_settings;
+create policy "anyone can read settings" on public.site_settings
+  for select
+  using (true);
+
+drop policy if exists "admins can update settings" on public.site_settings;
+create policy "admins can update settings" on public.site_settings
+  for update to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());

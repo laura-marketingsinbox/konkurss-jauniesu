@@ -244,6 +244,7 @@
   .podium-spot .medal { font-size: 26px; margin-bottom: 6px; }
   .podium-spot h3 { font-size: 16px; margin-bottom: 4px; }
   .podium-spot .author { font-size: 12.5px; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+  .podium-spot .desc { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 8px; }
   .podium-spot .prize { font-size: 12.5px; color: var(--gold); font-weight: 700; }
   .podium-spot.rank-1 { order: 2; padding-top: 6px; transform: translateY(-16px); }
   .podium-spot.rank-2 { order: 1; }
@@ -256,6 +257,21 @@
   }
 
   /* ---------- GALLERY ---------- */
+  /* ---------- FINALISTS (TOP 5) ---------- */
+  .finalists { padding: 90px 0; background: var(--ink); color: var(--white); text-align: center; }
+  .finalists h2 { font-size: 32px; }
+  .finalists p.sub { color: rgba(255,255,255,0.65); font-size: 15px; margin: 10px auto 36px; max-width: 44ch; }
+  .finalists-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .fcard { aspect-ratio: 3/4; border-radius: 12px; overflow: hidden; position: relative; background: rgba(255,255,255,0.06); cursor: zoom-in; }
+  .fcard img, .fcard video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .fcard .fname {
+    position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
+    color: #fff; font-size: 12.5px; padding: 8px 10px; text-align: left;
+  }
+  @media (max-width: 860px) {
+    .finalists-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   .gallery { padding: 90px 0; background: var(--bg-light); }
   .gallery h2 { font-size: 32px; margin-bottom: 8px; }
   .gallery p.sub { color: #514c47; font-size: 15px; margin-bottom: 36px; }
@@ -497,6 +513,14 @@
   </div>
 </section>
 
+<section class="finalists" id="finalistsSection" hidden>
+  <div class="wrap">
+    <h2 data-key="finT">TOP 5 finālisti</h2>
+    <p class="sub" data-key="finS">Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!</p>
+    <div class="finalists-grid" id="finalistsGrid"></div>
+  </div>
+</section>
+
 <section class="winners sunburst" id="winnersSection" hidden>
   <div class="wrap">
     <h2 data-key="winT">Uzvarētāji</h2>
@@ -570,6 +594,7 @@ window.dict = {
     msgErrFile:'Fails ir pārāk liels (maks. 50MB) vai nav atbalstīta formāta.',
     msgSending:'Sūta...',
     galT:'Dalībnieku darbi', galS:'Šeit pēc 6. oktobra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu',
+    finT:'TOP 5 finālisti', finS:'Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!',
     winT:'Uzvarētāji', winS:'Apsveicam! Šie ir konkursa uzvarētāji.',
     fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Kontakti'
   },
@@ -607,6 +632,7 @@ window.dict = {
     msgErrFile:'Файл слишком большой (макс. 50МБ) или неподдерживаемый формат.',
     msgSending:'Отправка...',
     galT:'Работы участников', galS:'Здесь после 6 октября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку',
+    finT:'ТОП 5 финалистов', finS:'Жюри выбрало сильнейшие идеи. Теперь Латвия голосует за фаворита!',
     winT:'Победители', winS:'Поздравляем! Это победители конкурса.',
     fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
   },
@@ -644,6 +670,7 @@ window.dict = {
     msgErrFile:'File is too large (max 50MB) or an unsupported format.',
     msgSending:'Sending...',
     galT:'Entries', galS:'Submitted mascots will appear here after 6 October. Will the first one be yours?', gEmpty:'Waiting for the first entry',
+    finT:'TOP 5 Finalists', finS:'The jury has picked the strongest concepts. Now Latvia votes for its favourite!',
     winT:'Winners', winS:'Congratulations! These are the contest winners.',
     fRules:'Rules', fPrivacy:'Privacy Policy', fContact:'Contact'
   }

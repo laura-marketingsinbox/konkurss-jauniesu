@@ -47,6 +47,19 @@
   .winner-controls select, .winner-controls input[type="text"] { font-size: 12.5px; padding: 6px 8px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.15); }
   .winner-controls input[type="text"] { flex: 1; min-width: 160px; }
   .winner-controls button { font-size: 12.5px; padding: 6px 12px; border-radius: 6px; border: none; background: var(--ink); color: var(--white); cursor: pointer; }
+  .winner-controls label.check { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink); font-weight: 600; }
+
+  .settings-panel { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; padding: 18px 20px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .setting-row { display: flex; align-items: center; gap: 14px; }
+  .setting-text { display: flex; flex-direction: column; }
+  .setting-text b { font-size: 14px; }
+  .setting-text span { font-size: 12.5px; color: var(--gray); }
+  .switch { position: relative; display: inline-block; width: 42px; height: 24px; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .switch .slider { position: absolute; inset: 0; background: #ccc; border-radius: 999px; cursor: pointer; transition: background .15s; }
+  .switch .slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: var(--white); border-radius: 50%; transition: transform .15s; }
+  .switch input:checked + .slider { background: #1e5e2e; }
+  .switch input:checked + .slider::before { transform: translateX(18px); }
 </style>
 </head>
 <body>
@@ -78,6 +91,30 @@
     <button data-status="rejected">Noraidīti</button>
     <button data-status="all">Visi</button>
   </div>
+
+  <div class="settings-panel">
+    <div class="setting-row">
+      <label class="switch">
+        <input type="checkbox" id="toggleTop5">
+        <span class="slider"></span>
+      </label>
+      <div class="setting-text">
+        <b>TOP 5 finālisti</b>
+        <span>Rāda lapā sadaļu ar finālistiem, kas atzīmēti balsošanai</span>
+      </div>
+    </div>
+    <div class="setting-row">
+      <label class="switch">
+        <input type="checkbox" id="toggleWinners">
+        <span class="slider"></span>
+      </label>
+      <div class="setting-text">
+        <b>Uzvarētāju podests</b>
+        <span>Rāda lapā uzvarētāju sadaļu (1./2./3. vieta)</span>
+      </div>
+    </div>
+  </div>
+
   <div id="list"></div>
 </div>
 
@@ -126,6 +163,21 @@
     resetMsg.style.display = 'block';
   });
 
+  async function loadSettings() {
+    const { data, error } = await sb.from('site_settings').select('key, value');
+    if (error) { console.error(error); return; }
+    const map = Object.fromEntries((data || []).map((r) => [r.key, r.value]));
+    document.getElementById('toggleTop5').checked = !!map.show_top5;
+    document.getElementById('toggleWinners').checked = !!map.show_winners;
+  }
+
+  async function saveSetting(key, value) {
+    await sb.from('site_settings').update({ value }).eq('key', key);
+  }
+
+  document.getElementById('toggleTop5').addEventListener('change', (e) => saveSetting('show_top5', e.target.checked));
+  document.getElementById('toggleWinners').addEventListener('change', (e) => saveSetting('show_winners', e.target.checked));
+
   async function checkSession() {
     if (inRecoveryFlow) return;
     resetBox.style.display = 'none';
@@ -135,6 +187,7 @@
       dashboard.style.display = 'block';
       signOutBtn.style.display = 'inline-block';
       loadList();
+      loadSettings();
     } else {
       loginBox.style.display = 'block';
       dashboard.style.display = 'none';
@@ -198,6 +251,10 @@
 
       const winnerBlock = row.status === 'approved' ? `
         <div class="winner-controls">
+          <label class="check">
+            <input type="checkbox" data-field="is_finalist" ${row.is_finalist ? 'checked' : ''}>
+            TOP 5 finālists
+          </label>
           <label>Uzvarētāja vieta:
             <select data-field="winner_rank">
               <option value="">- nav -</option>
@@ -239,9 +296,11 @@
         saveWinnerBtn.addEventListener('click', async () => {
           const rankVal = card.querySelector('[data-field="winner_rank"]').value;
           const prizeVal = card.querySelector('[data-field="prize_label"]').value.trim();
+          const isFinalist = card.querySelector('[data-field="is_finalist"]').checked;
           await sb.from('submissions').update({
             winner_rank: rankVal ? Number(rankVal) : null,
             prize_label: prizeVal || null,
+            is_finalist: isFinalist,
           }).eq('id', row.id);
           loadList();
         });

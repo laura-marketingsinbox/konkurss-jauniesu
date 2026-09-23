@@ -38,6 +38,7 @@
   }
   bindLightboxClicks(document.getElementById('galleryGrid'));
   bindLightboxClicks(document.getElementById('podiumGrid'));
+  bindLightboxClicks(document.getElementById('finalistsGrid'));
 
   // ---------- Form: show/hide parent fields for minors ----------
   const form = document.getElementById('entryForm');
@@ -132,16 +133,26 @@
     }
   });
 
-  // ---------- Winners podium (visible only from the reveal date onward) ----------
-  const WINNER_REVEAL_DATE = new Date('2026-11-16T00:00:00');
+  // ---------- Site settings: admin-controlled show/hide for TOP 5 + winners ----------
+  function truncate(str, n) {
+    const s = String(str || '');
+    return s.length > n ? s.slice(0, n).trim() + '…' : s;
+  }
+
+  async function loadSiteSettings() {
+    const { data, error } = await sb.from('site_settings').select('key, value');
+    if (error || !data) return {};
+    return Object.fromEntries(data.map((r) => [r.key, r.value]));
+  }
+
   const MEDALS = { 1: '🥇', 2: '🥈', 3: '🥉' };
 
-  async function loadWinners() {
-    if (new Date() < WINNER_REVEAL_DATE) return;
+  async function loadWinners(settings) {
+    if (!settings.show_winners) return;
 
     const { data, error } = await sb
       .from('submissions')
-      .select('id, display_name, mascot_name, file_path, file_type, winner_rank, prize_label')
+      .select('id, display_name, mascot_name, story, file_path, file_type, winner_rank, prize_label')
       .not('winner_rank', 'is', null)
       .eq('status', 'approved')
       .order('winner_rank', { ascending: true })
@@ -164,6 +175,7 @@
           <div class="media" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${media}</div>
           <h3>${esc(row.mascot_name)}</h3>
           <div class="author">${esc(row.display_name)}</div>
+          ${row.story ? `<p class="desc">${esc(truncate(row.story, 90))}</p>` : ''}
           ${row.prize_label ? `<div class="prize">${esc(row.prize_label)}</div>` : ''}
         </div>`;
     }));
@@ -171,7 +183,40 @@
     document.getElementById('podiumGrid').innerHTML = spots.join('');
     document.getElementById('winnersSection').hidden = false;
   }
-  loadWinners();
+
+  // ---------- TOP 5 finalists ----------
+  async function loadFinalists(settings) {
+    if (!settings.show_top5) return;
+
+    const { data, error } = await sb
+      .from('submissions')
+      .select('id, display_name, mascot_name, file_path, file_type')
+      .eq('is_finalist', true)
+      .eq('status', 'approved')
+      .order('created_at', { ascending: true })
+      .limit(5);
+
+    if (error || !data || data.length === 0) return;
+
+    const cards = await Promise.all(data.map(async (row) => {
+      const { data: signed } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrl(row.file_path, 3600);
+      const url = signed && signed.signedUrl;
+      const media = url
+        ? (row.file_type === 'video'
+            ? `<video src="${url}" muted playsinline preload="metadata"></video>`
+            : `<img src="${url}" alt="${esc(row.mascot_name)}" loading="lazy">`)
+        : '';
+      return `<div class="fcard" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${media}<div class="fname">${esc(row.mascot_name)}</div></div>`;
+    }));
+
+    document.getElementById('finalistsGrid').innerHTML = cards.join('');
+    document.getElementById('finalistsSection').hidden = false;
+  }
+
+  loadSiteSettings().then((settings) => {
+    loadWinners(settings);
+    loadFinalists(settings);
+  });
 
   // ---------- Gallery: show approved entries ----------
   async function loadGallery() {
