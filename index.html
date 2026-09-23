@@ -102,11 +102,11 @@
   .hero p.sub { margin-top: 22px; font-size: 18px; color: rgba(255,255,255,0.8); max-width: 46ch; }
   .hero-actions { margin-top: 34px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   .btn-primary {
-    background: var(--red); color: var(--white); font-weight: 700; font-size: 15px;
+    background: var(--violet); color: var(--white); font-weight: 700; font-size: 15px;
     padding: 15px 30px; border-radius: 10px;
     transition: transform .15s ease, box-shadow .15s ease;
   }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(204,7,23,0.35); }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(108,79,224,0.4); }
   .hero-dates { font-size: 14px; color: rgba(255,255,255,0.65); }
   .hero-dates b { color: var(--gold); }
 
@@ -334,7 +334,7 @@
       <h1 class="hero-fade d2" data-key="title">Radi nākamo<br>Inbox.lv talismanu</h1>
       <p class="sub hero-fade d3" data-key="sub">Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.</p>
       <div class="hero-actions hero-fade d3">
-        <button class="btn-primary" data-key="cta" onclick="document.getElementById('entryForm').scrollIntoView({behavior:'smooth'})">Piesakies konkursam</button>
+        <button class="btn-primary" data-key="cta" onclick="document.getElementById('howToEnterHeading').scrollIntoView({behavior:'smooth'})">Piesakies konkursam</button>
         <div class="hero-dates"><b data-key="dates">30.09.–30.10.2026</b> <span data-key="dates2">· pieteikšanās periods</span></div>
       </div>
     </div>
@@ -351,6 +351,22 @@
       <h2 class="display" data-key="philTitle">AI palīdz. Ideja ir tava.</h2>
       <p class="sub" data-key="philSub">Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts - jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.</p>
     </div>
+  </div>
+</section>
+
+<section class="winners sunburst" id="winnersSection" hidden>
+  <div class="wrap">
+    <h2 data-key="winT">Uzvarētāji</h2>
+    <p class="sub" data-key="winS">Apsveicam! Šie ir konkursa uzvarētāji.</p>
+    <div class="podium" id="podiumGrid"></div>
+  </div>
+</section>
+
+<section class="finalists" id="finalistsSection" hidden>
+  <div class="wrap">
+    <h2 data-key="finT">TOP 5 finālisti</h2>
+    <p class="sub" data-key="finS">Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!</p>
+    <div class="finalists-grid" id="finalistsGrid"></div>
   </div>
 </section>
 
@@ -458,7 +474,7 @@
 <section class="submit">
   <div class="wrap">
     <div>
-      <h2 data-key="subT">Kā pieteikties</h2>
+      <h2 id="howToEnterHeading" data-key="subT">Kā pieteikties</h2>
       <p class="sub" data-key="subS">Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.</p>
       <div class="consent-note" data-key="subNote">Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.</div>
     </div>
@@ -510,22 +526,6 @@
       <button type="submit" class="submit-btn" data-key="fSubmit">Iesniegt pieteikumu</button>
       <div class="form-msg" id="formMsg"></div>
     </form>
-  </div>
-</section>
-
-<section class="finalists" id="finalistsSection" hidden>
-  <div class="wrap">
-    <h2 data-key="finT">TOP 5 finālisti</h2>
-    <p class="sub" data-key="finS">Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!</p>
-    <div class="finalists-grid" id="finalistsGrid"></div>
-  </div>
-</section>
-
-<section class="winners sunburst" id="winnersSection" hidden>
-  <div class="wrap">
-    <h2 data-key="winT">Uzvarētāji</h2>
-    <p class="sub" data-key="winS">Apsveicam! Šie ir konkursa uzvarētāji.</p>
-    <div class="podium" id="podiumGrid"></div>
   </div>
 </section>
 
