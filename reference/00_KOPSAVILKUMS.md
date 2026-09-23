@@ -7,7 +7,7 @@
 
 Interaktīva publiska konkursa mikrosite portāla inbox.lv ietvaros, sadarbībā ar Samsung kā ekskluzīvo tehnoloģiju partneri. Jauniešiem (14–30 g.) ar AI rīku palīdzību jārada jauns Inbox.lv zīmola tēls (talismans) — vizuāls tēls, vārds un stāsts.
 
-**5 posmi:** CREATE (30.09.–30.10.2026, radīšana/iesniegšana) → DISCOVER (žūrijas finālistu atlase) → VOTE (publiskā balsošana sociālajos tīklos) → REVEAL (uzvarētāja atklāšana) → BRING TO LIFE (profesionāla ieviešana zīmolā).
+**5 posmi (atjaunināts 2026-09-23):** CREATE (6.–31.10.2026, radīšana/iesniegšana) → DISCOVER (2.–6.11.2026, žūrija izvēlas TOP 5, atklāj 9.11.) → VOTE (9.–15.11.2026, publiskā balsošana sociālajos tīklos) → REVEAL (16.11.2026, uzvarētāja atklāšana) → BRING TO LIFE (profesionāla ieviešana zīmolā).
 
 Valodas: latviešu, krievu, angļu.
 
@@ -39,7 +39,7 @@ Lietotāja vēlas publicēt `index.html` uz GitHub Pages, bet negrib manuāli pi
 ## Atlikušie atvērtie jautājumi (no TU 13. sadaļas)
 
 - Konkrēts Samsung balvu klāsts un modeļi
-- Precīzi datumi posmiem DISCOVER / VOTE / REVEAL
+- ~~Precīzi datumi posmiem DISCOVER / VOTE / REVEAL~~ — **atrisināts 2026-09-23**: DISCOVER 2.–6.11., VOTE 9.–15.11. (sociālajos tīklos, platforma var vēl mainīties), REVEAL 16.11.
 - Vai iesniegumu skaitu uz personu atstāt 1 vai palielināt
 - Vai publiski rādāms konkrēts kontakts vai vispārēja kontaktforma
 - Precīzs subdomēns un DNS piekļuve

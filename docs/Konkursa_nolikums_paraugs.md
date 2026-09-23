@@ -6,7 +6,7 @@
 
 1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē [organizētāja pilns nosaukums, piem., SIA "Inbox.lv"], reģ. Nr. [...], juridiskā adrese [...] (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
 
-1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no **2026. gada 30. septembra līdz 2026. gada 30. oktobrim** (turpmāk — Iesniegšanas periods).
+1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no **2026. gada 6. oktobra līdz 2026. gada 31. oktobrim** (turpmāk — Iesniegšanas periods).
 
 1.3. Konkursa mērķis ir aicināt Latvijas jauniešus, izmantojot mākslīgā intelekta (AI) rīkus, radīt jaunu Inbox.lv zīmola tēlu (talismanu) — tā vizuālo izskatu, vārdu un stāstu. Konkursa filozofija: **"AI palīdz. Ideja ir tava."**
 
@@ -59,10 +59,10 @@
 
 Konkurss norisinās piecos posmos:
 
-1. **CREATE** (30.09.–30.10.2026) — Dalībnieki izveido un iesniedz savus konceptus.
-2. **DISCOVER** — Organizētāja žūrija izvērtē iesniegtos darbus un atlasa spēcīgākos konceptus kā finālistus, ņemot vērā atbilstību tēmai, oriģinalitāti un izpildījuma kvalitāti. Finālistu darbi kļūst par saturu Konkursa sociālo tīklu kontos.
-3. **VOTE** — plašāka auditorija balso par finālistiem publiskā balsošanā [Instagram/TikTok/Facebook — JĀPRECIZĒ platforma un mehānisms].
-4. **REVEAL** — uzvarētājs tiek paziņots digitālā atklāšanas pasākumā [datums — JĀPRECIZĒ].
+1. **CREATE** (6.–31.10.2026) — Dalībnieki izveido un iesniedz savus konceptus. Komunikācija: Inbox.lv baneri, landing page, TikTok/Instagram/Facebook, reminderi un pēdējās nedēļas deadline push.
+2. **DISCOVER** (2.–6.11.2026) — Inbox.lv mārketinga komanda un vadība izvēlas TOP 5 spēcīgākos konceptus kā finālistus. TOP 5 tiek atklāti 9.11.2026, vienlaicīgi ar balsošanas sākumu.
+3. **VOTE** (9.–15.11.2026) — plašāka auditorija balso par finālistiem publiskā balsošanā sociālajos tīklos (primāri Instagram — platforma/mehānisms var vēl tikt precizēts).
+4. **REVEAL** (16.11.2026) — uzvarētājs tiek paziņots, komunicēta Samsung balva, noslēdzas konkursa aktīvais komunikācijas posms.
 5. **BRING TO LIFE** — uzvarošais koncepts pēc Konkursa tiek profesionāli tālāk attīstīts par oficiālu Inbox.lv zīmola tēlu; šis process notiek pēc Organizētāja ieskatiem un var atšķirties no sākotnējā iesniegtā darba.
 
 5.1. Organizētāja un žūrijas lēmumi par finālistiem un uzvarētāju ir galīgi un nav apstrīdami.
