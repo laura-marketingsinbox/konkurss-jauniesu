@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Konkursa administrēšana — Inbox.lv</title>
+<title>Konkursa administrēšana - Inbox.lv</title>
 <style>
   :root {
     --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -193,14 +193,14 @@
 
       const created = new Date(row.created_at).toLocaleString('lv-LV');
       const minorInfo = row.is_minor
-        ? `<br>Nepilngadīgs · vecāks: ${escapeHtml(row.parent_name || '—')} (${escapeHtml(row.parent_email || '—')})`
+        ? `<br>Nepilngadīgs · vecāks: ${escapeHtml(row.parent_name || '-')} (${escapeHtml(row.parent_email || '-')})`
         : '';
 
       const winnerBlock = row.status === 'approved' ? `
         <div class="winner-controls">
           <label>Uzvarētāja vieta:
             <select data-field="winner_rank">
-              <option value="">— nav —</option>
+              <option value="">- nav -</option>
               <option value="1" ${row.winner_rank === 1 ? 'selected' : ''}>🥇 1. vieta</option>
               <option value="2" ${row.winner_rank === 2 ? 'selected' : ''}>🥈 2. vieta</option>
               <option value="3" ${row.winner_rank === 3 ? 'selected' : ''}>🥉 3. vieta</option>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radi nākamo Inbox.lv talismanu — dizaina makets</title>
+<title>Radi nākamo Inbox.lv talismanu - dizaina makets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
@@ -164,28 +164,31 @@
     color: var(--gold);
   }
 
-  /* ---------- PARTNERSHIP ---------- */
+  /* ---------- PARTNERSHIP / PRIZES ---------- */
   .partnership { padding: 90px 0; background: var(--bg-light); }
-  .partnership h2 { font-size: 32px; max-width: 16ch; margin-bottom: 46px; }
-  .partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-  .partner-card {
-    background: var(--white); border-radius: 14px; padding: 32px;
-    border: 1px solid rgba(0,0,0,0.06);
+  .partner-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; margin-bottom: 46px; }
+  .partnership h2 { font-size: 32px; max-width: 16ch; margin-bottom: 0; }
+  .samsung-logo { height: 26px; width: auto; }
+
+  .prize-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 22px; align-items: stretch; }
+  .prize-card {
+    background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center;
+    border: 1px solid rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center;
   }
-  .partner-card.samsung { border-top: 3px solid var(--ink); }
-  .partner-card.inbox { border-top: 3px solid var(--red); }
-  .partner-card h3 { font-size: 19px; margin-bottom: 16px; }
-  .partner-card ul { margin: 0; padding-left: 18px; color: #514c47; font-size: 14.5px; line-height: 1.7; }
-  .prize-strip {
-    margin-top: 28px; background: var(--ink); color: var(--white);
-    border-radius: 14px; padding: 26px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  .prize-card.place-1 { background: var(--ink); color: var(--white); border: none; box-shadow: 0 20px 44px rgba(0,0,0,0.18); }
+  .place-badge { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+  .prize-card:not(.place-1) .place-badge { color: var(--gray); }
+  .prize-media { width: 96px; height: 96px; margin-bottom: 14px; }
+  .prize-media svg { width: 100%; height: 100%; }
+  .prize-card h3 { font-size: 16px; }
+  .prize-card.place-1 h3 { font-size: 19px; }
+  .prize-card p { margin-top: 10px; font-size: 13.5px; color: rgba(255,255,255,0.68); max-width: 26ch; }
+  .prize-card:not(.place-1) p { color: #514c47; }
+  .prize-note { margin-top: 24px; font-size: 13px; color: var(--gray); text-align: center; }
+
+  @media (max-width: 860px) {
+    .prize-grid { grid-template-columns: 1fr; }
   }
-  .prize-strip .tablet {
-    width: 54px; height: 72px; border: 2px solid var(--gold); border-radius: 8px; position: relative; flex-shrink: 0;
-  }
-  .prize-strip .tablet::after { content:''; position:absolute; bottom:6px; left:50%; width:12px; height:2px; background: var(--gold); transform: translateX(-50%); border-radius:2px; }
-  .prize-strip .text b { display: block; font-size: 15px; }
-  .prize-strip .text span { font-size: 13px; color: rgba(255,255,255,0.6); }
 
   /* ---------- SUBMIT PREVIEW ---------- */
   .submit { padding: 90px 0; background: var(--white); }
@@ -280,7 +283,6 @@
     .mascot-wrap img { max-width: 200px; }
     .steps { grid-template-columns: 1fr 1fr; row-gap: 34px; }
     .steps::before { display: none; }
-    .partner-grid { grid-template-columns: 1fr; }
     .submit .wrap { grid-template-columns: 1fr; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   }
@@ -314,14 +316,14 @@
     <div>
       <div class="partner-pill hero-fade">🤝 <span data-key="pill">Sadarbībā ar <b>Samsung</b></span></div>
       <h1 class="hero-fade d2" data-key="title">Radi nākamo<br>Inbox.lv talismanu</h1>
-      <p class="sub hero-fade d3" data-key="sub">Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu — tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.</p>
+      <p class="sub hero-fade d3" data-key="sub">Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.</p>
       <div class="hero-actions hero-fade d3">
         <button class="btn-primary" data-key="cta" onclick="document.getElementById('entryForm').scrollIntoView({behavior:'smooth'})">Piesakies konkursam</button>
         <div class="hero-dates"><b data-key="dates">30.09.–30.10.2026</b> <span data-key="dates2">· pieteikšanās periods</span></div>
       </div>
     </div>
     <div class="mascot-wrap hero-fade d3">
-      <img src="assets/hero-monster.png" alt="Radi nākamo varoni! — konkursa tēls">
+      <img src="assets/hero-monster.png" alt="Radi nākamo varoni! - konkursa tēls">
     </div>
   </div>
 </section>
@@ -331,7 +333,7 @@
     <img class="philosophy-img" src="assets/hero-hat.webp" alt="AI palīdz radīt talismanu">
     <div>
       <h2 class="display" data-key="philTitle">AI palīdz. Ideja ir tava.</h2>
-      <p class="sub" data-key="philSub">Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts — jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.</p>
+      <p class="sub" data-key="philSub">Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts - jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.</p>
     </div>
   </div>
 </section>
@@ -372,32 +374,68 @@
 
 <section class="partnership">
   <div class="wrap">
-    <h2 data-key="partTitle">Ekskluzīvs tehnoloģiju partneris</h2>
-    <div class="partner-grid">
-      <div class="partner-card samsung">
-        <h3 data-key="samT">Samsung dod</h3>
-        <ul>
-          <li data-key="samL1">Tehnoloģiju balvu klāstu, kas domāts jauniešiem un radošai ambīcijai</li>
-          <li data-key="samL2">Galaxy AI rīkus tēla radīšanai (nav obligāti, bet pieejami)</li>
-        </ul>
-      </div>
-      <div class="partner-card inbox">
-        <h3 data-key="inbT">Inbox.lv dod</h3>
-        <ul>
-          <li data-key="inbL1">Platformu un auditoriju visā Latvijā</li>
-          <li data-key="inbL2">Redzamību sociālajos tīklos un PR atbalstu uzvarētājam</li>
-        </ul>
-      </div>
+    <div class="partner-header">
+      <h2 data-key="partTitle">Ekskluzīvs tehnoloģiju partneris</h2>
+      <img class="samsung-logo" src="assets/samsung-logo.png" alt="Samsung">
     </div>
-    <div class="prize-strip">
-      <div style="display:flex; align-items:center; gap:18px;">
-        <div class="tablet"></div>
-        <div class="text">
-          <b data-key="prizeT">Galvenā balva — jaunā Samsung planšete</b>
-          <span data-key="prizeS">Tirgū no 30.09.2026 · modelis tiks precizēts</span>
+
+    <div class="prize-grid">
+      <div class="prize-card place-1">
+        <div class="place-badge">🥇 <span data-key="place1">1. vieta</span></div>
+        <div class="prize-media">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect x="38" y="10" width="52" height="100" rx="10" fill="#17151C"/>
+            <rect x="43" y="18" width="42" height="78" rx="3" fill="#3a3742"/>
+            <rect x="43" y="18" width="42" height="78" rx="3" fill="url(#screenGrad)"/>
+            <circle cx="64" cy="106" r="3" fill="#454249"/>
+            <path d="M92 30 L104 14" stroke="#8C8279" stroke-width="4" stroke-linecap="round"/>
+            <path d="M104 14 L109 9" stroke="#CC0717" stroke-width="4" stroke-linecap="round"/>
+            <path d="M18 78 l6 -6 5 5 -6 6z" fill="#F4B740"/>
+            <path d="M22 62 l3 -3 2.5 2.5 -3 3z" fill="#F4B740"/>
+            <defs>
+              <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#A3134B"/>
+                <stop offset="1" stop-color="#F0472F"/>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
+        <h3>Samsung Galaxy S26 Ultra</h3>
+        <p data-key="prize1Desc">Ar S Pen un Galaxy AI radošuma rīkiem talismana tapšanai.</p>
+      </div>
+
+      <div class="prize-card place-2">
+        <div class="place-badge">🥈 <span data-key="place2">2. vieta</span></div>
+        <div class="prize-media">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect x="50" y="6" width="20" height="16" rx="4" fill="#17151C"/>
+            <rect x="50" y="98" width="20" height="16" rx="4" fill="#17151C"/>
+            <rect x="34" y="26" width="52" height="68" rx="16" fill="#17151C"/>
+            <rect x="40" y="32" width="40" height="56" rx="10" fill="#3a3742"/>
+            <circle cx="60" cy="60" r="16" fill="none" stroke="#F4B740" stroke-width="2.5"/>
+            <path d="M60 50v11l8 5" stroke="#F4B740" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <h3>Galaxy Watch9</h3>
+      </div>
+
+      <div class="prize-card place-3">
+        <div class="place-badge">🥉 <span data-key="place3">3. vieta</span></div>
+        <div class="prize-media">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect x="28" y="60" width="24" height="34" rx="9" fill="#17151C"/>
+            <circle cx="40" cy="56" r="13" fill="#3a3742"/>
+            <rect x="68" y="60" width="24" height="34" rx="9" fill="#17151C"/>
+            <circle cx="80" cy="56" r="13" fill="#3a3742"/>
+            <rect x="42" y="20" width="36" height="26" rx="8" fill="#8C8279"/>
+            <rect x="46" y="24" width="28" height="18" rx="5" fill="#5e5952"/>
+          </svg>
+        </div>
+        <h3>Galaxy Buds4 Pro</h3>
       </div>
     </div>
+
+    <p class="prize-note" data-key="prizeNote">Balvas nodrošina Samsung kā ekskluzīvais tehnoloģiju partneris. Precīzi modeļi var tikt precizēti.</p>
   </div>
 </section>
 
@@ -420,7 +458,7 @@
       <div class="field">
         <label data-key="fAge">Vecuma grupa</label>
         <select class="input" name="age_bracket" required>
-          <option value="" data-key="fAgeChoose">— izvēlies —</option>
+          <option value="" data-key="fAgeChoose">- izvēlies -</option>
           <option value="minor" data-key="fAgeMinor">14–17 gadi</option>
           <option value="adult" data-key="fAgeAdult">18–30 gadi</option>
         </select>
@@ -492,7 +530,7 @@
       <a href="#" data-key="fPrivacy">Privātuma politika</a>
       <a href="#" data-key="fContact">Kontakti</a>
     </div>
-    <div class="brands">Samsung × Inbox.lv — 2026</div>
+    <div class="brands">Samsung × Inbox.lv - 2026</div>
   </div>
 </footer>
 
@@ -500,10 +538,10 @@
 window.dict = {
   lv: {
     pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
-    sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu — tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
+    sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
     cta: 'Piesakies konkursam', dates: '06.10.–31.10.2026', dates2: '· pieteikšanās periods',
     philTitle: 'AI palīdz. Ideja ir tava.',
-    philSub: 'Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts — jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.',
+    philSub: 'Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts - jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.',
     journeyTitle: 'Konkursa gaita',
     s1t:'Radi', s1d:'Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to (6.–31. oktobris).', s1tag:'Notiek tagad',
     s2t:'Atklāj', s2d:'Žūrija izvēlas TOP 5 spēcīgākos konceptus par finālistiem (2.–6. novembris), kurus atklājam 9. novembrī.',
@@ -511,16 +549,16 @@ window.dict = {
     s4t:'Atklāšana', s4d:'Uzvarētājs tiek paziņots 16. novembrī.',
     s5t:'Iedzīvina', s5d:'Koncepts kļūst par īstu Inbox.lv zīmola tēlu.',
     partTitle: 'Ekskluzīvs tehnoloģiju partneris',
-    samT:'Samsung dod', samL1:'Tehnoloģiju balvu klāstu, kas domāts jauniešiem un radošai ambīcijai', samL2:'Galaxy AI rīkus tēla radīšanai (nav obligāti, bet pieejami)',
-    inbT:'Inbox.lv dod', inbL1:'Platformu un auditoriju visā Latvijā', inbL2:'Redzamību sociālajos tīklos un PR atbalstu uzvarētājam',
-    prizeT:'Galvenā balva — jaunā Samsung planšete', prizeS:'Tirgū no 30.09.2026 · modelis tiks precizēts',
+    place1:'1. vieta', place2:'2. vieta', place3:'3. vieta',
+    prize1Desc:'Ar S Pen un Galaxy AI radošuma rīkiem talismana tapšanai.',
+    prizeNote:'Balvas nodrošina Samsung kā ekskluzīvais tehnoloģiju partneris. Precīzi modeļi var tikt precizēti.',
     subT:'Kā pieteikties', subS:'Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.',
     subNote:'Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.',
     f1:'Talismana vizuālais tēls (attēls vai video)', f1hint:'Attēls vai video, līdz 50MB',
     f2:'Talismana vārds', f2p:'piem., Vēstulis',
     f3:'Personība un stāsts', f3p:'Pastāsti, kas viņš ir...',
     fName:'Tavs vārds vai segvārds', fEmail:'E-pasts',
-    fAge:'Vecuma grupa', fAgeChoose:'— izvēlies —', fAgeMinor:'14–17 gadi', fAgeAdult:'18–30 gadi',
+    fAge:'Vecuma grupa', fAgeChoose:'- izvēlies -', fAgeMinor:'14–17 gadi', fAgeAdult:'18–30 gadi',
     fParentName:'Vecāka/aizbildņa vārds, uzvārds', fParentEmail:'Vecāka/aizbildņa e-pasts',
     cRules:'Piekrītu <a href="rules.html" target="_blank">konkursa nolikumam</a>',
     cRights:'Piekrītu nodot Inbox.lv izmantošanas tiesības uz iesniegto darbu, kā aprakstīts nolikumā',
@@ -537,10 +575,10 @@ window.dict = {
   },
   ru: {
     pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
-    sub: 'С помощью ИИ создай образ, имя и историю — твоя идея может стать настоящим лицом бренда Inbox.lv.',
+    sub: 'С помощью ИИ создай образ, имя и историю - твоя идея может стать настоящим лицом бренда Inbox.lv.',
     cta: 'Участвовать', dates: '06.10–31.10.2026', dates2: '· приём заявок',
-    philTitle: 'ИИ помогает. Идея — твоя.',
-    philSub: 'С помощью ИИ ты создаёшь визуальный образ талисмана, придумываешь имя и пишешь его характер и историю. Результат — новый герой бренда Inbox.lv, которого выберет Латвия.',
+    philTitle: 'ИИ помогает. Идея - твоя.',
+    philSub: 'С помощью ИИ ты создаёшь визуальный образ талисмана, придумываешь имя и пишешь его характер и историю. Результат - новый герой бренда Inbox.lv, которого выберет Латвия.',
     journeyTitle: 'Этапы конкурса',
     s1t:'Создай', s1d:'Создай образ, имя и историю с помощью ИИ и отправь заявку (6–31 октября).', s1tag:'Идёт сейчас',
     s2t:'Отбор', s2d:'Жюри выбирает ТОП-5 сильнейших идей в финал (2–6 ноября), которые объявим 9 ноября.',
@@ -548,16 +586,16 @@ window.dict = {
     s4t:'Раскрытие', s4d:'Победитель объявляется 16 ноября.',
     s5t:'Воплощение', s5d:'Идея становится настоящим героем бренда Inbox.lv.',
     partTitle: 'Эксклюзивный технологический партнёр',
-    samT:'Samsung даёт', samL1:'Призовой фонд технологий для молодёжи и творческих идей', samL2:'Инструменты Galaxy AI для создания образа (не обязательно)',
-    inbT:'Inbox.lv даёт', inbL1:'Платформу и аудиторию по всей Латвии', inbL2:'Продвижение в соцсетях и PR-поддержку победителя',
-    prizeT:'Главный приз — новый планшет Samsung', prizeS:'В продаже с 30.09.2026 · модель уточняется',
+    place1:'1 место', place2:'2 место', place3:'3 место',
+    prize1Desc:'С S Pen и инструментами Galaxy AI для создания талисмана.',
+    prizeNote:'Призы предоставляет Samsung как эксклюзивный технологический партнёр. Точные модели могут уточняться.',
     subT:'Как участвовать', subS:'Три шага: визуальный образ, имя и история. Займёт около 10 минут.',
     subNote:'Если тебе меньше 18 лет, форма также запросит согласие родителя или опекуна.',
     f1:'Визуальный образ талисмана (изображение или видео)', f1hint:'Изображение или видео, до 50МБ',
     f2:'Имя талисмана', f2p:'например, Вестулис',
     f3:'Характер и история', f3p:'Расскажи, кто он...',
     fName:'Твоё имя или псевдоним', fEmail:'Эл. почта',
-    fAge:'Возрастная группа', fAgeChoose:'— выбери —', fAgeMinor:'14–17 лет', fAgeAdult:'18–30 лет',
+    fAge:'Возрастная группа', fAgeChoose:'- выбери -', fAgeMinor:'14–17 лет', fAgeAdult:'18–30 лет',
     fParentName:'Имя и фамилия родителя/опекуна', fParentEmail:'Эл. почта родителя/опекуна',
     cRules:'Согласен(на) с <a href="rules.html" target="_blank">правилами конкурса</a>',
     cRights:'Согласен(на) передать Inbox.lv права на использование присланной работы, как описано в правилах',
@@ -574,10 +612,10 @@ window.dict = {
   },
   en: {
     pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
-    sub: 'Using AI tools, design a character, name and story — your idea could become the real face of the Inbox.lv brand.',
+    sub: 'Using AI tools, design a character, name and story - your idea could become the real face of the Inbox.lv brand.',
     cta: 'Enter the contest', dates: '6–31 Oct 2026', dates2: '· submission period',
     philTitle: 'AI helps. The idea is yours.',
-    philSub: 'Using AI tools, you create your mascot\'s visual character, give it a name, and write its personality and story. The result — a new Inbox.lv brand hero, chosen by Latvia.',
+    philSub: 'Using AI tools, you create your mascot\'s visual character, give it a name, and write its personality and story. The result - a new Inbox.lv brand hero, chosen by Latvia.',
     journeyTitle: 'How it works',
     s1t:'Create', s1d:'Design a character, name and story with AI and submit it (6–31 October).', s1tag:'Happening now',
     s2t:'Discover', s2d:'A jury selects the TOP 5 strongest concepts as finalists (2–6 November), revealed on 9 November.',
@@ -585,16 +623,16 @@ window.dict = {
     s4t:'Reveal', s4d:'The winner is announced on 16 November.',
     s5t:'Bring to life', s5d:'The concept becomes a real Inbox.lv brand character.',
     partTitle: 'Exclusive technology partner',
-    samT:'Samsung brings', samL1:'A technology prize pool built around youth and creative ambition', samL2:'Galaxy AI tools for creating your character (optional)',
-    inbT:'Inbox.lv brings', inbL1:'The platform and audience across Latvia', inbL2:'Social media reach and PR support for the winner',
-    prizeT:'Main prize — the new Samsung tablet', prizeS:'On sale from 30 Sep 2026 · exact model to be confirmed',
+    place1:'1st place', place2:'2nd place', place3:'3rd place',
+    prize1Desc:'With S Pen and Galaxy AI creativity tools for shaping your mascot.',
+    prizeNote:'Prizes are provided by Samsung as the exclusive technology partner. Exact models may still be confirmed.',
     subT:'How to enter', subS:'Three steps: visual character, name, and story. Takes about 10 minutes.',
     subNote:'If you\'re under 18, the form will also ask for a parent or guardian\'s consent.',
     f1:'Mascot visual character (image or video)', f1hint:'Image or video, up to 50MB',
     f2:'Mascot name', f2p:'e.g., Vestulis',
     f3:'Personality & story', f3p:'Tell us who they are...',
     fName:'Your name or nickname', fEmail:'Email',
-    fAge:'Age group', fAgeChoose:'— choose —', fAgeMinor:'14–17 years old', fAgeAdult:'18–30 years old',
+    fAge:'Age group', fAgeChoose:'- choose -', fAgeMinor:'14–17 years old', fAgeAdult:'18–30 years old',
     fParentName:"Parent/guardian's full name", fParentEmail:"Parent/guardian's email",
     cRules:'I agree to the <a href="rules.html" target="_blank">contest rules</a>',
     cRights:'I agree to transfer usage rights of the submitted work to Inbox.lv, as described in the rules',
