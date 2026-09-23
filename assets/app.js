@@ -10,6 +10,35 @@
     }[c]));
   }
 
+  // ---------- Lightbox: full-size preview for gallery/podium media ----------
+  const lightbox = document.getElementById('lightbox');
+  const lightboxInner = document.getElementById('lightboxInner');
+
+  function openLightbox(url, type, label) {
+    if (!url) return;
+    lightboxInner.innerHTML = type === 'video'
+      ? `<video src="${url}" controls autoplay playsinline></video>`
+      : `<img src="${url}" alt="${esc(label || '')}">`;
+    lightbox.classList.add('open');
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightboxInner.innerHTML = '';
+  }
+  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+  function bindLightboxClicks(container) {
+    container.addEventListener('click', (e) => {
+      const card = e.target.closest('[data-media-url]');
+      if (!card) return;
+      openLightbox(card.getAttribute('data-media-url'), card.getAttribute('data-media-type'), card.getAttribute('data-media-label'));
+    });
+  }
+  bindLightboxClicks(document.getElementById('galleryGrid'));
+  bindLightboxClicks(document.getElementById('podiumGrid'));
+
   // ---------- Form: show/hide parent fields for minors ----------
   const form = document.getElementById('entryForm');
   const parentFields = document.getElementById('parentFields');
@@ -127,7 +156,7 @@
       return `
         <div class="podium-spot rank-${rank}">
           <div class="medal">${MEDALS[rank] || ''}</div>
-          <div class="media">${media}</div>
+          <div class="media" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${media}</div>
           <h3>${esc(row.mascot_name)}</h3>
           <div class="author">${esc(row.display_name)}</div>
           ${row.prize_label ? `<div class="prize">${esc(row.prize_label)}</div>` : ''}
@@ -157,7 +186,7 @@
       const media = row.file_type === 'video'
         ? `<video src="${url}" muted playsinline preload="metadata"></video>`
         : `<img src="${url}" alt="${esc(row.mascot_name)}" loading="lazy">`;
-      return `<div class="gcard filled">${url ? media : ''}<div class="gname">${esc(row.mascot_name)}</div></div>`;
+      return `<div class="gcard filled" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${url ? media : ''}<div class="gname">${esc(row.mascot_name)}</div></div>`;
     }));
 
     grid.innerHTML = cards.join('');
