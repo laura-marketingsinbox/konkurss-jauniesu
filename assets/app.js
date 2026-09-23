@@ -92,7 +92,7 @@
     submitBtn.disabled = true;
     showMsg(t('msgSending'), true);
 
-    try {
+    async function attemptSubmit() {
       const ext = (file.name.split('.').pop() || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '');
       const path = `${crypto.randomUUID()}.${ext}`;
 
@@ -116,7 +116,16 @@
         consent_rights_transfer: true,
       });
       if (insertError) throw insertError;
+    }
 
+    try {
+      try {
+        await attemptSubmit();
+      } catch (firstErr) {
+        console.warn('Submission failed, retrying once...', firstErr);
+        await new Promise((r) => setTimeout(r, 1500));
+        await attemptSubmit();
+      }
       form.reset();
       syncParentFields();
       showMsg(t('msgOk'), true);
