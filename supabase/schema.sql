@@ -111,9 +111,11 @@ insert into storage.buckets (id, name, public)
 values ('submissions', 'submissions', false)
 on conflict (id) do nothing;
 
+-- Ietver arī "authenticated" lomu: ja pārlūkā ir aktīva admin sesija (no admin.html),
+-- tā pati lapa publiskajai formai izmantos to pašu sesiju, nevis anon lomu.
 drop policy if exists "public can upload submissions" on storage.objects;
 create policy "public can upload submissions" on storage.objects
-  for insert to anon
+  for insert to anon, authenticated
   with check (bucket_id = 'submissions');
 
 drop policy if exists "admins can read submissions" on storage.objects;
