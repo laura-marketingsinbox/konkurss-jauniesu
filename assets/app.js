@@ -64,7 +64,7 @@
     msgBox.className = 'form-msg ' + (ok ? 'ok' : 'err');
   }
 
-  const MAX_BYTES = 50 * 1024 * 1024;
+  const MAX_BYTES = 50 * 1000 * 1000; // decimal MB, safely under Supabase's ~50 MiB server-side storage limit
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -121,7 +121,12 @@
       showMsg(t('msgOk'), true);
     } catch (err) {
       console.error(err);
-      showMsg(t('msgErr'), false);
+      if (err && (err.statusCode === '413' || err.error === 'Payload too large')) {
+        showMsg(t('msgErrFile'), false);
+      } else {
+        const detail = err && (err.message || err.error_description || err.statusCode);
+        showMsg(t('msgErr') + (detail ? ` (${detail})` : ''), false);
+      }
     } finally {
       submitBtn.disabled = false;
     }
