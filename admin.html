@@ -287,6 +287,18 @@
         btn.addEventListener('click', async () => {
           const newStatus = btn.getAttribute('data-action') === 'approve' ? 'approved' : 'rejected';
           await sb.from('submissions').update({ status: newStatus }).eq('id', row.id);
+          if (newStatus === 'approved') {
+            // Pārkopē failu uz publisko krātuvi — tikai TAGAD tas kļūst publiski redzams.
+            const { data: fileBlob } = await sb.storage.from(SUPABASE_BUCKET).download(row.file_path);
+            if (fileBlob) {
+              await sb.storage.from(SUPABASE_PUBLIC_BUCKET).upload(row.file_path, fileBlob, {
+                contentType: fileBlob.type, upsert: true,
+              });
+            }
+          } else {
+            // Noraidot (arī iepriekš apstiprinātu darbu) — noņem no publiskās krātuves.
+            await sb.storage.from(SUPABASE_PUBLIC_BUCKET).remove([row.file_path]);
+          }
           loadList();
         });
       });
@@ -309,6 +321,7 @@
       card.querySelector('[data-action="delete"]').addEventListener('click', async () => {
         if (!confirm('Vai tiešām neatgriezeniski dzēst šo iesniegumu un failu?')) return;
         await sb.storage.from(SUPABASE_BUCKET).remove([row.file_path]);
+        await sb.storage.from(SUPABASE_PUBLIC_BUCKET).remove([row.file_path]);
         await sb.from('submissions').delete().eq('id', row.id);
         loadList();
       });
