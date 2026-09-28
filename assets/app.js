@@ -170,8 +170,8 @@
     if (error || !data || data.length === 0) return;
 
     const spots = await Promise.all(data.map(async (row) => {
-      const { data: signed } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrl(row.file_path, 3600);
-      const url = signed && signed.signedUrl;
+      const { data: pub } = sb.storage.from(SUPABASE_PUBLIC_BUCKET).getPublicUrl(row.file_path);
+      const url = pub && pub.publicUrl;
       const media = url
         ? (row.file_type === 'video'
             ? `<video src="${url}" muted playsinline preload="metadata"></video>`
@@ -208,8 +208,8 @@
     if (error || !data || data.length === 0) return;
 
     const cards = await Promise.all(data.map(async (row) => {
-      const { data: signed } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrl(row.file_path, 3600);
-      const url = signed && signed.signedUrl;
+      const { data: pub } = sb.storage.from(SUPABASE_PUBLIC_BUCKET).getPublicUrl(row.file_path);
+      const url = pub && pub.publicUrl;
       const media = url
         ? (row.file_type === 'video'
             ? `<video src="${url}" muted playsinline preload="metadata"></video>`
@@ -240,8 +240,8 @@
     if (error || !data || data.length === 0) return;
 
     const cards = await Promise.all(data.map(async (row) => {
-      const { data: signed } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrl(row.file_path, 3600);
-      const url = signed && signed.signedUrl;
+      const { data: pub } = sb.storage.from(SUPABASE_PUBLIC_BUCKET).getPublicUrl(row.file_path);
+      const url = pub && pub.publicUrl;
       const media = row.file_type === 'video'
         ? `<video src="${url}" muted playsinline preload="metadata"></video>`
         : `<img src="${url}" alt="${esc(row.mascot_name)}" loading="lazy">`;
