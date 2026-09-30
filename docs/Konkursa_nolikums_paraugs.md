@@ -4,7 +4,7 @@
 
 ## 1. Vispārīgie noteikumi
 
-1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē **SIA "INBOKSS"** (zīmols Inbox.lv), reģ. Nr. **40003560720**, juridiskā adrese **Rīga, Matrožu iela 15, LV-1048** (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
+1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē **SIA "INBOKSS"** (zīmols Inbox.lv), reģ. Nr. **40003560720**, juridiskā adrese **Matrožu iela 15, 2. stāvs, Rīga, LV-1048** (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
 
 1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no **2026. gada 6. oktobra līdz 2026. gada 31. oktobrim** (turpmāk — Iesniegšanas periods).
 
@@ -97,7 +97,7 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 ## 8. Personas datu apstrāde
 
-8.1. Pārziņa identitāte un kontaktinformācija: **SIA "INBOKSS"**, reģ. Nr. **40003560720**, juridiskā adrese **Rīga, Matrožu iela 15, LV-1048**, e-pasts **marketing@co.inbox.lv**.
+8.1. Pārziņa identitāte un kontaktinformācija: **SIA "INBOKSS"**, reģ. Nr. **40003560720**, juridiskā adrese **Matrožu iela 15, 2. stāvs, Rīga, LV-1048**, e-pasts **marketing@co.inbox.lv**.
 
 8.2. Personas datu apstrādes mērķis ir Konkursa norises nodrošināšana (dalībnieku identifikācija, iesniegto darbu moderācija, balsošanas nodrošināšana, rezultātu paziņošana) un ar to saistīta publicitāte.
 
@@ -111,7 +111,7 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 8.7. Dalībnieks un/vai viņa likumiskais pārstāvis ir tiesīgs vērsties ar sūdzību Datu valsts inspekcijā (www.dvi.gov.lv), ja uzskata, ka noticis personas datu aizsardzības pārkāpums.
 
-8.8. Organizētāja pilna privātuma politika pieejama: [saite].
+8.8. Organizētāja pilna privātuma politika pieejama: https://help.inbox.lv/privacy-policy?language=lv
 
 ## 9. Nobeiguma noteikumi
 
