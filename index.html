@@ -107,6 +107,7 @@
     transition: transform .15s ease, box-shadow .15s ease;
   }
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(108,79,224,0.4); }
+  .finalists-vote-btn { display: inline-block; margin-top: 32px; text-decoration: none; }
   .hero-dates { font-size: 14px; color: rgba(255,255,255,0.65); }
   .hero-dates b { color: var(--gold); }
 
@@ -367,6 +368,7 @@
     <h2 data-key="finT">TOP 5 finālisti</h2>
     <p class="sub" data-key="finS">Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!</p>
     <div class="finalists-grid" id="finalistsGrid"></div>
+    <a class="btn-primary finalists-vote-btn" href="https://www.instagram.com/inbox_lv/" target="_blank" rel="noopener" data-key="finVoteBtn">Balsot Instagram</a>
   </div>
 </section>
 
@@ -552,7 +554,7 @@
     <div class="links">
       <a href="rules.html" target="_blank" data-key="fRules">Nolikums</a>
       <a href="https://help.inbox.lv/privacy-policy?language=lv" target="_blank" data-key="fPrivacy">Privātuma politika</a>
-      <a href="mailto:marketing@co.inbox.lv" data-key="fContact">Kontakti</a>
+      <a href="mailto:marketing@co.inbox.lv" data-key="fContact">Sazināties</a>
     </div>
     <div class="brands">Samsung × Inbox.lv - 2026</div>
   </div>
@@ -594,9 +596,9 @@ window.dict = {
     msgErrFile:'Fails ir pārāk liels (maks. 50MB) vai nav atbalstīta formāta.',
     msgSending:'Sūta...',
     galT:'Dalībnieku darbi', galS:'Šeit pēc 6. oktobra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu',
-    finT:'TOP 5 finālisti', finS:'Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!',
+    finT:'TOP 5 finālisti', finS:'Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!', finVoteBtn:'Balsot Instagram',
     winT:'Uzvarētāji', winS:'Apsveicam! Šie ir konkursa uzvarētāji.',
-    fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Kontakti'
+    fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Sazināties'
   },
   ru: {
     pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
@@ -632,7 +634,7 @@ window.dict = {
     msgErrFile:'Файл слишком большой (макс. 50МБ) или неподдерживаемый формат.',
     msgSending:'Отправка...',
     galT:'Работы участников', galS:'Здесь после 6 октября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку',
-    finT:'ТОП 5 финалистов', finS:'Жюри выбрало сильнейшие идеи. Теперь Латвия голосует за фаворита!',
+    finT:'ТОП 5 финалистов', finS:'Жюри выбрало сильнейшие идеи. Теперь Латвия голосует за фаворита!', finVoteBtn:'Голосовать в Instagram',
     winT:'Победители', winS:'Поздравляем! Это победители конкурса.',
     fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
   },
@@ -670,7 +672,7 @@ window.dict = {
     msgErrFile:'File is too large (max 50MB) or an unsupported format.',
     msgSending:'Sending...',
     galT:'Entries', galS:'Submitted mascots will appear here after 6 October. Will the first one be yours?', gEmpty:'Waiting for the first entry',
-    finT:'TOP 5 Finalists', finS:'The jury has picked the strongest concepts. Now Latvia votes for its favourite!',
+    finT:'TOP 5 Finalists', finS:'The jury has picked the strongest concepts. Now Latvia votes for its favourite!', finVoteBtn:'Vote on Instagram',
     winT:'Winners', winS:'Congratulations! These are the contest winners.',
     fRules:'Rules', fPrivacy:'Privacy Policy', fContact:'Contact'
   }
