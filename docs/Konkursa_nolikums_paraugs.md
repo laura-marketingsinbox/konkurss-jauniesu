@@ -1,10 +1,10 @@
 # "Radi nākamo Inbox.lv talismanu" — konkursa nolikums
 
-*Šis ir parauga nolikums. Kvadrātiekavās esošās vietas ([...]) jāaizpilda, un dokuments — īpaši 7. sadaļa — jāpārskata juridiski pirms publicēšanas.*
+*Šis teksts sagatavots, balstoties uz Civillikumu, Autortiesību likumu, Vispārīgo datu aizsardzības regulu (GDPR) un reāliem Latvijas konkursu nolikumu piemēriem. Kvadrātiekavās esošās vietas ([...]) jāaizpilda ar konkrētiem datiem. Dokuments — īpaši 7. un 8. sadaļa — jāpārskata juridiski pirms publicēšanas.*
 
 ## 1. Vispārīgie noteikumi
 
-1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē [organizētāja pilns nosaukums, piem., SIA "Inbox.lv"], reģ. Nr. [...], juridiskā adrese [...] (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
+1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē **SIA "INBOKSS"** (zīmols Inbox.lv), reģ. Nr. [...], juridiskā adrese [...] (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
 
 1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no **2026. gada 6. oktobra līdz 2026. gada 31. oktobrim** (turpmāk — Iesniegšanas periods).
 
@@ -16,7 +16,7 @@
 
 2.1. Konkursā var piedalīties jaunieši vecumā no **14 līdz 30 gadiem**, kuri ir [Latvijas Republikas iedzīvotāji / cits nosacījums — JĀPRECIZĒ].
 
-2.2. Ja Dalībnieks Konkursa pieteikšanās brīdī ir jaunāks par 18 gadiem, dalībai nepieciešama vecāka vai likumiskā aizbildņa parakstīta piekrišana. Šī piekrišana attiecas **gan uz dalību Konkursā, gan uz iesniegtā darba tiesību nodošanu Organizētājam** saskaņā ar šī nolikuma 7. sadaļu — tas ir īpaši jāizceļ piekrišanas veidlapā, nevis jāpaslēpj vispārīgā tekstā.
+2.2. Saskaņā ar Civillikuma 219. pantu pilngadība (un ar to pilna rīcībspēja patstāvīgi slēgt tiesiskus darījumus) iestājas ar 18 gadu vecumu. Tāpēc Dalībniekam, kurš Konkursa pieteikšanās brīdī ir jaunāks par 18 gadiem (14–17 g.), nepieciešama vecāka vai likumiskā aizbildņa piekrišana. Šī piekrišana attiecas **gan uz dalību Konkursā, gan uz 7. sadaļā minēto satura licencēšanu un iespējamo tiesību nodošanu**, ja Dalībnieks kļūst par uzvarētāju — tas jāizceļ piekrišanas veidlapā, nevis jāpaslēpj vispārīgā tekstā.
 
 2.3. Konkursā nedrīkst piedalīties Organizētāja un Partnera darbinieki un viņu ģimenes locekļi, kā arī personas, kas tieši iesaistītas Konkursa organizēšanā vai vērtēšanā.
 
@@ -25,13 +25,13 @@
 ## 3. Pieteikšanās un darba iesniegšanas kārtība
 
 3.1. Iesniegšanas periodā Dalībnieks aizpilda pieteikuma formu, norādot:
-   - vārdu, uzvārdu vai segvārdu, vecumu, e-pasta adresi;
-   - **talismana vizuālo tēlu** — attēlu, kas izveidots, izmantojot AI rīkus (pēc Dalībnieka izvēles — jebkuru pieejamu AI rīku);
+   - vārdu, uzvārdu vai segvārdu, vecuma grupu, e-pasta adresi;
+   - **talismana vizuālo tēlu** — attēlu vai video, kas izveidots, izmantojot AI rīkus (pēc Dalībnieka izvēles — jebkuru pieejamu AI rīku);
    - **talismana vārdu**;
    - **talismana personības un stāsta aprakstu**;
-   - apliecinājumu par piekrišanu šim nolikumam un 7. sadaļā minētajai tiesību nodošanai.
+   - apliecinājumu par piekrišanu šim nolikumam un 7. sadaļā minētajiem satura izmantošanas noteikumiem.
 
-3.2. Viens Dalībnieks Iesniegšanas periodā drīkst iesniegt vienu (1) pamatkonceptu. [Ja Organizētājs vēlas atļaut vairākus iesniegumus, šis punkts jāmaina.]
+3.2. Viens Dalībnieks Iesniegšanas periodā drīkst iesniegt vienu (1) pamatkonceptu.
 
 3.3. Iesniegtie darbi tiek pārbaudīti (moderēti), un tikai apstiprinātie darbi tiek publicēti publiski redzamajā Konkursa galerijā. Pārbaude var ilgt līdz [__] darbdienām.
 
@@ -51,51 +51,69 @@
 
 | Elements | Prasība |
 |---|---|
-| Vizuālais tēls | JPG/PNG/WEBP, līdz 15 MB |
+| Vizuālais tēls / video | attēls vai video, līdz 50 MB |
 | Talismana vārds | līdz 50 rakstzīmēm |
-| Personība un stāsts | līdz 1500–2000 rakstzīmēm |
+| Personība un stāsts | līdz 2000 rakstzīmēm |
 
 ## 5. Konkursa gaita un vērtēšana
 
 Konkurss norisinās piecos posmos:
 
-1. **CREATE** (6.–31.10.2026) — Dalībnieki izveido un iesniedz savus konceptus. Komunikācija: Inbox.lv baneri, landing page, TikTok/Instagram/Facebook, reminderi un pēdējās nedēļas deadline push.
-2. **DISCOVER** (2.–6.11.2026) — Inbox.lv mārketinga komanda un vadība izvēlas TOP 5 spēcīgākos konceptus kā finālistus. TOP 5 tiek atklāti 9.11.2026, vienlaicīgi ar balsošanas sākumu.
-3. **VOTE** (9.–15.11.2026) — plašāka auditorija balso par finālistiem publiskā balsošanā sociālajos tīklos (primāri Instagram — platforma/mehānisms var vēl tikt precizēts).
-4. **REVEAL** (16.11.2026) — uzvarētājs tiek paziņots, komunicēta Samsung balva, noslēdzas konkursa aktīvais komunikācijas posms.
+1. **CREATE** (6.–31.10.2026) — Dalībnieki izveido un iesniedz savus konceptus.
+2. **DISCOVER** (2.–6.11.2026) — žūrija izvēlas TOP 5 spēcīgākos konceptus kā finālistus. TOP 5 tiek atklāti 9.11.2026, vienlaicīgi ar balsošanas sākumu.
+3. **VOTE** (9.–15.11.2026) — plašāka auditorija balso par finālistiem publiskā balsošanā sociālajos tīklos [precīza platforma var vēl tikt precizēta].
+4. **REVEAL** (16.11.2026) — uzvarētājs tiek paziņots, komunicēta Samsung balva.
 5. **BRING TO LIFE** — uzvarošais koncepts pēc Konkursa tiek profesionāli tālāk attīstīts par oficiālu Inbox.lv zīmola tēlu; šis process notiek pēc Organizētāja ieskatiem un var atšķirties no sākotnējā iesniegtā darba.
 
 5.1. Organizētāja un žūrijas lēmumi par finālistiem un uzvarētāju ir galīgi un nav apstrīdami.
 
+5.2. Konkursa uzvarētāju izvēlas žūrija (TOP 5 atlase) un publiska balsošana, nevis nejaušības princips (izloze). Tāpēc Konkurss nav uzskatāms par izloti Izložu un azartspēļu likuma izpratnē un tam nav nepieciešama Izložu un azartspēļu uzraudzības inspekcijas licence.
+
 ## 6. Balvas
 
-6.1. Konkursa galvenā balva — jauna Samsung planšete no sērijas, kas tirgū nonāk 2026. gada 30. septembrī [precīzs modelis — JĀPRECIZĒ ar Samsung].
+6.1. Konkursa galvenā balva — [Samsung Galaxy S26 Ultra] (1. vieta).
 
-6.2. Finālisti saņem papildu Samsung tehnoloģiju balvas [konkrēts saraksts — JĀPRECIZĒ ar Samsung].
+6.2. Papildu balvas: [Galaxy Watch9] (2. vieta) un [Galaxy Buds4 Pro] (3. vieta). Precīzi modeļi var tikt precizēti ar Samsung.
 
 6.3. Balvas netiek izmaksātas naudā.
 
 6.4. Uzvarētājam/finālistiem jāsazinās ar Organizētāju [__] dienu laikā pēc rezultātu paziņošanas, lai vienotos par balvas saņemšanu.
 
-## 7. Autortiesības un satura izmantošana
+## 7. Satura izmantošana un autortiesības
 
 7.1. Iesniedzot savu darbu, Dalībnieks apliecina, ka darbs ir viņa paša radīts (ar AI rīku palīdzību) un nepārkāpj trešo personu tiesības.
 
-7.2. **Iesniedzot darbu, Dalībnieks piekrīt, ka viss iesniegtais saturs — talismana vizuālais tēls, vārds un stāsts — kopā ar visām ar to saistītajām izmantošanas (mantiskajām) tiesībām pāriet Organizētāja īpašumā.** Tas nozīmē, ka Organizētājs var brīvi un neierobežoti izmantot, pielāgot, tālāk attīstīt un komerciāli izmantot iesniegto tēlu, vārdu un stāstu jebkādā veidā un jebkuros kanālos — arī pēc Konkursa noslēguma — bez nepieciešamības atkārtoti sazināties ar Dalībnieku vai saņemt viņa papildu piekrišanu, un bez papildu atlīdzības, izņemot šajā nolikumā paredzētās balvas.
+### 7.2. Licence visiem Dalībniekiem (konkursa un balsošanas nolūkiem)
 
-7.3. Autora personiskās (morālās) tiesības, kuras saskaņā ar likumu nav atsavināmas, paliek pie Dalībnieka.
+**Iesniedzot darbu, Dalībnieks piešķir Organizētājam un Partnerim bezatlīdzības, neekskluzīvu licenci** izmantot iesniegto saturu (talismana vizuālo tēlu, vārdu un stāstu) Konkursa norises, publiskās galerijas, balsošanas un ar to saistītas publicitātes nolūkos — Organizētāja un Partnera mājaslapās un sociālo tīklu kontos — Konkursa laikā un saprātīgu laiku pēc tā noslēguma. Šī licence neparedz darba īpašumtiesību pāreju.
 
-7.4. Ja Dalībnieks ir jaunāks par 18 gadiem, šī punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa parakstīta piekrišana, kas skaidri attiecas tieši uz šo tiesību nodošanu (skat. 2.2.).
+### 7.3. Pilna tiesību nodošana — tikai Konkursa uzvarētājam
 
-*[Juridiska piezīme izstrādātājam un Organizētājam: šis punkts nav juridiski pārbaudīts un pirms publicēšanas jāapstiprina ar juristu — īpaši attiecībā uz nepilngadīgo rīcībspēju un morālo tiesību neatsavināmību.]*
+Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot balvu, nodod Organizētāja īpašumā visas ar iesniegto darbu saistītās izmantošanas (mantiskās) tiesības**, lai Organizētājs varētu iesniegto konceptu profesionāli tālāk attīstīt un brīvi izmantot kā oficiālu Inbox.lv zīmola tēlu jebkādā veidā un jebkuros kanālos, arī pēc Konkursa noslēguma, bez papildu atlīdzības, izņemot šajā nolikumā paredzēto balvu.
+
+7.4. Autora personiskās (morālās) tiesības — tiesības uz autorību un darba integritāti —, kuras saskaņā ar Autortiesību likuma 14. panta piekto daļu nav atsavināmas, vienmēr paliek pie Dalībnieka/uzvarētāja neatkarīgi no 7.2. un 7.3. punktā minētās licences vai tiesību nodošanas.
+
+7.5. Ja Dalībnieks/uzvarētājs Konkursa pieteikšanās vai balvas saņemšanas brīdī ir jaunāks par 18 gadiem, gan 7.2., gan 7.3. punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa piekrišana (skat. 2.2.).
+
+*[Juridiska piezīme izstrādātājam un Organizētājam: šī sadaļa balstīta uz vispārīgiem Autortiesību likuma un Civillikuma principiem, bet pirms publicēšanas jāapstiprina ar juristu — īpaši attiecībā uz nepilngadīgo rīcībspēju un licences/tiesību nodošanas precīzu formulējumu.]*
 
 ## 8. Personas datu apstrāde
 
-8.1. Organizētājs apstrādā Dalībnieku personas datus (vārds/segvārds, e-pasts, vecums, iesniegtais saturs) atbilstoši GDPR un Organizētāja privātuma politikai [saite].
+8.1. Pārziņa identitāte un kontaktinformācija: **SIA "INBOKSS"**, reģ. Nr. [...], juridiskā adrese [...], e-pasts [...].
 
-8.2. Dati tiek izmantoti Konkursa organizēšanas, moderācijas un rezultātu paziņošanas nolūkos.
+8.2. Personas datu apstrādes mērķis ir Konkursa norises nodrošināšana (dalībnieku identifikācija, iesniegto darbu moderācija, balsošanas nodrošināšana, rezultātu paziņošana) un ar to saistīta publicitāte.
 
-8.3. Dalībniekam ir tiesības pieprasīt savu personas datu labošanu vai dzēšanu, vēršoties [kontaktinformācija]. *(Ņemot vērā 7. sadaļu, paša iesniegtā darba/koncepta dzēšana pēc tiesību nodošanas var būt ierobežota — šis nosacījums jāformulē skaidri kopā ar juristu.)*
+8.3. Tiesiskais pamats: (a) līguma (šī nolikuma noteikumu) izpilde — vārda/segvārda, e-pasta un iesniegtā satura apstrādei; (b) piekrišana — iesniegtā satura (attēla/video, vārda, stāsta) publiskai rādīšanai, kā arī nepilngadīgo dalībnieku gadījumā — vecāka/aizbildņa datu apstrādei.
+
+8.4. Piesakoties Konkursam, Dalībnieks un/vai viņa likumiskais pārstāvis apzinās un ir informēts, ka Dalībnieka vārds/segvārds, talismana vārds, iesniegtais darbs (attēls/video) un stāsts var tikt publiskoti Organizētāja un Partnera mājaslapās un sociālo tīklu kontos šajā nolikumā noteikto mērķu sasniegšanai.
+
+8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz [e-pasts].
+
+8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. *(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota — šis nosacījums jāformulē skaidri kopā ar juristu.)*
+
+8.7. Dalībnieks un/vai viņa likumiskais pārstāvis ir tiesīgs vērsties ar sūdzību Datu valsts inspekcijā (www.dvi.gov.lv), ja uzskata, ka noticis personas datu aizsardzības pārkāpums.
+
+8.8. Organizētāja pilna privātuma politika pieejama: [saite].
 
 ## 9. Nobeiguma noteikumi
 
@@ -107,4 +125,4 @@ Konkurss norisinās piecos posmos:
 
 ---
 
-*Piezīme izstrādātājam: nolikums jāizvieto informatīvajā sadaļā visās trīs valodās; 7. sadaļas piekrišana (tiesību nodošana) formā jārāda kā atsevišķs, skaidri redzams checkbox, nevis apvienota ar vispārējo piekrišanu.*
+*Piezīme izstrādātājam: nolikums jāizvieto informatīvajā sadaļā visās trīs valodās; 7. sadaļas piekrišana (satura licence / iespējamā tiesību nodošana) formā jārāda kā atsevišķs, skaidri redzams checkbox, nevis apvienota ar vispārējo piekrišanu. Avoti: Civillikums (219. pants), Autortiesību likums (14. panta 5. daļa), GDPR, Datu valsts inspekcijas un pašvaldību jauniešu konkursu nolikumu piemēri.*
