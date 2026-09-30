@@ -4,17 +4,17 @@
 
 ## 1. Vispārīgie noteikumi
 
-1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē **SIA "INBOKSS"** (zīmols Inbox.lv), reģ. Nr. [...], juridiskā adrese [...] (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
+1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē **SIA "INBOKSS"** (zīmols Inbox.lv), reģ. Nr. **40003560720**, juridiskā adrese **Rīga, Matrožu iela 15, LV-1048** (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
 
 1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no **2026. gada 6. oktobra līdz 2026. gada 31. oktobrim** (turpmāk — Iesniegšanas periods).
 
 1.3. Konkursa mērķis ir aicināt Latvijas jauniešus, izmantojot mākslīgā intelekta (AI) rīkus, radīt jaunu Inbox.lv zīmola tēlu (talismanu) — tā vizuālo izskatu, vārdu un stāstu. Konkursa filozofija: **"AI palīdz. Ideja ir tava."**
 
-1.4. Konkursa norises vieta ir tīmekļa vietne [talismans.inbox.lv], kur pieejama pilna informācija par Konkursu.
+1.4. Konkursa norises vieta ir tīmekļa vietne [__________], kur pieejama pilna informācija par Konkursu.
 
 ## 2. Dalībnieki
 
-2.1. Konkursā var piedalīties jaunieši vecumā no **14 līdz 30 gadiem**, kuri ir [Latvijas Republikas iedzīvotāji / cits nosacījums — JĀPRECIZĒ].
+2.1. Konkursā var piedalīties jaunieši vecumā no **14 līdz 30 gadiem**.
 
 2.2. Saskaņā ar Civillikuma 219. pantu pilngadība (un ar to pilna rīcībspēja patstāvīgi slēgt tiesiskus darījumus) iestājas ar 18 gadu vecumu. Tāpēc Dalībniekam, kurš Konkursa pieteikšanās brīdī ir jaunāks par 18 gadiem (14–17 g.), nepieciešama vecāka vai likumiskā aizbildņa piekrišana. Šī piekrišana attiecas **gan uz dalību Konkursā, gan uz 7. sadaļā minēto satura licencēšanu un iespējamo tiesību nodošanu**, ja Dalībnieks kļūst par uzvarētāju — tas jāizceļ piekrišanas veidlapā, nevis jāpaslēpj vispārīgā tekstā.
 
@@ -33,7 +33,7 @@
 
 3.2. Viens Dalībnieks Iesniegšanas periodā drīkst iesniegt vienu (1) pamatkonceptu.
 
-3.3. Iesniegtie darbi tiek pārbaudīti (moderēti), un tikai apstiprinātie darbi tiek publicēti publiski redzamajā Konkursa galerijā. Pārbaude var ilgt līdz [__] darbdienām.
+3.3. Iesniegtie darbi tiek pārbaudīti (moderēti), un tikai apstiprinātie darbi tiek publicēti publiski redzamajā Konkursa galerijā. Pārbaude parasti tiek veikta tuvākajā darba dienā pēc iesniegšanas.
 
 3.4. Organizētājam ir tiesības noraidīt darbu, kas neatbilst 4. sadaļas prasībām, par to īsi informējot Dalībnieku.
 
@@ -61,7 +61,7 @@ Konkurss norisinās piecos posmos:
 
 1. **CREATE** (6.–31.10.2026) — Dalībnieki izveido un iesniedz savus konceptus.
 2. **DISCOVER** (2.–6.11.2026) — žūrija izvēlas TOP 5 spēcīgākos konceptus kā finālistus. TOP 5 tiek atklāti 9.11.2026, vienlaicīgi ar balsošanas sākumu.
-3. **VOTE** (9.–15.11.2026) — plašāka auditorija balso par finālistiem publiskā balsošanā sociālajos tīklos [precīza platforma var vēl tikt precizēta].
+3. **VOTE** (9.–15.11.2026) — plašāka auditorija balso par finālistiem publiskā balsošanā **Instagram** platformā.
 4. **REVEAL** (16.11.2026) — uzvarētājs tiek paziņots, komunicēta Samsung balva.
 5. **BRING TO LIFE** — uzvarošais koncepts pēc Konkursa tiek profesionāli tālāk attīstīts par oficiālu Inbox.lv zīmola tēlu; šis process notiek pēc Organizētāja ieskatiem un var atšķirties no sākotnējā iesniegtā darba.
 
@@ -71,13 +71,11 @@ Konkurss norisinās piecos posmos:
 
 ## 6. Balvas
 
-6.1. Konkursa galvenā balva — [Samsung Galaxy S26 Ultra] (1. vieta).
+6.1. Konkursa galvenā balva — **Samsung Galaxy S26 Ultra** (1. vieta).
 
-6.2. Papildu balvas: [Galaxy Watch9] (2. vieta) un [Galaxy Buds4 Pro] (3. vieta). Precīzi modeļi var tikt precizēti ar Samsung.
+6.2. Papildu balvas: **Galaxy Watch9** (2. vieta) un **Galaxy Buds4 Pro** (3. vieta).
 
 6.3. Balvas netiek izmaksātas naudā.
-
-6.4. Uzvarētājam/finālistiem jāsazinās ar Organizētāju [__] dienu laikā pēc rezultātu paziņošanas, lai vienotos par balvas saņemšanu.
 
 ## 7. Satura izmantošana un autortiesības
 
@@ -99,7 +97,7 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 ## 8. Personas datu apstrāde
 
-8.1. Pārziņa identitāte un kontaktinformācija: **SIA "INBOKSS"**, reģ. Nr. [...], juridiskā adrese [...], e-pasts [...].
+8.1. Pārziņa identitāte un kontaktinformācija: **SIA "INBOKSS"**, reģ. Nr. **40003560720**, juridiskā adrese **Rīga, Matrožu iela 15, LV-1048**, e-pasts **marketing@co.inbox.lv**.
 
 8.2. Personas datu apstrādes mērķis ir Konkursa norises nodrošināšana (dalībnieku identifikācija, iesniegto darbu moderācija, balsošanas nodrošināšana, rezultātu paziņošana) un ar to saistīta publicitāte.
 
@@ -107,7 +105,7 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 8.4. Piesakoties Konkursam, Dalībnieks un/vai viņa likumiskais pārstāvis apzinās un ir informēts, ka Dalībnieka vārds/segvārds, talismana vārds, iesniegtais darbs (attēls/video) un stāsts var tikt publiskoti Organizētāja un Partnera mājaslapās un sociālo tīklu kontos šajā nolikumā noteikto mērķu sasniegšanai.
 
-8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz [e-pasts].
+8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz **marketing@co.inbox.lv**.
 
 8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. *(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota — šis nosacījums jāformulē skaidri kopā ar juristu.)*
 
@@ -119,7 +117,7 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 9.1. Organizētājs patur tiesības grozīt šo nolikumu vai pārtraukt Konkursu, iepriekš par to informējot Konkursa tīmekļa vietnē.
 
-9.2. Jautājumu vai sūdzību gadījumā Dalībnieki var sazināties ar Organizētāju: [e-pasts/tālrunis].
+9.2. Jautājumu vai sūdzību gadījumā Dalībnieki var sazināties ar Organizētāju: **marketing@co.inbox.lv**.
 
 9.3. Šis nolikums sastādīts latviešu valodā un tulkots krievu un angļu valodā. Strīdu gadījumā noteicošā ir latviešu valodas versija.
 
