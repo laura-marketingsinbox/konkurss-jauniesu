@@ -170,19 +170,16 @@
 
   .prize-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 22px; align-items: stretch; }
   .prize-card {
-    background: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center;
-    border: 1px solid rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center;
+    background: var(--ink); color: var(--white); border-radius: 16px; padding: 28px 24px; text-align: center;
+    border: none; box-shadow: 0 20px 44px rgba(0,0,0,0.18); display: flex; flex-direction: column; align-items: center;
   }
-  .prize-card.place-1 { background: var(--ink); color: var(--white); border: none; box-shadow: 0 20px 44px rgba(0,0,0,0.18); }
-  .place-badge { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
-  .prize-card:not(.place-1) .place-badge { color: var(--gray); }
-  .prize-media { width: 96px; height: 96px; margin-bottom: 14px; border-radius: 16px; overflow: hidden; background: #fff; }
+  .place-badge { font-size: 13px; font-weight: 700; margin-bottom: 14px; color: rgba(255,255,255,0.6); }
+  .prize-media { width: 96px; height: 96px; margin-bottom: 14px; }
   .prize-media svg { width: 100%; height: 100%; }
   .prize-media img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .prize-card h3 { font-size: 16px; }
   .prize-card.place-1 h3 { font-size: 19px; }
   .prize-card p { margin-top: 10px; font-size: 13.5px; color: rgba(255,255,255,0.68); max-width: 26ch; }
-  .prize-card:not(.place-1) p { color: #514c47; }
   .prize-note { margin-top: 24px; font-size: 13px; color: var(--gray); text-align: center; }
 
   @media (max-width: 860px) {
@@ -421,7 +418,7 @@
           <img src="assets/prize-s26ultra.webp" alt="Samsung Galaxy S26 Ultra ar S Pen">
         </div>
         <h3>Samsung Galaxy S26 Ultra</h3>
-        <p data-key="prize1Desc">Ar S Pen un Galaxy AI radošuma rīkiem talismana tapšanai.</p>
+        <p data-key="prize1Desc">Ar 200 MP kameru, iebūvētu S Pen un Galaxy AI iespējām.</p>
       </div>
 
       <div class="prize-card place-2">
@@ -430,6 +427,7 @@
           <img src="assets/prize-watch9.webp" alt="Samsung Galaxy Watch9">
         </div>
         <h3>Galaxy Watch9</h3>
+        <p data-key="prize2Desc">Seko miegam, treniņiem un veselības rādītājiem visas dienas garumā.</p>
       </div>
 
       <div class="prize-card place-3">
@@ -438,6 +436,7 @@
           <img src="assets/prize-buds4pro.webp" alt="Samsung Galaxy Buds4 Pro">
         </div>
         <h3>Galaxy Buds4 Pro</h3>
+        <p data-key="prize3Desc">Bezvadu austiņas ar adaptīvu trokšņu slāpēšanu un 360 Audio.</p>
       </div>
     </div>
 
@@ -548,7 +547,9 @@ window.dict = {
     s5t:'Iedzīvina', s5d:'Koncepts kļūst par īstu Inbox.lv zīmola tēlu.',
     partTitle: 'Ekskluzīvs tehnoloģiju partneris',
     place1:'1. vieta', place2:'2. vieta', place3:'3. vieta',
-    prize1Desc:'Ar S Pen un Galaxy AI radošuma rīkiem talismana tapšanai.',
+    prize1Desc:'Ar 200 MP kameru, iebūvētu S Pen un Galaxy AI iespējām.',
+    prize2Desc:'Seko miegam, treniņiem un veselības rādītājiem visas dienas garumā.',
+    prize3Desc:'Bezvadu austiņas ar adaptīvu trokšņu slāpēšanu un 360 Audio.',
     prizeNote:'Balvas nodrošina Samsung kā ekskluzīvais tehnoloģiju partneris. Precīzi modeļi var tikt precizēti.',
     subT:'Kā pieteikties', subS:'Trīs soļi: vizuāls tēls, vārds un stāsts. Aizņem apmēram 10 minūtes.',
     subNote:'Ja esi jaunāks par 18 gadiem, forma pieprasīs arī vecāka vai aizbildņa piekrišanu.',
@@ -586,7 +587,9 @@ window.dict = {
     s5t:'Воплощение', s5d:'Идея становится настоящим героем бренда Inbox.lv.',
     partTitle: 'Эксклюзивный технологический партнёр',
     place1:'1 место', place2:'2 место', place3:'3 место',
-    prize1Desc:'С S Pen и инструментами Galaxy AI для создания талисмана.',
+    prize1Desc:'С камерой 200 МП, встроенным S Pen и возможностями Galaxy AI.',
+    prize2Desc:'Следит за сном, тренировками и показателями здоровья весь день.',
+    prize3Desc:'Беспроводные наушники с адаптивным шумоподавлением и 360 Audio.',
     prizeNote:'Призы предоставляет Samsung как эксклюзивный технологический партнёр. Точные модели могут уточняться.',
     subT:'Как участвовать', subS:'Три шага: визуальный образ, имя и история. Займёт около 10 минут.',
     subNote:'Если тебе меньше 18 лет, форма также запросит согласие родителя или опекуна.',
@@ -624,7 +627,9 @@ window.dict = {
     s5t:'Bring to life', s5d:'The concept becomes a real Inbox.lv brand character.',
     partTitle: 'Exclusive technology partner',
     place1:'1st place', place2:'2nd place', place3:'3rd place',
-    prize1Desc:'With S Pen and Galaxy AI creativity tools for shaping your mascot.',
+    prize1Desc:'With a 200 MP camera, built-in S Pen and Galaxy AI features.',
+    prize2Desc:'Tracks sleep, workouts and health metrics all day long.',
+    prize3Desc:'Wireless earbuds with adaptive noise cancelling and 360 Audio.',
     prizeNote:'Prizes are provided by Samsung as the exclusive technology partner. Exact models may still be confirmed.',
     subT:'How to enter', subS:'Three steps: visual character, name, and story. Takes about 10 minutes.',
     subNote:'If you\'re under 18, the form will also ask for a parent or guardian\'s consent.',
