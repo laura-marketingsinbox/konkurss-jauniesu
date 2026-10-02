@@ -5,10 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Konkursa nolikums - Radi nākamo Inbox.lv talismanu</title>
 <style>
-  :root { --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; --ink:#17151C; --red:#CC0717; --gray:#8C8279; --bg:#F5F3F0; }
+  :root { --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; --ink:#17151C; --red:#CC0717; --gray:#8C8279; --bg:#F5F3F0; --white:#fff; }
   * { box-sizing: border-box; }
   body { margin: 0; font-family: var(--font-base); background: var(--bg); color: var(--ink); line-height: 1.6; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(13,13,20,0.92); backdrop-filter: blur(8px); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; max-width: 760px; }
+  .logo { height: 22px; width: auto; display: block; }
+  .logo path { fill: #FFFFFF; }
+  .lang-switch { display: flex; gap: 4px; background: rgba(255,255,255,0.08); padding: 4px; border-radius: 999px; }
+  .lang-switch button { background: transparent; color: rgba(255,255,255,0.6); font-size: 13px; padding: 6px 13px; border-radius: 999px; font-weight: 600; transition: background .2s, color .2s; font-family: var(--font-base); cursor: pointer; border: none; }
+  .lang-switch button.active { background: var(--white); color: var(--ink); }
+  .page { max-width: 760px; margin: 0 auto; padding: 40px 24px 80px; }
   a.back { font-size: 14px; color: var(--gray); text-decoration: none; }
   h1 { font-size: 26px; margin: 20px 0 6px; }
   h2 { font-size: 19px; margin: 34px 0 10px; }
@@ -23,82 +31,314 @@
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a class="back" href="index.html">&larr; Atpakaļ</a>
-  <h1>"Radi nākamo Inbox.lv talismanu" - konkursa nolikums</h1>
+
+<nav>
+  <div class="wrap">
+    <svg class="logo" viewBox="0 0 539.479 148.144" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 68.324219 105.949219 C 64.945312 105.949219 63.257812 104.210938 63.257812 100.734375 L 63.257812 57.050781 C 63.257812 53.574219 64.945312 51.835938 68.324219 51.835938 C 71.832031 51.835938 73.585938 53.574219 73.585938 57.050781 L 73.585938 100.734375 C 73.585938 104.210938 71.832031 105.949219 68.324219 105.949219 "/>
+      <path d="M 68.324219 47.703125 C 64.945312 47.703125 63.257812 45.96875 63.257812 42.492188 C 63.257812 39.015625 64.945312 37.277344 68.324219 37.277344 C 71.832031 37.277344 73.585938 39.015625 73.585938 42.492188 C 73.585938 45.96875 71.832031 47.703125 68.324219 47.703125 "/>
+      <path d="M 144.515625 105.949219 C 141.136719 105.949219 139.449219 104.210938 139.449219 100.734375 L 139.449219 67.480469 C 132.5625 62.628906 124.996094 60.199219 116.75 60.199219 C 108.433594 60.199219 100.898438 62.628906 94.144531 67.480469 L 94.144531 100.734375 C 94.144531 104.210938 92.390625 105.949219 88.882812 105.949219 C 85.503906 105.949219 83.816406 104.210938 83.816406 100.734375 L 83.816406 64.921875 C 83.816406 63.347656 84.464844 62.003906 85.765625 60.886719 C 94.792969 53.476562 105.121094 49.769531 116.75 49.769531 C 128.375 49.769531 138.703125 53.476562 147.730469 60.886719 C 149.03125 62.003906 149.679688 63.347656 149.679688 64.921875 L 149.679688 100.734375 C 149.679688 104.210938 147.957031 105.949219 144.515625 105.949219 "/>
+      <path d="M 215.640625 90.304688 C 208.820312 95.222656 201.253906 97.683594 192.941406 97.683594 C 184.5625 97.683594 177.023438 95.222656 170.335938 90.304688 L 170.335938 67.480469 C 177.089844 62.625 184.625 60.199219 192.941406 60.199219 C 201.1875 60.199219 208.753906 62.625 215.640625 67.480469 Z M 223.921875 60.886719 C 214.894531 53.476562 204.566406 49.769531 192.941406 49.769531 C 184.886719 49.769531 177.351562 51.640625 170.335938 55.378906 L 170.335938 42.492188 C 170.335938 39.015625 168.582031 37.277344 165.074219 37.277344 C 161.695312 37.277344 160.007812 39.015625 160.007812 42.492188 L 160.007812 92.863281 C 160.007812 94.4375 160.65625 95.78125 161.957031 96.898438 C 170.855469 104.308594 181.183594 108.015625 192.941406 108.015625 C 204.695312 108.015625 215.023438 104.308594 223.921875 96.898438 C 225.222656 95.78125 225.871094 94.4375 225.871094 92.863281 L 225.871094 64.921875 C 225.871094 63.347656 225.222656 62.003906 223.921875 60.886719 "/>
+      <path d="M 291.832031 90.304688 C 285.011719 95.222656 277.445312 97.683594 269.132812 97.683594 C 260.753906 97.683594 253.214844 95.222656 246.527344 90.304688 L 246.527344 67.480469 C 253.28125 62.625 260.816406 60.199219 269.132812 60.199219 C 277.378906 60.199219 284.949219 62.625 291.832031 67.480469 Z M 300.113281 60.886719 C 291.085938 53.476562 280.757812 49.769531 269.132812 49.769531 C 257.503906 49.769531 247.175781 53.476562 238.148438 60.886719 C 236.847656 62.003906 236.199219 63.347656 236.199219 64.921875 L 236.199219 92.863281 C 236.199219 94.4375 236.847656 95.78125 238.148438 96.898438 C 247.046875 104.308594 257.375 108.015625 269.132812 108.015625 C 280.886719 108.015625 291.214844 104.308594 300.113281 96.898438 C 301.414062 95.78125 302.0625 94.4375 302.0625 92.863281 L 302.0625 64.921875 C 302.0625 63.347656 301.414062 62.003906 300.113281 60.886719 "/>
+      <path d="M 373.382812 61.183594 L 350.875 78.992188 L 373.382812 96.601562 C 374.941406 97.914062 375.722656 99.226562 375.722656 100.539062 C 375.722656 101.191406 375.574219 101.863281 375.28125 102.554688 C 374.992188 103.242188 374.601562 103.847656 374.113281 104.375 C 373.628906 104.902344 373.058594 105.34375 372.410156 105.703125 C 371.757812 106.0625 371.109375 106.242188 370.460938 106.242188 C 369.421875 106.242188 368.285156 105.785156 367.050781 104.867188 L 342.496094 85.484375 L 317.847656 104.867188 C 316.613281 105.785156 315.476562 106.242188 314.4375 106.242188 C 313.851562 106.242188 313.234375 106.0625 312.585938 105.703125 C 311.9375 105.34375 311.367188 104.882812 310.878906 104.324219 C 310.394531 103.769531 309.988281 103.144531 309.664062 102.457031 C 309.335938 101.765625 309.175781 101.128906 309.175781 100.539062 C 309.175781 99.226562 309.957031 97.914062 311.511719 96.601562 L 334.019531 78.992188 L 311.511719 61.183594 C 309.957031 59.9375 309.175781 58.660156 309.175781 57.347656 C 309.175781 56.757812 309.335938 56.117188 309.664062 55.425781 C 309.988281 54.738281 310.394531 54.117188 310.878906 53.558594 C 311.367188 53.003906 311.9375 52.542969 312.585938 52.179688 C 313.234375 51.820312 313.851562 51.640625 314.4375 51.640625 C 315.476562 51.640625 316.613281 52.097656 317.847656 53.019531 L 342.496094 72.398438 L 367.050781 53.019531 C 368.285156 52.097656 369.421875 51.640625 370.460938 51.640625 C 371.046875 51.640625 371.660156 51.820312 372.3125 52.179688 C 372.960938 52.542969 373.527344 53.003906 374.015625 53.558594 C 374.503906 54.117188 374.910156 54.738281 375.234375 55.425781 C 375.558594 56.117188 375.722656 56.757812 375.722656 57.347656 C 375.722656 58.660156 374.941406 59.9375 373.382812 61.183594 "/>
+      <path d="M 385.269531 105.949219 C 381.824219 105.949219 380.105469 104.210938 380.105469 100.734375 C 380.105469 97.324219 381.824219 95.617188 385.269531 95.617188 C 388.644531 95.617188 390.335938 97.324219 390.335938 100.734375 C 390.335938 104.210938 388.644531 105.949219 385.269531 105.949219 "/>
+      <path d="M 403.097656 105.949219 C 399.71875 105.949219 398.03125 104.210938 398.03125 100.734375 L 398.03125 42.292969 C 398.03125 38.820312 399.71875 37.078125 403.097656 37.078125 C 406.605469 37.078125 408.359375 38.820312 408.359375 42.292969 L 408.359375 100.734375 C 408.359375 104.210938 406.605469 105.949219 403.097656 105.949219 "/>
+      <path d="M 484.84375 60.003906 L 455.027344 103.488281 C 453.988281 105.128906 452.558594 105.949219 450.742188 105.949219 C 448.988281 105.949219 447.558594 105.195312 446.453125 103.6875 L 416.542969 60.003906 C 415.765625 58.953125 415.375 57.871094 415.375 56.757812 C 415.375 55.316406 416.21875 54 417.90625 52.820312 C 419.074219 52.035156 420.148438 51.640625 421.121094 51.640625 C 422.683594 51.640625 423.980469 52.460938 425.019531 54.097656 L 450.644531 91.585938 L 476.367188 54.097656 C 477.40625 52.460938 478.707031 51.640625 480.261719 51.640625 C 481.238281 51.640625 482.308594 52.035156 483.480469 52.820312 C 485.167969 54 486.011719 55.316406 486.011719 56.757812 C 486.011719 57.871094 485.621094 58.953125 484.84375 60.003906 "/>
+    </svg>
+    <div class="lang-switch" id="langSwitch">
+      <button data-lang="lv" class="active">LV</button>
+      <button data-lang="ru">RU</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <a class="back" href="index.html" data-key="back">&larr; Atpakaļ</a>
+  <h1 data-key="h1">"Radi nākamo Inbox.lv talismanu" - konkursa nolikums</h1>
 
   <div class="draft-banner">
-    <b>⚠️ Melnraksts - nav juridiski apstiprināts</b>
-    Šis teksts sagatavots, balstoties uz Civillikumu, Autortiesību likumu, Vispārīgo datu aizsardzības regulu (GDPR) un reāliem Latvijas konkursu nolikumu piemēriem (t.sk. Datu valsts inspekcijas paša jauniešu konkursa nolikumu). Vietas ar <span class="placeholder">[...]</span> vēl jāaizpilda ar konkrētiem datiem. Pirms konkursa reālas palaišanas dokuments jāapstiprina ar juristu — īpaši 7. un 8. sadaļa.
+    <b data-key="draftTitle">⚠️ Melnraksts - nav juridiski apstiprināts</b>
+    <span data-key="draftText">Šis teksts sagatavots, balstoties uz Civillikumu, Autortiesību likumu, Vispārīgo datu aizsardzības regulu (GDPR) un reāliem Latvijas konkursu nolikumu piemēriem (t.sk. Datu valsts inspekcijas paša jauniešu konkursa nolikumu). Vietas ar <span class="placeholder">[...]</span> vēl jāaizpilda ar konkrētiem datiem. Pirms konkursa reālas palaišanas dokuments jāapstiprina ar juristu — īpaši 7. un 8. sadaļa.</span>
   </div>
 
-  <h2>1. Vispārīgie noteikumi</h2>
-  <p>1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk - Konkurss) organizē <b>SIA "INBOKSS"</b> (zīmols Inbox.lv), reģ. Nr. <b>40003560720</b>, juridiskā adrese <b>Matrožu iela 15, 2. stāvs, Rīga, LV-1048</b> (turpmāk - Organizētājs), sadarbībā ar <b>Samsung</b> kā ekskluzīvo tehnoloģiju partneri (turpmāk - Partneris).</p>
-  <p>1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no <b>2026. gada 6. oktobra līdz 2026. gada 31. oktobrim</b> (turpmāk - Iesniegšanas periods).</p>
-  <p>1.3. Konkursa mērķis ir aicināt Latvijas jauniešus, izmantojot mākslīgā intelekta (AI) rīkus, radīt jaunu Inbox.lv zīmola tēlu (talismanu) - tā vizuālo izskatu, vārdu un stāstu. Konkursa filozofija: <b>"AI palīdz. Ideja ir tava."</b></p>
-  <p>1.4. Konkursa norises vieta ir tīmekļa vietne <span class="placeholder">[__________]</span>, kur pieejama pilna informācija par Konkursu.</p>
+  <h2 data-key="h2_1">1. Vispārīgie noteikumi</h2>
+  <p data-key="p1_1">1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk - Konkurss) organizē <b>SIA "INBOKSS"</b> (zīmols Inbox.lv), reģ. Nr. <b>40003560720</b>, juridiskā adrese <b>Matrožu iela 15, 2. stāvs, Rīga, LV-1048</b> (turpmāk - Organizētājs), sadarbībā ar <b>Samsung</b> kā ekskluzīvo tehnoloģiju partneri (turpmāk - Partneris).</p>
+  <p data-key="p1_2">1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no <b>2026. gada 6. oktobra līdz 2026. gada 31. oktobrim</b> (turpmāk - Iesniegšanas periods).</p>
+  <p data-key="p1_3">1.3. Konkursa mērķis ir aicināt Latvijas jauniešus, izmantojot mākslīgā intelekta (AI) rīkus, radīt jaunu Inbox.lv zīmola tēlu (talismanu) - tā vizuālo izskatu, vārdu un stāstu. Konkursa filozofija: <b>"AI palīdz. Ideja ir tava."</b></p>
+  <p data-key="p1_4">1.4. Konkursa norises vieta ir tīmekļa vietne <span class="placeholder">[__________]</span>, kur pieejama pilna informācija par Konkursu.</p>
 
-  <h2>2. Dalībnieki</h2>
-  <p>2.1. Konkursā var piedalīties jaunieši vecumā no <b>14 līdz 30 gadiem</b>.</p>
-  <p>2.2. Saskaņā ar Civillikuma 219. pantu pilngadība (un ar to pilna rīcībspēja patstāvīgi slēgt tiesiskus darījumus) iestājas ar 18 gadu vecumu. Tāpēc Dalībniekam, kurš Konkursa pieteikšanās brīdī ir jaunāks par 18 gadiem (14-17 g.), nepieciešama vecāka vai likumiskā aizbildņa piekrišana. Šī piekrišana attiecas <b>gan uz dalību Konkursā, gan uz 7. sadaļā minēto satura licencēšanu un iespējamo tiesību nodošanu</b>, ja Dalībnieks kļūst par uzvarētāju.</p>
-  <p>2.3. Konkursā nedrīkst piedalīties Organizētāja un Partnera darbinieki un viņu ģimenes locekļi, kā arī personas, kas tieši iesaistītas Konkursa organizēšanā vai vērtēšanā.</p>
-  <p>2.4. Piedaloties Konkursā, Dalībnieks apstiprina, ka iepazinies ar šo nolikumu un piekrīt tā noteikumiem.</p>
+  <h2 data-key="h2_2">2. Dalībnieki</h2>
+  <p data-key="p2_1">2.1. Konkursā var piedalīties jaunieši vecumā no <b>14 līdz 30 gadiem</b>.</p>
+  <p data-key="p2_2">2.2. Saskaņā ar Civillikuma 219. pantu pilngadība (un ar to pilna rīcībspēja patstāvīgi slēgt tiesiskus darījumus) iestājas ar 18 gadu vecumu. Tāpēc Dalībniekam, kurš Konkursa pieteikšanās brīdī ir jaunāks par 18 gadiem (14-17 g.), nepieciešama vecāka vai likumiskā aizbildņa piekrišana. Šī piekrišana attiecas <b>gan uz dalību Konkursā, gan uz 7. sadaļā minēto satura licencēšanu un iespējamo tiesību nodošanu</b>, ja Dalībnieks kļūst par uzvarētāju.</p>
+  <p data-key="p2_3">2.3. Konkursā nedrīkst piedalīties Organizētāja un Partnera darbinieki un viņu ģimenes locekļi, kā arī personas, kas tieši iesaistītas Konkursa organizēšanā vai vērtēšanā.</p>
+  <p data-key="p2_4">2.4. Piedaloties Konkursā, Dalībnieks apstiprina, ka iepazinies ar šo nolikumu un piekrīt tā noteikumiem.</p>
 
-  <h2>3. Pieteikšanās un darba iesniegšanas kārtība</h2>
-  <p>3.1. Iesniegšanas periodā Dalībnieks aizpilda pieteikuma formu, norādot vārdu/segvārdu un vecuma grupu, e-pasta adresi, talismana vizuālo tēlu (izveidotu ar AI rīku palīdzību), talismana vārdu, personības un stāsta aprakstu, kā arī apliecinājumu par piekrišanu šim nolikumam un 7. sadaļā minētajiem satura izmantošanas noteikumiem.</p>
-  <p>3.2. Viens Dalībnieks Iesniegšanas periodā drīkst iesniegt vienu (1) pamatkonceptu.</p>
-  <p>3.3. Iesniegtie darbi tiek pārbaudīti (moderēti), un tikai apstiprinātie darbi tiek publicēti publiski redzamajā Konkursa galerijā. Pārbaude parasti tiek veikta tuvākajā darba dienā pēc iesniegšanas.</p>
-  <p>3.4. Organizētājam ir tiesības noraidīt darbu, kas neatbilst 4. sadaļas prasībām, par to īsi informējot Dalībnieku.</p>
+  <h2 data-key="h2_3">3. Pieteikšanās un darba iesniegšanas kārtība</h2>
+  <p data-key="p3_1">3.1. Iesniegšanas periodā Dalībnieks aizpilda pieteikuma formu, norādot vārdu/segvārdu un vecuma grupu, e-pasta adresi, talismana vizuālo tēlu (izveidotu ar AI rīku palīdzību), talismana vārdu, personības un stāsta aprakstu, kā arī apliecinājumu par piekrišanu šim nolikumam un 7. sadaļā minētajiem satura izmantošanas noteikumiem.</p>
+  <p data-key="p3_2">3.2. Viens Dalībnieks Iesniegšanas periodā drīkst iesniegt vienu (1) pamatkonceptu.</p>
+  <p data-key="p3_3">3.3. Iesniegtie darbi tiek pārbaudīti (moderēti), un tikai apstiprinātie darbi tiek publicēti publiski redzamajā Konkursa galerijā. Pārbaude parasti tiek veikta tuvākajā darba dienā pēc iesniegšanas.</p>
+  <p data-key="p3_4">3.4. Organizētājam ir tiesības noraidīt darbu, kas neatbilst 4. sadaļas prasībām, par to īsi informējot Dalībnieku.</p>
 
-  <h2>4. Prasības iesniegtajiem darbiem</h2>
-  <p>4.1. Darba koncepcijai (idejai, vārdam, stāstam) jābūt Dalībnieka paša radītai; AI rīku izmantošana vizuālā tēla veidošanā ir sagaidāma un atbalstīta.</p>
-  <p>4.2. Darbs nedrīkst saturēt aicinājumus uz vardarbību, naida runu vai diskrimināciju; seksualizētu vai nepiemērotu saturu; trešo personu attēlus, vārdus vai zīmolus bez atļaujas; reklāmu vai citu ar Konkursa tēmu nesaistītu komerciālu saturu.</p>
+  <h2 data-key="h2_4">4. Prasības iesniegtajiem darbiem</h2>
+  <p data-key="p4_1">4.1. Darba koncepcijai (idejai, vārdam, stāstam) jābūt Dalībnieka paša radītai; AI rīku izmantošana vizuālā tēla veidošanā ir sagaidāma un atbalstīta.</p>
+  <p data-key="p4_2">4.2. Darbs nedrīkst saturēt aicinājumus uz vardarbību, naida runu vai diskrimināciju; seksualizētu vai nepiemērotu saturu; trešo personu attēlus, vārdus vai zīmolus bez atļaujas; reklāmu vai citu ar Konkursa tēmu nesaistītu komerciālu saturu.</p>
   <table>
-    <tr><th>Elements</th><th>Prasība</th></tr>
-    <tr><td>Vizuālais tēls / video</td><td>attēls vai video, līdz 50 MB</td></tr>
-    <tr><td>Talismana vārds</td><td>līdz 50 rakstzīmēm</td></tr>
-    <tr><td>Personība un stāsts</td><td>līdz 2000 rakstzīmēm</td></tr>
+    <tr><th data-key="th1">Elements</th><th data-key="th2">Prasība</th></tr>
+    <tr><td data-key="tr1td1">Vizuālais tēls / video</td><td data-key="tr1td2">attēls vai video, līdz 50 MB</td></tr>
+    <tr><td data-key="tr2td1">Talismana vārds</td><td data-key="tr2td2">līdz 50 rakstzīmēm</td></tr>
+    <tr><td data-key="tr3td1">Personība un stāsts</td><td data-key="tr3td2">līdz 2000 rakstzīmēm</td></tr>
   </table>
 
-  <h2>5. Konkursa gaita un vērtēšana</h2>
-  <p>Konkurss norisinās piecos posmos: <b>CREATE</b> (6.-31.10.2026) - darbu radīšana un iesniegšana; <b>DISCOVER</b> (2.-6.11.2026) - žūrija izvēlas TOP 5 finālistus, kurus atklāj 9.11.2026; <b>VOTE</b> (9.-15.11.2026) - publiska balsošana <b>Instagram</b> platformā; <b>REVEAL</b> (16.11.2026) - uzvarētāja paziņošana; <b>BRING TO LIFE</b> - uzvarošā koncepta profesionāla ieviešana zīmolā.</p>
-  <p>5.1. Organizētāja un žūrijas lēmumi par finālistiem un uzvarētāju ir galīgi un nav apstrīdami.</p>
-  <p>5.2. Konkursa uzvarētāju izvēlas žūrija (TOP 5 atlase) un publiska balsošana, nevis nejaušības princips (izloze). Tāpēc Konkurss nav uzskatāms par izloti Izložu un azartspēļu likuma izpratnē un tam nav nepieciešama Izložu un azartspēļu uzraudzības inspekcijas licence.</p>
+  <h2 data-key="h2_5">5. Konkursa gaita un vērtēšana</h2>
+  <p data-key="p5_intro">Konkurss norisinās piecos posmos: <b>CREATE</b> (6.-31.10.2026) - darbu radīšana un iesniegšana; <b>DISCOVER</b> (2.-6.11.2026) - žūrija izvēlas TOP 5 finālistus, kurus atklāj 9.11.2026; <b>VOTE</b> (9.-15.11.2026) - publiska balsošana <b>Instagram</b> platformā; <b>REVEAL</b> (16.11.2026) - uzvarētāja paziņošana; <b>BRING TO LIFE</b> - uzvarošā koncepta profesionāla ieviešana zīmolā.</p>
+  <p data-key="p5_1">5.1. Organizētāja un žūrijas lēmumi par finālistiem un uzvarētāju ir galīgi un nav apstrīdami.</p>
+  <p data-key="p5_2">5.2. Konkursa uzvarētāju izvēlas žūrija (TOP 5 atlase) un publiska balsošana, nevis nejaušības princips (izloze). Tāpēc Konkurss nav uzskatāms par izloti Izložu un azartspēļu likuma izpratnē un tam nav nepieciešama Izložu un azartspēļu uzraudzības inspekcijas licence.</p>
 
-  <h2>6. Balvas</h2>
-  <p>6.1. Konkursa galvenā balva - <b>Samsung Galaxy S26 Ultra</b> (1. vieta).</p>
-  <p>6.2. Papildu balvas: <b>Galaxy Watch9</b> (2. vieta) un <b>Galaxy Buds4 Pro</b> (3. vieta).</p>
-  <p>6.3. Balvas netiek izmaksātas naudā.</p>
+  <h2 data-key="h2_6">6. Balvas</h2>
+  <p data-key="p6_1">6.1. Konkursa galvenā balva - <b>Samsung Galaxy S26 Ultra</b> (1. vieta).</p>
+  <p data-key="p6_2">6.2. Papildu balvas: <b>Galaxy Watch9</b> (2. vieta) un <b>Galaxy Buds4 Pro</b> (3. vieta).</p>
+  <p data-key="p6_3">6.3. Balvas netiek izmaksātas naudā.</p>
 
-  <h2>7. Satura izmantošana un autortiesības</h2>
-  <p>7.1. Iesniedzot savu darbu, Dalībnieks apliecina, ka darbs ir viņa paša radīts (ar AI rīku palīdzību) un nepārkāpj trešo personu tiesības.</p>
+  <h2 data-key="h2_7">7. Satura izmantošana un autortiesības</h2>
+  <p data-key="p7_1">7.1. Iesniedzot savu darbu, Dalībnieks apliecina, ka darbs ir viņa paša radīts (ar AI rīku palīdzību) un nepārkāpj trešo personu tiesības.</p>
 
-  <h3>7.2. Licence visiem Dalībniekiem (konkursa un balsošanas nolūkiem)</h3>
-  <p><b>Iesniedzot darbu, Dalībnieks piešķir Organizētājam un Partnerim bezatlīdzības, neekskluzīvu licenci</b> izmantot iesniegto saturu (talismana vizuālo tēlu, vārdu un stāstu) Konkursa norises, publiskās galerijas, balsošanas un ar to saistītas publicitātes nolūkos - Organizētāja un Partnera mājaslapās un sociālo tīklu kontos - Konkursa laikā un saprātīgu laiku pēc tā noslēguma. Šī licence neparedz darba īpašumtiesību pāreju.</p>
+  <h3 data-key="h3_7_2">7.2. Licence visiem Dalībniekiem (konkursa un balsošanas nolūkiem)</h3>
+  <p data-key="p7_2"><b>Iesniedzot darbu, Dalībnieks piešķir Organizētājam un Partnerim bezatlīdzības, neekskluzīvu licenci</b> izmantot iesniegto saturu (talismana vizuālo tēlu, vārdu un stāstu) Konkursa norises, publiskās galerijas, balsošanas un ar to saistītas publicitātes nolūkos - Organizētāja un Partnera mājaslapās un sociālo tīklu kontos - Konkursa laikā un saprātīgu laiku pēc tā noslēguma. Šī licence neparedz darba īpašumtiesību pāreju.</p>
 
-  <h3>7.3. Pilna tiesību nodošana - tikai Konkursa uzvarētājam</h3>
-  <p>Papildus 7.2. punktā minētajai licencei, <b>Konkursa uzvarētājs, saņemot balvu, nodod Organizētāja īpašumā visas ar iesniegto darbu saistītās izmantošanas (mantiskās) tiesības</b>, lai Organizētājs varētu iesniegto konceptu profesionāli tālāk attīstīt un brīvi izmantot kā oficiālu Inbox.lv zīmola tēlu jebkādā veidā un jebkuros kanālos, arī pēc Konkursa noslēguma, bez papildu atlīdzības, izņemot šajā nolikumā paredzēto balvu.</p>
+  <h3 data-key="h3_7_3">7.3. Pilna tiesību nodošana - tikai Konkursa uzvarētājam</h3>
+  <p data-key="p7_3">Papildus 7.2. punktā minētajai licencei, <b>Konkursa uzvarētājs, saņemot balvu, nodod Organizētāja īpašumā visas ar iesniegto darbu saistītās izmantošanas (mantiskās) tiesības</b>, lai Organizētājs varētu iesniegto konceptu profesionāli tālāk attīstīt un brīvi izmantot kā oficiālu Inbox.lv zīmola tēlu jebkādā veidā un jebkuros kanālos, arī pēc Konkursa noslēguma, bez papildu atlīdzības, izņemot šajā nolikumā paredzēto balvu.</p>
 
-  <p>7.4. Autora personiskās (morālās) tiesības - tiesības uz autorību un darba integritāti -, kuras saskaņā ar Autortiesību likuma 14. panta piekto daļu nav atsavināmas, vienmēr paliek pie Dalībnieka/uzvarētāja neatkarīgi no 7.2. un 7.3. punktā minētās licences vai tiesību nodošanas.</p>
-  <p>7.5. Ja Dalībnieks/uzvarētājs Konkursa pieteikšanās vai balvas saņemšanas brīdī ir jaunāks par 18 gadiem, gan 7.2., gan 7.3. punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa piekrišana (skat. 2.2.).</p>
-  <div class="draft-banner"><b>⚠️ Juridiska piezīme</b>Šī sadaļa balstīta uz vispārīgiem Autortiesību likuma un Civillikuma principiem, bet pirms reālas palaišanas jāapstiprina ar juristu - īpaši attiecībā uz nepilngadīgo rīcībspēju un licences/tiesību nodošanas precīzu formulējumu.</div>
+  <p data-key="p7_4">7.4. Autora personiskās (morālās) tiesības - tiesības uz autorību un darba integritāti -, kuras saskaņā ar Autortiesību likuma 14. panta piekto daļu nav atsavināmas, vienmēr paliek pie Dalībnieka/uzvarētāja neatkarīgi no 7.2. un 7.3. punktā minētās licences vai tiesību nodošanas.</p>
+  <p data-key="p7_5">7.5. Ja Dalībnieks/uzvarētājs Konkursa pieteikšanās vai balvas saņemšanas brīdī ir jaunāks par 18 gadiem, gan 7.2., gan 7.3. punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa piekrišana (skat. 2.2.).</p>
+  <div class="draft-banner"><b data-key="legalNoteTitle">⚠️ Juridiska piezīme</b><span data-key="legalNoteText">Šī sadaļa balstīta uz vispārīgiem Autortiesību likuma un Civillikuma principiem, bet pirms reālas palaišanas jāapstiprina ar juristu - īpaši attiecībā uz nepilngadīgo rīcībspēju un licences/tiesību nodošanas precīzu formulējumu.</span></div>
 
-  <h2>8. Personas datu apstrāde</h2>
-  <p>8.1. Pārziņa identitāte un kontaktinformācija: <b>SIA "INBOKSS"</b>, reģ. Nr. <b>40003560720</b>, juridiskā adrese <b>Matrožu iela 15, 2. stāvs, Rīga, LV-1048</b>, e-pasts <b>marketing@co.inbox.lv</b>.</p>
-  <p>8.2. Personas datu apstrādes mērķis ir Konkursa norises nodrošināšana (dalībnieku identifikācija, iesniegto darbu moderācija, balsošanas nodrošināšana, rezultātu paziņošana) un ar to saistīta publicitāte.</p>
-  <p>8.3. Tiesiskais pamats: (a) līguma (šī nolikuma noteikumu) izpilde - vārda/segvārda, e-pasta un iesniegtā satura apstrādei; (b) piekrišana - iesniegtā satura (attēla/video, vārda, stāsta) publiskai rādīšanai, kā arī nepilngadīgo dalībnieku gadījumā - vecāka/aizbildņa datu apstrādei.</p>
-  <p>8.4. Piesakoties Konkursam, Dalībnieks un/vai viņa likumiskais pārstāvis apzinās un ir informēts, ka Dalībnieka vārds/segvārds, talismana vārds, iesniegtais darbs (attēls/video) un stāsts var tikt publiskoti Organizētāja un Partnera mājaslapās un sociālo tīklu kontos šajā nolikumā noteikto mērķu sasniegšanai.</p>
-  <p>8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz <b>marketing@co.inbox.lv</b>.</p>
-  <p>8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. <i>(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota - šis nosacījums jāformulē skaidri kopā ar juristu.)</i></p>
-  <p>8.7. Dalībnieks un/vai viņa likumiskais pārstāvis ir tiesīgs vērsties ar sūdzību Datu valsts inspekcijā (<a href="https://www.dvi.gov.lv" target="_blank">www.dvi.gov.lv</a>), ja uzskata, ka noticis personas datu aizsardzības pārkāpums.</p>
-  <p>8.8. Organizētāja pilna privātuma politika pieejama: <a href="https://help.inbox.lv/privacy-policy?language=lv" target="_blank">help.inbox.lv/privacy-policy</a>.</p>
+  <h2 data-key="h2_8">8. Personas datu apstrāde</h2>
+  <p data-key="p8_1">8.1. Pārziņa identitāte un kontaktinformācija: <b>SIA "INBOKSS"</b>, reģ. Nr. <b>40003560720</b>, juridiskā adrese <b>Matrožu iela 15, 2. stāvs, Rīga, LV-1048</b>, e-pasts <b>marketing@co.inbox.lv</b>.</p>
+  <p data-key="p8_2">8.2. Personas datu apstrādes mērķis ir Konkursa norises nodrošināšana (dalībnieku identifikācija, iesniegto darbu moderācija, balsošanas nodrošināšana, rezultātu paziņošana) un ar to saistīta publicitāte.</p>
+  <p data-key="p8_3">8.3. Tiesiskais pamats: (a) līguma (šī nolikuma noteikumu) izpilde - vārda/segvārda, e-pasta un iesniegtā satura apstrādei; (b) piekrišana - iesniegtā satura (attēla/video, vārda, stāsta) publiskai rādīšanai, kā arī nepilngadīgo dalībnieku gadījumā - vecāka/aizbildņa datu apstrādei.</p>
+  <p data-key="p8_4">8.4. Piesakoties Konkursam, Dalībnieks un/vai viņa likumiskais pārstāvis apzinās un ir informēts, ka Dalībnieka vārds/segvārds, talismana vārds, iesniegtais darbs (attēls/video) un stāsts var tikt publiskoti Organizētāja un Partnera mājaslapās un sociālo tīklu kontos šajā nolikumā noteikto mērķu sasniegšanai.</p>
+  <p data-key="p8_5">8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz <b>marketing@co.inbox.lv</b>.</p>
+  <p data-key="p8_6">8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. <i>(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota - šis nosacījums jāformulē skaidri kopā ar juristu.)</i></p>
+  <p data-key="p8_7">8.7. Dalībnieks un/vai viņa likumiskais pārstāvis ir tiesīgs vērsties ar sūdzību Datu valsts inspekcijā (<a href="https://www.dvi.gov.lv" target="_blank">www.dvi.gov.lv</a>), ja uzskata, ka noticis personas datu aizsardzības pārkāpums.</p>
+  <p data-key="p8_8">8.8. Organizētāja pilna privātuma politika pieejama: <a href="https://help.inbox.lv/privacy-policy?language=lv" target="_blank" id="privacyLink">help.inbox.lv/privacy-policy</a>.</p>
 
-  <h2>9. Nobeiguma noteikumi</h2>
-  <p>9.1. Organizētājs patur tiesības grozīt šo nolikumu vai pārtraukt Konkursu, iepriekš par to informējot Konkursa tīmekļa vietnē.</p>
-  <p>9.2. Jautājumu vai sūdzību gadījumā Dalībnieki var sazināties ar Organizētāju: <b>marketing@co.inbox.lv</b>.</p>
-  <p>9.3. Šis nolikums sastādīts latviešu valodā un tulkots krievu un angļu valodā. Strīdu gadījumā noteicošā ir latviešu valodas versija.</p>
+  <h2 data-key="h2_9">9. Nobeiguma noteikumi</h2>
+  <p data-key="p9_1">9.1. Organizētājs patur tiesības grozīt šo nolikumu vai pārtraukt Konkursu, iepriekš par to informējot Konkursa tīmekļa vietnē.</p>
+  <p data-key="p9_2">9.2. Jautājumu vai sūdzību gadījumā Dalībnieki var sazināties ar Organizētāju: <b>marketing@co.inbox.lv</b>.</p>
+  <p data-key="p9_3">9.3. Šis nolikums sastādīts latviešu valodā un tulkots krievu un angļu valodā. Strīdu gadījumā noteicošā ir latviešu valodas versija.</p>
 
-  <p class="source-note">Sagatavots, izpētot: Civillikumu (219. pants - pilngadība), Autortiesību likumu (14. panta 5. daļa - morālās tiesības), Vispārīgo datu aizsardzības regulu, Reklāmas likumu, kā arī Datu valsts inspekcijas, Latvijas Republikas Patentu valdes un pašvaldību jauniešu konkursu nolikumu piemērus.</p>
+  <p class="source-note" data-key="sourceNote">Sagatavots, izpētot: Civillikumu (219. pants - pilngadība), Autortiesību likumu (14. panta 5. daļa - morālās tiesības), Vispārīgo datu aizsardzības regulu, Reklāmas likumu, kā arī Datu valsts inspekcijas, Latvijas Republikas Patentu valdes un pašvaldību jauniešu konkursu nolikumu piemērus.</p>
 </div>
+
+<script>
+window.dict = {
+  lv: {
+    pageTitle: 'Konkursa nolikums - Radi nākamo Inbox.lv talismanu',
+    back: '&larr; Atpakaļ',
+    h1: '"Radi nākamo Inbox.lv talismanu" - konkursa nolikums',
+    draftTitle: '⚠️ Melnraksts - nav juridiski apstiprināts',
+    draftText: 'Šis teksts sagatavots, balstoties uz Civillikumu, Autortiesību likumu, Vispārīgo datu aizsardzības regulu (GDPR) un reāliem Latvijas konkursu nolikumu piemēriem (t.sk. Datu valsts inspekcijas paša jauniešu konkursa nolikumu). Vietas ar <span class="placeholder">[...]</span> vēl jāaizpilda ar konkrētiem datiem. Pirms konkursa reālas palaišanas dokuments jāapstiprina ar juristu — īpaši 7. un 8. sadaļa.',
+    h2_1: '1. Vispārīgie noteikumi',
+    p1_1: '1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk - Konkurss) organizē <b>SIA "INBOKSS"</b> (zīmols Inbox.lv), reģ. Nr. <b>40003560720</b>, juridiskā adrese <b>Matrožu iela 15, 2. stāvs, Rīga, LV-1048</b> (turpmāk - Organizētājs), sadarbībā ar <b>Samsung</b> kā ekskluzīvo tehnoloģiju partneri (turpmāk - Partneris).',
+    p1_2: '1.2. Konkursa 1. kārta (darbu radīšana un iesniegšana) norisinās no <b>2026. gada 6. oktobra līdz 2026. gada 31. oktobrim</b> (turpmāk - Iesniegšanas periods).',
+    p1_3: '1.3. Konkursa mērķis ir aicināt Latvijas jauniešus, izmantojot mākslīgā intelekta (AI) rīkus, radīt jaunu Inbox.lv zīmola tēlu (talismanu) - tā vizuālo izskatu, vārdu un stāstu. Konkursa filozofija: <b>"AI palīdz. Ideja ir tava."</b>',
+    p1_4: '1.4. Konkursa norises vieta ir tīmekļa vietne <span class="placeholder">[__________]</span>, kur pieejama pilna informācija par Konkursu.',
+    h2_2: '2. Dalībnieki',
+    p2_1: '2.1. Konkursā var piedalīties jaunieši vecumā no <b>14 līdz 30 gadiem</b>.',
+    p2_2: '2.2. Saskaņā ar Civillikuma 219. pantu pilngadība (un ar to pilna rīcībspēja patstāvīgi slēgt tiesiskus darījumus) iestājas ar 18 gadu vecumu. Tāpēc Dalībniekam, kurš Konkursa pieteikšanās brīdī ir jaunāks par 18 gadiem (14-17 g.), nepieciešama vecāka vai likumiskā aizbildņa piekrišana. Šī piekrišana attiecas <b>gan uz dalību Konkursā, gan uz 7. sadaļā minēto satura licencēšanu un iespējamo tiesību nodošanu</b>, ja Dalībnieks kļūst par uzvarētāju.',
+    p2_3: '2.3. Konkursā nedrīkst piedalīties Organizētāja un Partnera darbinieki un viņu ģimenes locekļi, kā arī personas, kas tieši iesaistītas Konkursa organizēšanā vai vērtēšanā.',
+    p2_4: '2.4. Piedaloties Konkursā, Dalībnieks apstiprina, ka iepazinies ar šo nolikumu un piekrīt tā noteikumiem.',
+    h2_3: '3. Pieteikšanās un darba iesniegšanas kārtība',
+    p3_1: '3.1. Iesniegšanas periodā Dalībnieks aizpilda pieteikuma formu, norādot vārdu/segvārdu un vecuma grupu, e-pasta adresi, talismana vizuālo tēlu (izveidotu ar AI rīku palīdzību), talismana vārdu, personības un stāsta aprakstu, kā arī apliecinājumu par piekrišanu šim nolikumam un 7. sadaļā minētajiem satura izmantošanas noteikumiem.',
+    p3_2: '3.2. Viens Dalībnieks Iesniegšanas periodā drīkst iesniegt vienu (1) pamatkonceptu.',
+    p3_3: '3.3. Iesniegtie darbi tiek pārbaudīti (moderēti), un tikai apstiprinātie darbi tiek publicēti publiski redzamajā Konkursa galerijā. Pārbaude parasti tiek veikta tuvākajā darba dienā pēc iesniegšanas.',
+    p3_4: '3.4. Organizētājam ir tiesības noraidīt darbu, kas neatbilst 4. sadaļas prasībām, par to īsi informējot Dalībnieku.',
+    h2_4: '4. Prasības iesniegtajiem darbiem',
+    p4_1: '4.1. Darba koncepcijai (idejai, vārdam, stāstam) jābūt Dalībnieka paša radītai; AI rīku izmantošana vizuālā tēla veidošanā ir sagaidāma un atbalstīta.',
+    p4_2: '4.2. Darbs nedrīkst saturēt aicinājumus uz vardarbību, naida runu vai diskrimināciju; seksualizētu vai nepiemērotu saturu; trešo personu attēlus, vārdus vai zīmolus bez atļaujas; reklāmu vai citu ar Konkursa tēmu nesaistītu komerciālu saturu.',
+    th1: 'Elements', th2: 'Prasība',
+    tr1td1: 'Vizuālais tēls / video', tr1td2: 'attēls vai video, līdz 50 MB',
+    tr2td1: 'Talismana vārds', tr2td2: 'līdz 50 rakstzīmēm',
+    tr3td1: 'Personība un stāsts', tr3td2: 'līdz 2000 rakstzīmēm',
+    h2_5: '5. Konkursa gaita un vērtēšana',
+    p5_intro: 'Konkurss norisinās piecos posmos: <b>CREATE</b> (6.-31.10.2026) - darbu radīšana un iesniegšana; <b>DISCOVER</b> (2.-6.11.2026) - žūrija izvēlas TOP 5 finālistus, kurus atklāj 9.11.2026; <b>VOTE</b> (9.-15.11.2026) - publiska balsošana <b>Instagram</b> platformā; <b>REVEAL</b> (16.11.2026) - uzvarētāja paziņošana; <b>BRING TO LIFE</b> - uzvarošā koncepta profesionāla ieviešana zīmolā.',
+    p5_1: '5.1. Organizētāja un žūrijas lēmumi par finālistiem un uzvarētāju ir galīgi un nav apstrīdami.',
+    p5_2: '5.2. Konkursa uzvarētāju izvēlas žūrija (TOP 5 atlase) un publiska balsošana, nevis nejaušības princips (izloze). Tāpēc Konkurss nav uzskatāms par izloti Izložu un azartspēļu likuma izpratnē un tam nav nepieciešama Izložu un azartspēļu uzraudzības inspekcijas licence.',
+    h2_6: '6. Balvas',
+    p6_1: '6.1. Konkursa galvenā balva - <b>Samsung Galaxy S26 Ultra</b> (1. vieta).',
+    p6_2: '6.2. Papildu balvas: <b>Galaxy Watch9</b> (2. vieta) un <b>Galaxy Buds4 Pro</b> (3. vieta).',
+    p6_3: '6.3. Balvas netiek izmaksātas naudā.',
+    h2_7: '7. Satura izmantošana un autortiesības',
+    p7_1: '7.1. Iesniedzot savu darbu, Dalībnieks apliecina, ka darbs ir viņa paša radīts (ar AI rīku palīdzību) un nepārkāpj trešo personu tiesības.',
+    h3_7_2: '7.2. Licence visiem Dalībniekiem (konkursa un balsošanas nolūkiem)',
+    p7_2: '<b>Iesniedzot darbu, Dalībnieks piešķir Organizētājam un Partnerim bezatlīdzības, neekskluzīvu licenci</b> izmantot iesniegto saturu (talismana vizuālo tēlu, vārdu un stāstu) Konkursa norises, publiskās galerijas, balsošanas un ar to saistītas publicitātes nolūkos - Organizētāja un Partnera mājaslapās un sociālo tīklu kontos - Konkursa laikā un saprātīgu laiku pēc tā noslēguma. Šī licence neparedz darba īpašumtiesību pāreju.',
+    h3_7_3: '7.3. Pilna tiesību nodošana - tikai Konkursa uzvarētājam',
+    p7_3: 'Papildus 7.2. punktā minētajai licencei, <b>Konkursa uzvarētājs, saņemot balvu, nodod Organizētāja īpašumā visas ar iesniegto darbu saistītās izmantošanas (mantiskās) tiesības</b>, lai Organizētājs varētu iesniegto konceptu profesionāli tālāk attīstīt un brīvi izmantot kā oficiālu Inbox.lv zīmola tēlu jebkādā veidā un jebkuros kanālos, arī pēc Konkursa noslēguma, bez papildu atlīdzības, izņemot šajā nolikumā paredzēto balvu.',
+    p7_4: '7.4. Autora personiskās (morālās) tiesības - tiesības uz autorību un darba integritāti -, kuras saskaņā ar Autortiesību likuma 14. panta piekto daļu nav atsavināmas, vienmēr paliek pie Dalībnieka/uzvarētāja neatkarīgi no 7.2. un 7.3. punktā minētās licences vai tiesību nodošanas.',
+    p7_5: '7.5. Ja Dalībnieks/uzvarētājs Konkursa pieteikšanās vai balvas saņemšanas brīdī ir jaunāks par 18 gadiem, gan 7.2., gan 7.3. punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa piekrišana (skat. 2.2.).',
+    legalNoteTitle: '⚠️ Juridiska piezīme',
+    legalNoteText: 'Šī sadaļa balstīta uz vispārīgiem Autortiesību likuma un Civillikuma principiem, bet pirms reālas palaišanas jāapstiprina ar juristu - īpaši attiecībā uz nepilngadīgo rīcībspēju un licences/tiesību nodošanas precīzu formulējumu.',
+    h2_8: '8. Personas datu apstrāde',
+    p8_1: '8.1. Pārziņa identitāte un kontaktinformācija: <b>SIA "INBOKSS"</b>, reģ. Nr. <b>40003560720</b>, juridiskā adrese <b>Matrožu iela 15, 2. stāvs, Rīga, LV-1048</b>, e-pasts <b>marketing@co.inbox.lv</b>.',
+    p8_2: '8.2. Personas datu apstrādes mērķis ir Konkursa norises nodrošināšana (dalībnieku identifikācija, iesniegto darbu moderācija, balsošanas nodrošināšana, rezultātu paziņošana) un ar to saistīta publicitāte.',
+    p8_3: '8.3. Tiesiskais pamats: (a) līguma (šī nolikuma noteikumu) izpilde - vārda/segvārda, e-pasta un iesniegtā satura apstrādei; (b) piekrišana - iesniegtā satura (attēla/video, vārda, stāsta) publiskai rādīšanai, kā arī nepilngadīgo dalībnieku gadījumā - vecāka/aizbildņa datu apstrādei.',
+    p8_4: '8.4. Piesakoties Konkursam, Dalībnieks un/vai viņa likumiskais pārstāvis apzinās un ir informēts, ka Dalībnieka vārds/segvārds, talismana vārds, iesniegtais darbs (attēls/video) un stāsts var tikt publiskoti Organizētāja un Partnera mājaslapās un sociālo tīklu kontos šajā nolikumā noteikto mērķu sasniegšanai.',
+    p8_5: '8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz <b>marketing@co.inbox.lv</b>.',
+    p8_6: '8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. <i>(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota - šis nosacījums jāformulē skaidri kopā ar juristu.)</i>',
+    p8_7: '8.7. Dalībnieks un/vai viņa likumiskais pārstāvis ir tiesīgs vērsties ar sūdzību Datu valsts inspekcijā (<a href="https://www.dvi.gov.lv" target="_blank">www.dvi.gov.lv</a>), ja uzskata, ka noticis personas datu aizsardzības pārkāpums.',
+    p8_8: '8.8. Organizētāja pilna privātuma politika pieejama: <a href="https://help.inbox.lv/privacy-policy?language=lv" target="_blank" id="privacyLink">help.inbox.lv/privacy-policy</a>.',
+    h2_9: '9. Nobeiguma noteikumi',
+    p9_1: '9.1. Organizētājs patur tiesības grozīt šo nolikumu vai pārtraukt Konkursu, iepriekš par to informējot Konkursa tīmekļa vietnē.',
+    p9_2: '9.2. Jautājumu vai sūdzību gadījumā Dalībnieki var sazināties ar Organizētāju: <b>marketing@co.inbox.lv</b>.',
+    p9_3: '9.3. Šis nolikums sastādīts latviešu valodā un tulkots krievu un angļu valodā. Strīdu gadījumā noteicošā ir latviešu valodas versija.',
+    sourceNote: 'Sagatavots, izpētot: Civillikumu (219. pants - pilngadība), Autortiesību likumu (14. panta 5. daļa - morālās tiesības), Vispārīgo datu aizsardzības regulu, Reklāmas likumu, kā arī Datu valsts inspekcijas, Latvijas Republikas Patentu valdes un pašvaldību jauniešu konkursu nolikumu piemērus.',
+    privacyUrl: 'https://help.inbox.lv/privacy-policy?language=lv'
+  },
+  ru: {
+    pageTitle: 'Правила конкурса - Создай нового талисмана Inbox.lv',
+    back: '&larr; Назад',
+    h1: '«Создай нового талисмана Inbox.lv» — правила конкурса',
+    draftTitle: '⚠️ Черновик — юридически не утверждён',
+    draftText: 'Этот текст подготовлен на основе Гражданского закона, Закона об авторских правах, Общего регламента по защите данных (GDPR) и реальных примеров правил латвийских конкурсов (включая правила собственного молодёжного конкурса Государственной инспекции данных). Места, отмеченные <span class="placeholder">[...]</span>, ещё нужно заполнить конкретными данными. Перед реальным запуском конкурса документ должен быть утверждён юристом — особенно разделы 7 и 8.',
+    h2_1: '1. Общие положения',
+    p1_1: '1.1. Конкурс «Создай нового талисмана Inbox.lv» (далее — Конкурс) организует <b>SIA «INBOKSS»</b> (бренд Inbox.lv), рег. № <b>40003560720</b>, юридический адрес <b>ул. Матрожу 15, 2-й этаж, Рига, LV-1048</b> (далее — Организатор), в партнёрстве с <b>Samsung</b> как эксклюзивным технологическим партнёром (далее — Партнёр).',
+    p1_2: '1.2. Первый этап Конкурса (создание и подача работ) проходит с <b>6 октября 2026 года по 31 октября 2026 года</b> (далее — Период подачи заявок).',
+    p1_3: '1.3. Цель Конкурса — пригласить молодёжь Латвии с помощью инструментов искусственного интеллекта (ИИ) создать новый образ бренда Inbox.lv (талисман) — его визуальный облик, имя и историю. Философия Конкурса: <b>«ИИ помогает. Идея — твоя»</b>.',
+    p1_4: '1.4. Конкурс проводится на веб-сайте <span class="placeholder">[__________]</span>, где доступна полная информация о Конкурсе.',
+    h2_2: '2. Участники',
+    p2_1: '2.1. В Конкурсе могут участвовать молодые люди в возрасте <b>от 14 до 30 лет</b>.',
+    p2_2: '2.2. Согласно статье 219 Гражданского закона совершеннолетие (а вместе с ним полная дееспособность самостоятельно заключать юридические сделки) наступает с 18 лет. Поэтому Участнику, которому на момент подачи заявки на Конкурс ещё не исполнилось 18 лет (14–17 лет), необходимо согласие родителя или законного опекуна. Это согласие относится <b>как к участию в Конкурсе, так и к указанному в разделе 7 лицензированию контента и возможной передаче прав</b>, если Участник станет победителем.',
+    p2_3: '2.3. В Конкурсе не могут участвовать сотрудники Организатора и Партнёра, а также члены их семей, равно как и лица, непосредственно вовлечённые в организацию или оценку Конкурса.',
+    p2_4: '2.4. Участвуя в Конкурсе, Участник подтверждает, что ознакомился с настоящими правилами и согласен с их условиями.',
+    h2_3: '3. Порядок подачи заявки и работы',
+    p3_1: '3.1. В течение Периода подачи заявок Участник заполняет форму заявки, указывая имя/псевдоним и возрастную группу, адрес электронной почты, визуальный образ талисмана (созданный с помощью инструментов ИИ), имя талисмана, описание его характера и истории, а также подтверждение согласия с настоящими правилами и указанными в разделе 7 условиями использования контента.',
+    p3_2: '3.2. Один Участник может подать в течение Периода подачи заявок одну (1) основную концепцию.',
+    p3_3: '3.3. Поданные работы проходят проверку (модерацию), и только одобренные работы публикуются в открытой для всех галерее Конкурса. Проверка обычно проводится в ближайший рабочий день после подачи.',
+    p3_4: '3.4. Организатор вправе отклонить работу, не соответствующую требованиям раздела 4, кратко уведомив об этом Участника.',
+    h2_4: '4. Требования к поданным работам',
+    p4_1: '4.1. Концепция работы (идея, имя, история) должна быть создана самим Участником; использование инструментов ИИ для создания визуального образа ожидается и приветствуется.',
+    p4_2: '4.2. Работа не должна содержать призывов к насилию, разжигания ненависти или дискриминации; сексуализированного или неуместного контента; изображений, имён или брендов третьих лиц без разрешения; рекламы или иного коммерческого контента, не связанного с тематикой Конкурса.',
+    th1: 'Элемент', th2: 'Требование',
+    tr1td1: 'Визуальный образ / видео', tr1td2: 'изображение или видео, до 50 МБ',
+    tr2td1: 'Имя талисмана', tr2td2: 'до 50 символов',
+    tr3td1: 'Характер и история', tr3td2: 'до 2000 символов',
+    h2_5: '5. Ход конкурса и оценка',
+    p5_intro: 'Конкурс проходит в пять этапов: <b>CREATE</b> (6–31.10.2026) — создание и подача работ; <b>DISCOVER</b> (2–6.11.2026) — жюри выбирает ТОП-5 финалистов, которые объявляются 9.11.2026; <b>VOTE</b> (9–15.11.2026) — публичное голосование на платформе <b>Instagram</b>; <b>REVEAL</b> (16.11.2026) — объявление победителя; <b>BRING TO LIFE</b> — профессиональное воплощение победившей концепции в бренде.',
+    p5_1: '5.1. Решения Организатора и жюри о финалистах и победителе являются окончательными и не подлежат обжалованию.',
+    p5_2: '5.2. Победитель Конкурса определяется жюри (отбор ТОП-5) и публичным голосованием, а не по принципу случайности (жеребьёвки). Поэтому Конкурс не считается лотереей по смыслу Закона о лотереях и азартных играх, и для него не требуется лицензия Инспекции по надзору за лотереями и азартными играми.',
+    h2_6: '6. Призы',
+    p6_1: '6.1. Главный приз Конкурса — <b>Samsung Galaxy S26 Ultra</b> (1-е место).',
+    p6_2: '6.2. Дополнительные призы: <b>Galaxy Watch9</b> (2-е место) и <b>Galaxy Buds4 Pro</b> (3-е место).',
+    p6_3: '6.3. Призы не выплачиваются деньгами.',
+    h2_7: '7. Использование контента и авторские права',
+    p7_1: '7.1. Подавая свою работу, Участник подтверждает, что работа создана им самим (с помощью инструментов ИИ) и не нарушает права третьих лиц.',
+    h3_7_2: '7.2. Лицензия для всех Участников (для целей конкурса и голосования)',
+    p7_2: '<b>Подавая работу, Участник предоставляет Организатору и Партнёру безвозмездную неисключительную лицензию</b> на использование поданного контента (визуального образа талисмана, имени и истории) в целях проведения Конкурса, публичной галереи, голосования и связанной с этим публичности — на сайтах и в аккаунтах социальных сетей Организатора и Партнёра — в течение Конкурса и разумный период после его завершения. Данная лицензия не предполагает передачи права собственности на работу.',
+    h3_7_3: '7.3. Полная передача прав — только победителю Конкурса',
+    p7_3: 'Помимо указанной в пункте 7.2 лицензии, <b>победитель Конкурса, получая приз, передаёт Организатору в собственность все связанные с поданной работой имущественные права на использование</b>, чтобы Организатор мог профессионально развивать поданную концепцию далее и свободно использовать её как официальный образ бренда Inbox.lv любым способом и в любых каналах, в том числе после завершения Конкурса, без дополнительного вознаграждения, помимо предусмотренного настоящими правилами приза.',
+    p7_4: '7.4. Личные (моральные) права автора — право на авторство и на неприкосновенность произведения, — которые согласно пятой части статьи 14 Закона об авторских правах являются неотчуждаемыми, всегда остаются за Участником/победителем независимо от лицензии или передачи прав, указанных в пунктах 7.2 и 7.3.',
+    p7_5: '7.5. Если Участник/победитель на момент подачи заявки на Конкурс или получения приза младше 18 лет, для действительности как пункта 7.2, так и пункта 7.3 также требуется согласие родителя или законного опекуна (см. п. 2.2).',
+    legalNoteTitle: '⚠️ Юридическое примечание',
+    legalNoteText: 'Этот раздел основан на общих принципах Закона об авторских правах и Гражданского закона, но перед реальным запуском должен быть утверждён юристом — особенно в части дееспособности несовершеннолетних и точной формулировки лицензии/передачи прав.',
+    h2_8: '8. Обработка персональных данных',
+    p8_1: '8.1. Данные и контактная информация контролёра данных: <b>SIA «INBOKSS»</b>, рег. № <b>40003560720</b>, юридический адрес <b>ул. Матрожу 15, 2-й этаж, Рига, LV-1048</b>, эл. почта <b>marketing@co.inbox.lv</b>.',
+    p8_2: '8.2. Цель обработки персональных данных — обеспечение проведения Конкурса (идентификация участников, модерация поданных работ, обеспечение голосования, объявление результатов) и связанная с этим публичность.',
+    p8_3: '8.3. Правовое основание: (a) исполнение договора (условий настоящих правил) — для обработки имени/псевдонима, электронной почты и поданного контента; (b) согласие — для публичного показа поданного контента (изображения/видео, имени, истории), а также для обработки данных родителя/опекуна в случае несовершеннолетних участников.',
+    p8_4: '8.4. Подавая заявку на Конкурс, Участник и/или его законный представитель осознаёт и проинформирован, что имя/псевдоним Участника, имя талисмана, поданная работа (изображение/видео) и история могут быть опубликованы на сайтах и в аккаунтах социальных сетей Организатора и Партнёра для достижения целей, указанных в настоящих правилах.',
+    p8_5: '8.5. Участник и/или его законный представитель вправе в любое время возразить против публикации поданного им контента, написав об этом на <b>marketing@co.inbox.lv</b>.',
+    p8_6: '8.6. Участник вправе реализовать право субъекта данных на доступ (статья 15 Общего регламента по защите данных), право на исправление (статья 16) или удаление (статья 17) персональных данных в предусмотренных Регламентом случаях. <i>(С учётом пункта 7.3, удаление поданной победителем работы после передачи прав может быть ограничено — это условие должно быть чётко сформулировано совместно с юристом.)</i>',
+    p8_7: '8.7. Участник и/или его законный представитель вправе подать жалобу в Государственную инспекцию данных (<a href="https://www.dvi.gov.lv" target="_blank">www.dvi.gov.lv</a>), если считает, что произошло нарушение защиты персональных данных.',
+    p8_8: '8.8. Полная политика конфиденциальности Организатора доступна по адресу: <a href="https://help.inbox.lv/privacy-policy?language=ru" target="_blank" id="privacyLink">help.inbox.lv/privacy-policy</a>.',
+    h2_9: '9. Заключительные положения',
+    p9_1: '9.1. Организатор оставляет за собой право вносить изменения в настоящие правила или прекратить Конкурс, заранее проинформировав об этом на сайте Конкурса.',
+    p9_2: '9.2. По вопросам или жалобам Участники могут связаться с Организатором: <b>marketing@co.inbox.lv</b>.',
+    p9_3: '9.3. Настоящие правила составлены на латышском языке и переведены на русский и английский языки. В случае спора определяющей является версия на латышском языке.',
+    sourceNote: 'Подготовлено на основе изучения: Гражданского закона (ст. 219 — совершеннолетие), Закона об авторских правах (ст. 14, ч. 5 — моральные права), Общего регламента по защите данных, Закона о рекламе, а также примеров правил молодёжных конкурсов Государственной инспекции данных, Патентного управления Латвийской Республики и самоуправлений.',
+    privacyUrl: 'https://help.inbox.lv/privacy-policy?language=ru'
+  },
+  en: {
+    pageTitle: 'Contest Rules - Create the next Inbox.lv mascot',
+    back: '&larr; Back',
+    h1: '"Create the next Inbox.lv mascot" — Contest Rules',
+    draftTitle: '⚠️ Draft — not yet legally approved',
+    draftText: 'This text was prepared based on the Civil Law, the Copyright Law, the General Data Protection Regulation (GDPR) and real examples of Latvian contest rules (including the Data State Inspectorate\'s own youth contest rules). Places marked <span class="placeholder">[...]</span> still need to be filled in with specific details. Before the Contest is actually launched, this document must be approved by a lawyer — especially sections 7 and 8.',
+    h2_1: '1. General provisions',
+    p1_1: '1.1. The Contest "Create the next Inbox.lv mascot" (hereinafter — the Contest) is organised by <b>SIA "INBOKSS"</b> (brand Inbox.lv), reg. No. <b>40003560720</b>, legal address <b>Matrožu iela 15, 2nd floor, Riga, LV-1048</b> (hereinafter — the Organiser), in partnership with <b>Samsung</b> as the exclusive technology partner (hereinafter — the Partner).',
+    p1_2: '1.2. Round 1 of the Contest (creating and submitting entries) runs from <b>6 October 2026 to 31 October 2026</b> (hereinafter — the Submission Period).',
+    p1_3: '1.3. The purpose of the Contest is to invite young people in Latvia to use artificial intelligence (AI) tools to create a new Inbox.lv brand character (mascot) — its visual look, name and story. The Contest\'s philosophy: <b>"AI helps. The idea is yours."</b>',
+    p1_4: '1.4. The Contest takes place on the website <span class="placeholder">[__________]</span>, where full information about the Contest is available.',
+    h2_2: '2. Participants',
+    p2_1: '2.1. The Contest is open to young people aged <b>14 to 30</b>.',
+    p2_2: '2.2. Under Section 219 of the Civil Law, the age of majority (and with it full legal capacity to independently enter into legal transactions) begins at age 18. Therefore, a Participant who is younger than 18 (14–17 years old) at the time of entering the Contest needs the consent of a parent or legal guardian. This consent covers <b>both participation in the Contest and the content licensing and possible transfer of rights referred to in Section 7</b>, should the Participant become a winner.',
+    p2_3: '2.3. Employees of the Organiser and the Partner and their family members, as well as persons directly involved in organising or judging the Contest, may not take part in the Contest.',
+    p2_4: '2.4. By participating in the Contest, the Participant confirms that they have read these rules and agree to their terms.',
+    h2_3: '3. Entry and submission procedure',
+    p3_1: '3.1. During the Submission Period, the Participant fills in the entry form, providing their name/alias and age group, email address, the mascot\'s visual image (created with the help of AI tools), the mascot\'s name, a description of its personality and story, and confirmation of agreement with these rules and the content usage terms set out in Section 7.',
+    p3_2: '3.2. Each Participant may submit one (1) core concept during the Submission Period.',
+    p3_3: '3.3. Submitted entries are reviewed (moderated), and only approved entries are published in the Contest\'s public gallery. Review is usually carried out on the next business day after submission.',
+    p3_4: '3.4. The Organiser has the right to reject an entry that does not meet the requirements of Section 4, briefly notifying the Participant of this.',
+    h2_4: '4. Requirements for submitted entries',
+    p4_1: '4.1. The concept of the entry (the idea, name and story) must be created by the Participant themselves; using AI tools to create the visual image is expected and encouraged.',
+    p4_2: '4.2. The entry must not contain calls for violence, hate speech or discrimination; sexualised or inappropriate content; third-party images, names or brands used without permission; or advertising or other commercial content unrelated to the Contest\'s theme.',
+    th1: 'Element', th2: 'Requirement',
+    tr1td1: 'Visual image / video', tr1td2: 'image or video, up to 50 MB',
+    tr2td1: 'Mascot name', tr2td2: 'up to 50 characters',
+    tr3td1: 'Personality and story', tr3td2: 'up to 2000 characters',
+    h2_5: '5. Contest timeline and judging',
+    p5_intro: 'The Contest runs in five stages: <b>CREATE</b> (6–31.10.2026) — creating and submitting entries; <b>DISCOVER</b> (2–6.11.2026) — the jury selects the TOP 5 finalists, revealed on 9.11.2026; <b>VOTE</b> (9–15.11.2026) — public voting on <b>Instagram</b>; <b>REVEAL</b> (16.11.2026) — announcement of the winner; <b>BRING TO LIFE</b> — professional development of the winning concept into the brand.',
+    p5_1: '5.1. Decisions of the Organiser and the jury regarding finalists and the winner are final and not subject to appeal.',
+    p5_2: '5.2. The Contest winner is chosen by the jury (TOP 5 selection) and public voting, not by a random draw. The Contest is therefore not considered a lottery within the meaning of the Lotteries and Gambling Law and does not require a licence from the Lottery and Gambling Supervisory Inspection.',
+    h2_6: '6. Prizes',
+    p6_1: '6.1. The Contest\'s main prize is a <b>Samsung Galaxy S26 Ultra</b> (1st place).',
+    p6_2: '6.2. Additional prizes: <b>Galaxy Watch9</b> (2nd place) and <b>Galaxy Buds4 Pro</b> (3rd place).',
+    p6_3: '6.3. Prizes are not paid out in cash.',
+    h2_7: '7. Content use and copyright',
+    p7_1: '7.1. By submitting their entry, the Participant confirms that the entry was created by them (with the help of AI tools) and does not infringe the rights of third parties.',
+    h3_7_2: '7.2. Licence for all Participants (for contest and voting purposes)',
+    p7_2: '<b>By submitting an entry, the Participant grants the Organiser and the Partner a royalty-free, non-exclusive licence</b> to use the submitted content (the mascot\'s visual image, name and story) for the purposes of running the Contest, the public gallery, voting and related publicity — on the Organiser\'s and Partner\'s websites and social media accounts — during the Contest and for a reasonable period afterwards. This licence does not involve a transfer of ownership of the entry.',
+    h3_7_3: '7.3. Full transfer of rights — winner of the Contest only',
+    p7_3: 'In addition to the licence referred to in point 7.2, upon receiving the prize <b>the Contest winner transfers to the Organiser\'s ownership all economic (property) usage rights related to the submitted entry</b>, so that the Organiser may professionally further develop the submitted concept and freely use it as the official Inbox.lv brand character in any manner and through any channels, including after the Contest has ended, without additional compensation other than the prize provided for in these rules.',
+    p7_4: '7.4. The author\'s personal (moral) rights — the right of authorship and the right to the integrity of the work — which under Section 14(5) of the Copyright Law are inalienable, always remain with the Participant/winner regardless of the licence or transfer of rights referred to in points 7.2 and 7.3.',
+    p7_5: '7.5. If the Participant/winner is younger than 18 at the time of entering the Contest or receiving the prize, the validity of both point 7.2 and point 7.3 also requires the consent of a parent or legal guardian (see 2.2).',
+    legalNoteTitle: '⚠️ Legal note',
+    legalNoteText: 'This section is based on general principles of the Copyright Law and the Civil Law, but must be approved by a lawyer before actual launch — particularly regarding the legal capacity of minors and the precise wording of the licence/transfer of rights.',
+    h2_8: '8. Personal data processing',
+    p8_1: '8.1. Identity and contact details of the controller: <b>SIA "INBOKSS"</b>, reg. No. <b>40003560720</b>, legal address <b>Matrožu iela 15, 2nd floor, Riga, LV-1048</b>, email <b>marketing@co.inbox.lv</b>.',
+    p8_2: '8.2. The purpose of processing personal data is to ensure the running of the Contest (identifying participants, moderating submitted entries, enabling voting, announcing results) and related publicity.',
+    p8_3: '8.3. Legal basis: (a) performance of a contract (the terms of these rules) — for processing the name/alias, email and submitted content; (b) consent — for publicly displaying the submitted content (image/video, name, story), as well as for processing parent/guardian data in the case of minor participants.',
+    p8_4: '8.4. By entering the Contest, the Participant and/or their legal representative is aware and has been informed that the Participant\'s name/alias, the mascot\'s name, the submitted entry (image/video) and story may be published on the Organiser\'s and Partner\'s websites and social media accounts to achieve the purposes set out in these rules.',
+    p8_5: '8.5. The Participant and/or their legal representative has the right to object at any time to the publication of their submitted content by writing to <b>marketing@co.inbox.lv</b>.',
+    p8_6: '8.6. The Participant has the right to exercise the data subject\'s right of access (Article 15 of the GDPR), the right to rectification (Article 16) or erasure (Article 17) of personal data in the cases provided for by the Regulation. <i>(Given point 7.3, deletion of the winner\'s submitted entry after the transfer of rights may be limited — this condition must be clearly formulated together with a lawyer.)</i>',
+    p8_7: '8.7. The Participant and/or their legal representative has the right to file a complaint with the Data State Inspectorate (<a href="https://www.dvi.gov.lv" target="_blank">www.dvi.gov.lv</a>) if they believe a personal data protection violation has occurred.',
+    p8_8: '8.8. The Organiser\'s full privacy policy is available at: <a href="https://help.inbox.lv/privacy-policy?language=en" target="_blank" id="privacyLink">help.inbox.lv/privacy-policy</a>.',
+    h2_9: '9. Final provisions',
+    p9_1: '9.1. The Organiser reserves the right to amend these rules or discontinue the Contest, having given prior notice on the Contest website.',
+    p9_2: '9.2. For questions or complaints, Participants may contact the Organiser at: <b>marketing@co.inbox.lv</b>.',
+    p9_3: '9.3. These rules have been drawn up in Latvian and translated into Russian and English. In the event of a dispute, the Latvian-language version shall prevail.',
+    sourceNote: 'Prepared based on research into: the Civil Law (Section 219 — age of majority), the Copyright Law (Section 14(5) — moral rights), the General Data Protection Regulation, the Advertising Law, as well as examples of youth contest rules from the Data State Inspectorate, the Patent Office of the Republic of Latvia, and local municipalities.',
+    privacyUrl: 'https://help.inbox.lv/privacy-policy?language=en'
+  }
+};
+
+function setLang(lang) {
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (dict[lang][key] !== undefined) el.innerHTML = dict[lang][key];
+  });
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+  });
+  document.documentElement.lang = lang;
+  document.title = dict[lang].pageTitle;
+  try { localStorage.setItem('inboxContestLang', lang); } catch (e) {}
+}
+document.querySelectorAll('#langSwitch button').forEach(b => {
+  b.addEventListener('click', () => setLang(b.getAttribute('data-lang')));
+});
+let initialLang = 'lv';
+try { initialLang = localStorage.getItem('inboxContestLang') || 'lv'; } catch (e) {}
+setLang(initialLang);
+</script>
 </body>
 </html>

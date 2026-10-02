@@ -665,11 +665,14 @@ function setLang(lang) {
     b.classList.toggle('active', b.getAttribute('data-lang') === lang);
   });
   document.documentElement.lang = lang;
+  try { localStorage.setItem('inboxContestLang', lang); } catch (e) {}
 }
 document.querySelectorAll('#langSwitch button').forEach(b => {
   b.addEventListener('click', () => setLang(b.getAttribute('data-lang')));
 });
-setLang('lv');
+let initialLang = 'lv';
+try { initialLang = localStorage.getItem('inboxContestLang') || 'lv'; } catch (e) {}
+setLang(initialLang);
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
