@@ -104,7 +104,7 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 8.5. Dalībniekam un/vai viņa likumiskajam pārstāvim ir tiesības jebkurā laikā iebilst pret sava iesniegtā satura publicēšanu, par to rakstot uz **marketing@co.inbox.lv**.
 
-8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. *(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota — šis nosacījums jāformulē skaidri kopā ar juristu.)*
+8.6. Dalībniekam ir tiesības īstenot datu subjekta piekļuves tiesības (Vispārīgās datu aizsardzības regulas 15. pants), tiesības labot (16. pants) vai dzēst (17. pants) personas datus Regulā noteiktajos gadījumos. *(Ņemot vērā 7.3. punktu, uzvarētāja iesniegtā darba dzēšana pēc tiesību nodošanas var būt ierobežota.)*
 
 8.7. Dalībnieks un/vai viņa likumiskais pārstāvis ir tiesīgs vērsties ar sūdzību Datu valsts inspekcijā (www.dvi.gov.lv), ja uzskata, ka noticis personas datu aizsardzības pārkāpums.
 
@@ -118,6 +118,3 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 9.3. Šis nolikums sastādīts latviešu valodā un tulkots krievu un angļu valodā. Strīdu gadījumā noteicošā ir latviešu valodas versija.
 
----
-
-*Piezīme izstrādātājam: nolikums jāizvieto informatīvajā sadaļā visās trīs valodās; 7. sadaļas piekrišana (satura licence / iespējamā tiesību nodošana) formā jārāda kā atsevišķs, skaidri redzams checkbox, nevis apvienota ar vispārējo piekrišanu. Avoti: Civillikums (219. pants), Autortiesību likums (14. panta 5. daļa), GDPR, Datu valsts inspekcijas un pašvaldību jauniešu konkursu nolikumu piemēri.*
