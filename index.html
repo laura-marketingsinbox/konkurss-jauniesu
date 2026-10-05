@@ -100,6 +100,11 @@
     font-size: 58px; letter-spacing: 0.01em; max-width: 12ch; line-height: 1.02;
     color: var(--cream); text-shadow: 0 3px 0 rgba(0,0,0,0.18);
   }
+  .hero-audience {
+    font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+    font-size: 28px; letter-spacing: 0.04em; color: var(--gold); margin-top: 16px; line-height: 1.1;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.18);
+  }
   .hero p.sub { margin-top: 22px; font-size: 18px; color: rgba(255,255,255,0.8); max-width: 46ch; }
   .hero-actions { margin-top: 34px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   .btn-primary {
@@ -292,6 +297,7 @@
   @media (max-width: 860px) {
     .hero .wrap { grid-template-columns: 1fr; }
     .hero h1 { font-size: 38px; max-width: none; }
+    .hero-audience { font-size: 22px; }
     .mascot-wrap { order: -1; }
     .mascot-wrap img { max-width: 200px; }
     .steps { grid-template-columns: 1fr 1fr; row-gap: 34px; }
@@ -332,6 +338,7 @@
         <img class="hero-samsung-logo" src="assets/samsung-logo.svg" alt="Samsung">
       </div>
       <h1 class="hero-fade d2" data-key="title">Radi nākamo<br>Inbox.lv talismanu</h1>
+      <div class="hero-audience hero-fade d2" data-key="audience">Bērniem un jauniešiem</div>
       <p class="sub hero-fade d3" data-key="sub">Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.</p>
       <div class="hero-actions hero-fade d3">
         <button class="btn-primary" data-key="cta" onclick="document.getElementById('howToEnterHeading').scrollIntoView({behavior:'smooth'})">Piesakies konkursam</button>
@@ -535,7 +542,7 @@
 <script>
 window.dict = {
   lv: {
-    pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
+    audience: 'Bērniem un jauniešiem', pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
     sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
     cta: 'Piesakies konkursam', dates: '06.10.–31.10.2026', dates2: '· pieteikšanās periods',
     philTitle: 'AI palīdz. Ideja ir tava.',
@@ -575,7 +582,7 @@ window.dict = {
     fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Sazināties'
   },
   ru: {
-    pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
+    audience: 'Для детей и молодёжи', pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
     sub: 'С помощью ИИ создай образ, имя и историю - твоя идея может стать настоящим лицом бренда Inbox.lv.',
     cta: 'Участвовать', dates: '06.10–31.10.2026', dates2: '· приём заявок',
     philTitle: 'ИИ помогает. Идея - твоя.',
@@ -615,7 +622,7 @@ window.dict = {
     fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
   },
   en: {
-    pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
+    audience: 'For kids and young people', pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
     sub: 'Using AI tools, design a character, name and story - your idea could become the real face of the Inbox.lv brand.',
     cta: 'Enter the contest', dates: '6–31 Oct 2026', dates2: '· submission period',
     philTitle: 'AI helps. The idea is yours.',
