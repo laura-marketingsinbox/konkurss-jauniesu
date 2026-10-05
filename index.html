@@ -283,6 +283,8 @@
   .gallery { padding: 90px 0; background: var(--bg-light); }
   .gallery h2 { font-size: 32px; margin-bottom: 8px; }
   .gallery p.sub { color: #514c47; font-size: 15px; margin-bottom: 36px; }
+  .gallery-more { text-align: center; margin-top: 32px; }
+  .gallery-more button:disabled { opacity: .6; cursor: wait; }
   .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .gcard {
     aspect-ratio: 3/4; border-radius: 12px; background: var(--white);
@@ -527,6 +529,7 @@
       <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
       <div class="gcard" data-key="gEmpty">Gaida pirmo iesniegumu</div>
     </div>
+    <div class="gallery-more"><button type="button" class="btn-primary" id="galleryMore" data-key="gMore" hidden>Ielādēt vairāk</button></div>
   </div>
 </section>
 
@@ -583,7 +586,7 @@ window.dict = {
     msgErrParent:'Dalībniekiem 14–17 gadu vecumā jānorāda arī vecāka/aizbildņa vārds un e-pasts.',
     msgErrFile:'Fails ir pārāk liels (maks. 50MB) vai nav atbalstīta formāta.',
     msgSending:'Sūta...',
-    galT:'Dalībnieku darbi', galS:'Šeit pēc 6. oktobra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu',
+    galT:'Dalībnieku darbi', galS:'Šeit pēc 6. oktobra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu', gMore:'Ielādēt vairāk',
     finT:'TOP 5 finālisti', finS:'Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!', finVoteBtn:'Balsot Instagram',
     winT:'Uzvarētāji', winS:'Apsveicam! Šie ir konkursa uzvarētāji.',
     fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Sazināties'
@@ -623,7 +626,7 @@ window.dict = {
     msgErrParent:'Участникам 14–17 лет нужно также указать имя и эл. почту родителя/опекуна.',
     msgErrFile:'Файл слишком большой (макс. 50МБ) или неподдерживаемый формат.',
     msgSending:'Отправка...',
-    galT:'Работы участников', galS:'Здесь после 6 октября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку',
+    galT:'Работы участников', galS:'Здесь после 6 октября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку', gMore:'Загрузить ещё',
     finT:'ТОП 5 финалистов', finS:'Жюри выбрало сильнейшие идеи. Теперь Латвия голосует за фаворита!', finVoteBtn:'Голосовать в Instagram',
     winT:'Победители', winS:'Поздравляем! Это победители конкурса.',
     fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
@@ -663,7 +666,7 @@ window.dict = {
     msgErrParent:'Entrants aged 14–17 must also provide a parent/guardian name and email.',
     msgErrFile:'File is too large (max 50MB) or an unsupported format.',
     msgSending:'Sending...',
-    galT:'Entries', galS:'Submitted mascots will appear here after 6 October. Will the first one be yours?', gEmpty:'Waiting for the first entry',
+    galT:'Entries', galS:'Submitted mascots will appear here after 6 October. Will the first one be yours?', gEmpty:'Waiting for the first entry', gMore:'Load more',
     finT:'TOP 5 Finalists', finS:'The jury has picked the strongest concepts. Now Latvia votes for its favourite!', finVoteBtn:'Vote on Instagram',
     winT:'Winners', winS:'Congratulations! These are the contest winners.',
     fRules:'Rules', fPrivacy:'Privacy Policy', fContact:'Contact'

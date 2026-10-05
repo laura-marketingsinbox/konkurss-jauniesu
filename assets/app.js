@@ -227,28 +227,47 @@
     loadFinalists(settings);
   });
 
-  // ---------- Gallery: show approved entries ----------
+  // ---------- Gallery: all approved entries, loaded in pages ----------
+  const GALLERY_PAGE = 8;
+  const galleryMoreBtn = document.getElementById('galleryMore');
+  const shownIds = new Set();
+  let galleryLoaded = 0;
+
   async function loadGallery() {
     const grid = document.getElementById('galleryGrid');
+    galleryMoreBtn.disabled = true;
+    // Prasa par vienu rindu vairāk, lai zinātu, vai ir nākamā lapa
     const { data, error } = await sb
       .from('submissions')
       .select('id, mascot_name, file_path, file_type')
       .eq('status', 'approved')
       .order('created_at', { ascending: false })
-      .limit(4);
+      .order('id', { ascending: false })
+      .range(galleryLoaded, galleryLoaded + GALLERY_PAGE);
+    galleryMoreBtn.disabled = false;
 
-    if (error || !data || data.length === 0) return;
+    if (error || !data) return;
+    if (data.length === 0) { galleryMoreBtn.hidden = true; return; }
 
-    const cards = await Promise.all(data.map(async (row) => {
+    const hasMore = data.length > GALLERY_PAGE;
+    const rows = data.slice(0, GALLERY_PAGE);
+
+    const cards = rows.filter((row) => !shownIds.has(row.id)).map((row) => {
+      shownIds.add(row.id);
       const { data: pub } = sb.storage.from(SUPABASE_PUBLIC_BUCKET).getPublicUrl(row.file_path);
       const url = pub && pub.publicUrl;
       const media = row.file_type === 'video'
         ? `<video src="${url}" muted playsinline preload="metadata"></video>`
         : `<img src="${url}" alt="${esc(row.mascot_name)}" loading="lazy">`;
       return `<div class="gcard filled" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${url ? media : ''}<div class="gname">${esc(row.mascot_name)}</div></div>`;
-    }));
+    }).join('');
 
-    grid.innerHTML = cards.join('');
+    if (galleryLoaded === 0) grid.innerHTML = cards;
+    else grid.insertAdjacentHTML('beforeend', cards);
+
+    galleryLoaded += rows.length;
+    galleryMoreBtn.hidden = !hasMore;
   }
+  galleryMoreBtn.addEventListener('click', loadGallery);
   loadGallery();
 })();
