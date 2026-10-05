@@ -10,7 +10,7 @@
 
 1.3. Konkursa mērķis ir aicināt Latvijas jauniešus, izmantojot mākslīgā intelekta (AI) rīkus, radīt jaunu Inbox.lv zīmola tēlu (talismanu) — tā vizuālo izskatu, vārdu un stāstu. Konkursa filozofija: **"AI palīdz. Ideja ir tava."**
 
-1.4. Konkursa norises vieta ir tīmekļa vietne **inboxtalismans.lv**, kur pieejama pilna informācija par Konkursu.
+1.4. Konkursa norises vieta ir tīmekļa vietne **https://laura-marketingsinbox.github.io/konkurss-jauniesu/**, kur pieejama pilna informācija par Konkursu.
 
 ## 2. Dalībnieki
 
