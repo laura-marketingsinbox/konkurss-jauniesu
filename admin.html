@@ -60,6 +60,17 @@
   .switch .slider::before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: var(--white); border-radius: 50%; transition: transform .15s; }
   .switch input:checked + .slider { background: #1e5e2e; }
   .switch input:checked + .slider::before { transform: translateX(18px); }
+
+  .export-panel { background: var(--white); border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; padding: 18px 20px; margin-bottom: 18px; }
+  .export-panel h2 { margin: 0 0 4px; font-size: 14px; }
+  .export-panel .hint { font-size: 12.5px; color: var(--gray); margin: 0 0 12px; }
+  .export-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .export-row select { font-size: 13px; padding: 9px 10px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.15); background: var(--white); }
+  .export-row button { font-size: 13px; font-weight: 600; padding: 10px 16px; border-radius: 8px; border: none; background: var(--ink); color: var(--white); cursor: pointer; }
+  .export-row button:disabled, .export-row select:disabled { opacity: 0.5; cursor: wait; }
+  #exportMsg { font-size: 12.5px; margin-top: 10px; color: var(--gray); min-height: 1em; white-space: pre-line; }
+  #exportMsg.err { color: #8a2a22; }
+  #exportMsg.ok { color: #1e5e2e; }
 </style>
 </head>
 <body>
@@ -115,9 +126,26 @@
     </div>
   </div>
 
+  <div class="export-panel">
+    <h2>Datu eksports</h2>
+    <p class="hint">CSV atveras Excel un Google Sheets (atdalītājs ";"). Saites uz failiem CSV ir derīgas 7 dienas. Faili tiek lejupielādēti ZIP daļās (~250 MB katra).</p>
+    <div class="export-row">
+      <select id="exportStatus">
+        <option value="all">Visi pieteikumi</option>
+        <option value="approved">Tikai apstiprinātie</option>
+        <option value="pending">Tikai gaida pārbaudi</option>
+        <option value="rejected">Tikai noraidītie</option>
+      </select>
+      <button id="exportCsvBtn">Eksportēt CSV</button>
+      <button id="exportZipBtn">Lejupielādēt visus failus (ZIP)</button>
+    </div>
+    <div id="exportMsg"></div>
+  </div>
+
   <div id="list"></div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="assets/supabase-config.js"></script>
 <script>
@@ -329,6 +357,147 @@
       list.appendChild(card);
     }
   }
+
+  // ---------- Eksports: CSV un failu ZIP ----------
+  const exportStatusSel = document.getElementById('exportStatus');
+  const exportCsvBtn = document.getElementById('exportCsvBtn');
+  const exportZipBtn = document.getElementById('exportZipBtn');
+  const exportMsg = document.getElementById('exportMsg');
+  const STATUS_LV = { pending: 'Gaida pārbaudi', approved: 'Apstiprināts', rejected: 'Noraidīts' };
+
+  function setExportBusy(busy) {
+    [exportStatusSel, exportCsvBtn, exportZipBtn].forEach((el) => { el.disabled = busy; });
+  }
+  function showExportMsg(text, kind) {
+    exportMsg.textContent = text;
+    exportMsg.className = kind || '';
+  }
+
+  async function fetchSubmissions(status) {
+    const rows = [];
+    const PAGE = 1000;
+    for (let from = 0; ; from += PAGE) {
+      let q = sb.from('submissions').select('*')
+        .order('created_at', { ascending: true }).order('id', { ascending: true })
+        .range(from, from + PAGE - 1);
+      if (status !== 'all') q = q.eq('status', status);
+      const { data, error } = await q;
+      if (error) throw error;
+      rows.push(...data);
+      if (data.length < PAGE) break;
+    }
+    return rows;
+  }
+
+  function slug(str) {
+    return String(str || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'darbs';
+  }
+  function exportFileName(row) {
+    const ext = (String(row.file_path).split('.').pop() || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const date = new Date(row.created_at).toISOString().slice(0, 10);
+    return `${date}_${slug(row.mascot_name)}_${String(row.id).slice(0, 8)}.${ext}`;
+  }
+
+  function csvCell(value) {
+    let s = value == null ? '' : String(value);
+    // Aizsardzība pret formulu injekciju, ja dalībnieka teksts sākas ar = + - @
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  const yesNo = (v) => (v ? 'jā' : 'nē');
+  const fmtDate = (iso) => new Date(iso).toLocaleString('sv-SE');
+
+  function triggerDownload(blob, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+  }
+
+  async function signedLinks(rows) {
+    const map = {};
+    for (let i = 0; i < rows.length; i += 100) {
+      const chunk = rows.slice(i, i + 100).map((r) => r.file_path);
+      const { data } = await sb.storage.from(SUPABASE_BUCKET).createSignedUrls(chunk, 7 * 24 * 3600);
+      (data || []).forEach((d) => { if (d.signedUrl) map[d.path] = d.signedUrl; });
+    }
+    return map;
+  }
+
+  exportCsvBtn.addEventListener('click', async () => {
+    setExportBusy(true);
+    showExportMsg('Sagatavo CSV...');
+    try {
+      const status = exportStatusSel.value;
+      const rows = await fetchSubmissions(status);
+      if (rows.length === 0) { showExportMsg('Šajā izvēlē nav neviena pieteikuma.', 'err'); return; }
+      const links = await signedLinks(rows);
+      const header = ['Iesniegts', 'Statuss', 'TOP 5 finālists', 'Uzvarētāja vieta', 'Balvas apraksts',
+        'Vārds / segvārds', 'E-pasts', 'Talismana vārds', 'Stāsts', 'Faila veids', 'Faila nosaukums (ZIP)',
+        'Saite uz failu (7 dienas)', 'Nepilngadīgs', 'Vecāka vārds', 'Vecāka e-pasts',
+        'Piekrišana nolikumam', 'Piekrišana tiesību licencēšanai/nodošanai', 'ID'];
+      const lines = [header.map(csvCell).join(';')];
+      for (const r of rows) {
+        lines.push([
+          fmtDate(r.created_at), STATUS_LV[r.status] || r.status, yesNo(r.is_finalist), r.winner_rank, r.prize_label,
+          r.display_name, r.email, r.mascot_name, r.story, r.file_type === 'video' ? 'video' : 'attēls', exportFileName(r),
+          links[r.file_path], yesNo(r.is_minor), r.parent_name, r.parent_email,
+          yesNo(r.consent_rules), yesNo(r.consent_rights_transfer), r.id,
+        ].map(csvCell).join(';'));
+      }
+      const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+      triggerDownload(blob, `konkurss_pieteikumi_${new Date().toISOString().slice(0, 10)}.csv`);
+      showExportMsg(`Gatavs: ${rows.length} pieteikumi.`, 'ok');
+    } catch (err) {
+      console.error(err);
+      showExportMsg('Neizdevās izveidot CSV: ' + (err.message || err), 'err');
+    } finally {
+      setExportBusy(false);
+    }
+  });
+
+  exportZipBtn.addEventListener('click', async () => {
+    if (typeof JSZip === 'undefined') { showExportMsg('ZIP bibliotēka neielādējās. Atjauno lapu un mēģini vēlreiz.', 'err'); return; }
+    setExportBusy(true);
+    showExportMsg('Sagatavo failu sarakstu...');
+    try {
+      const rows = await fetchSubmissions(exportStatusSel.value);
+      if (rows.length === 0) { showExportMsg('Šajā izvēlē nav neviena pieteikuma.', 'err'); return; }
+      const PART_LIMIT = 250 * 1000 * 1000;
+      let zip = new JSZip(), part = 1, bytes = 0, inPart = 0, done = 0, parts = 0;
+      const failed = [];
+      const flush = async () => {
+        if (inPart === 0) return;
+        showExportMsg(`Veido ZIP ${part}. daļu...`);
+        const blob = await zip.generateAsync({ type: 'blob', compression: 'STORE' });
+        triggerDownload(blob, `konkurss_faili_${part}.zip`);
+        parts++; part++; zip = new JSZip(); bytes = 0; inPart = 0;
+      };
+      for (const row of rows) {
+        showExportMsg(`Lejupielādē failus: ${done + 1} / ${rows.length}`);
+        const { data: blob, error } = await sb.storage.from(SUPABASE_BUCKET).download(row.file_path);
+        done++;
+        if (error || !blob) { failed.push(exportFileName(row)); continue; }
+        zip.file(exportFileName(row), blob);
+        bytes += blob.size; inPart++;
+        if (bytes >= PART_LIMIT) await flush();
+      }
+      await flush();
+      let msg = `Gatavs: ${rows.length - failed.length} faili ${parts} ZIP daļās.`;
+      if (parts > 1) msg += '\nJa pārlūks jautā, atļauj vairākas lejupielādes.';
+      if (failed.length) msg += `\nNeizdevās lejupielādēt ${failed.length} failus:\n${failed.join('\n')}`;
+      showExportMsg(msg, failed.length ? 'err' : 'ok');
+    } catch (err) {
+      console.error(err);
+      showExportMsg('Neizdevās izveidot ZIP: ' + (err.message || err), 'err');
+    } finally {
+      setExportBusy(false);
+    }
+  });
 
   function escapeHtml(str) {
     return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
