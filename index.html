@@ -167,6 +167,9 @@
     display: inline-block; margin-top: 10px; font-size: 11.5px; font-weight: 700;
     color: var(--gold);
   }
+  .step .tag:empty { display: none; }
+  .step.done .num { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.5); }
+  .step.done .tag, .step .tag.soon { color: rgba(255,255,255,0.5); }
 
   /* ---------- PARTNERSHIP / PRIZES ---------- */
   .partnership { padding: 90px 0; background: var(--bg-light); }
@@ -382,31 +385,35 @@
   <div class="wrap">
     <h2 data-key="journeyTitle">Konkursa gaita</h2>
     <div class="steps">
-      <div class="step active">
+      <div class="step" data-stage="1">
         <div class="num">01</div>
         <h3 data-key="s1t">Radi</h3>
         <p data-key="s1d">Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to.</p>
-        <span class="tag" data-key="s1tag">Notiek tagad</span>
+        <span class="tag"></span>
       </div>
-      <div class="step">
+      <div class="step" data-stage="2">
         <div class="num">02</div>
         <h3 data-key="s2t">Atklāj</h3>
         <p data-key="s2d">Žūrija izvēlas spēcīgākos konceptus par finālistiem.</p>
+        <span class="tag"></span>
       </div>
-      <div class="step">
+      <div class="step" data-stage="3">
         <div class="num">03</div>
         <h3 data-key="s3t">Balso</h3>
         <p data-key="s3d">Latvija balso par favorītu sociālajos tīklos.</p>
+        <span class="tag"></span>
       </div>
-      <div class="step">
+      <div class="step" data-stage="4">
         <div class="num">04</div>
         <h3 data-key="s4t">Atklāšana</h3>
         <p data-key="s4d">Uzvarētājs tiek paziņots digitālā pasākumā.</p>
+        <span class="tag"></span>
       </div>
-      <div class="step">
+      <div class="step" data-stage="5">
         <div class="num">05</div>
         <h3 data-key="s5t">Iedzīvina</h3>
         <p data-key="s5d">Koncepts kļūst par īstu Inbox.lv zīmola tēlu.</p>
+        <span class="tag"></span>
       </div>
     </div>
   </div>
@@ -548,7 +555,7 @@ window.dict = {
     philTitle: 'AI palīdz. Ideja ir tava.',
     philSub: 'Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts - jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.',
     journeyTitle: 'Konkursa gaita',
-    s1t:'Radi', s1d:'Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to (6.–31. oktobris).', s1tag:'Notiek tagad',
+    s1t:'Radi', s1d:'Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to (6.–31. oktobris).', tagNow:'Notiek tagad', tagDone:'Pabeigts', tagSoon:'Drīzumā',
     s2t:'Atklāj', s2d:'Žūrija izvēlas TOP 5 spēcīgākos konceptus par finālistiem (2.–6. novembris), kurus atklājam 9. novembrī.',
     s3t:'Balso', s3d:'Latvija balso par favorītu sociālajos tīklos (9.–15. novembris).',
     s4t:'Atklāšana', s4d:'Uzvarētājs tiek paziņots 16. novembrī.',
@@ -588,7 +595,7 @@ window.dict = {
     philTitle: 'ИИ помогает. Идея - твоя.',
     philSub: 'С помощью ИИ ты создаёшь визуальный образ талисмана, придумываешь имя и пишешь его характер и историю. Результат - новый герой бренда Inbox.lv, которого выберет Латвия.',
     journeyTitle: 'Этапы конкурса',
-    s1t:'Создай', s1d:'Создай образ, имя и историю с помощью ИИ и отправь заявку (6–31 октября).', s1tag:'Идёт сейчас',
+    s1t:'Создай', s1d:'Создай образ, имя и историю с помощью ИИ и отправь заявку (6–31 октября).', tagNow:'Идёт сейчас', tagDone:'Завершено', tagSoon:'Скоро',
     s2t:'Отбор', s2d:'Жюри выбирает ТОП-5 сильнейших идей в финал (2–6 ноября), которые объявим 9 ноября.',
     s3t:'Голосование', s3d:'Латвия голосует за фаворита в соцсетях (9–15 ноября).',
     s4t:'Раскрытие', s4d:'Победитель объявляется 16 ноября.',
@@ -628,7 +635,7 @@ window.dict = {
     philTitle: 'AI helps. The idea is yours.',
     philSub: 'Using AI tools, you create your mascot\'s visual character, give it a name, and write its personality and story. The result - a new Inbox.lv brand hero, chosen by Latvia.',
     journeyTitle: 'How it works',
-    s1t:'Create', s1d:'Design a character, name and story with AI and submit it (6–31 October).', s1tag:'Happening now',
+    s1t:'Create', s1d:'Design a character, name and story with AI and submit it (6–31 October).', tagNow:'Happening now', tagDone:'Completed', tagSoon:'Coming soon',
     s2t:'Discover', s2d:'A jury selects the TOP 5 strongest concepts as finalists (2–6 November), revealed on 9 November.',
     s3t:'Vote', s3d:'Latvia votes for its favourite on social media (9–15 November).',
     s4t:'Reveal', s4d:'The winner is announced on 16 November.',
@@ -663,6 +670,35 @@ window.dict = {
   }
 };
 
+// Konkursa posmu datumi pēc Rīgas laika (ieskaitot abus galus). Maini šeit, ja datumi mainās.
+const STAGES = [
+  { n: 1, from: '2026-10-06', to: '2026-10-31' },
+  { n: 2, from: '2026-11-02', to: '2026-11-06' },
+  { n: 3, from: '2026-11-09', to: '2026-11-15' },
+  { n: 4, from: '2026-11-16', to: '2026-11-16' },
+  { n: 5, from: '2026-11-17', to: '9999-12-31' },
+];
+function rigaToday() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Riga' }).format(new Date());
+}
+function updateJourney(today) {
+  today = today || rigaToday();
+  const d = dict[document.documentElement.lang] || dict.lv;
+  let nextUpcoming = null;
+  document.querySelectorAll('.step[data-stage]').forEach(el => {
+    const st = STAGES.find(x => x.n === Number(el.getAttribute('data-stage')));
+    const tag = el.querySelector('.tag');
+    el.classList.remove('active', 'done');
+    tag.classList.remove('soon');
+    tag.textContent = '';
+    if (today > st.to) { el.classList.add('done'); tag.textContent = d.tagDone; }
+    else if (today >= st.from) { el.classList.add('active'); tag.textContent = d.tagNow; }
+    else if (!nextUpcoming) { nextUpcoming = { el, tag }; }
+  });
+  const anyActive = document.querySelector('.step.active');
+  if (nextUpcoming && !anyActive) { nextUpcoming.tag.classList.add('soon'); nextUpcoming.tag.textContent = d.tagSoon; }
+}
+
 function setLang(lang) {
   document.querySelectorAll('[data-key]').forEach(el => {
     const key = el.getAttribute('data-key');
@@ -672,6 +708,7 @@ function setLang(lang) {
     b.classList.toggle('active', b.getAttribute('data-lang') === lang);
   });
   document.documentElement.lang = lang;
+  updateJourney();
   try { localStorage.setItem('inboxContestLang', lang); } catch (e) {}
 }
 document.querySelectorAll('#langSwitch button').forEach(b => {
