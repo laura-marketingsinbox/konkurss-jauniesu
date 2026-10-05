@@ -1,7 +1,5 @@
 # "Radi nākamo Inbox.lv talismanu" — konkursa nolikums
 
-*Šis teksts sagatavots, balstoties uz Civillikumu, Autortiesību likumu, Vispārīgo datu aizsardzības regulu (GDPR) un reāliem Latvijas konkursu nolikumu piemēriem. Kvadrātiekavās esošās vietas ([...]) jāaizpilda ar konkrētiem datiem. Dokuments — īpaši 7. un 8. sadaļa — jāpārskata juridiski pirms publicēšanas.*
-
 ## 1. Vispārīgie noteikumi
 
 1.1. Konkursu "Radi nākamo Inbox.lv talismanu" (turpmāk — Konkurss) organizē **SIA "INBOKSS"** (zīmols Inbox.lv), reģ. Nr. **40003560720**, juridiskā adrese **Matrožu iela 15, 2. stāvs, Rīga, LV-1048** (turpmāk — Organizētājs), sadarbībā ar **Samsung** kā ekskluzīvo tehnoloģiju partneri (turpmāk — Partneris).
@@ -93,7 +91,6 @@ Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot bal
 
 7.5. Ja Dalībnieks/uzvarētājs Konkursa pieteikšanās vai balvas saņemšanas brīdī ir jaunāks par 18 gadiem, gan 7.2., gan 7.3. punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa piekrišana (skat. 2.2.).
 
-*[Juridiska piezīme izstrādātājam un Organizētājam: šī sadaļa balstīta uz vispārīgiem Autortiesību likuma un Civillikuma principiem, bet pirms publicēšanas jāapstiprina ar juristu — īpaši attiecībā uz nepilngadīgo rīcībspēju un licences/tiesību nodošanas precīzu formulējumu.]*
 
 ## 8. Personas datu apstrāde
 
