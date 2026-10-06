@@ -62,12 +62,32 @@
   const listeners = [];
   let analyticsLoaded = false;
 
-  // Vieta analītikas pieslēgšanai. Tiek izsaukta tikai pēc piekrišanas (un katrā lapas ielādē, kamēr piekrišana ir spēkā).
-  // Šeit vēlāk ievietosim Google Analytics (un Meta Pixel) ielādi.
+  // ---------- Google Tag Manager (ielādējas TIKAI pēc piekrišanas) ----------
+  const GTM_ID = 'GTM-P26P2R9C';
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  // Google Consent Mode v2: pēc noklusējuma viss liegts; tiek atļauts tikai tas, kam lietotājs piekrīt.
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+
+  function loadGTM() {
+    if (document.getElementById('gtmScript')) return;
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    const j = document.createElement('script');
+    j.id = 'gtmScript'; j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+    document.head.appendChild(j);
+  }
+
   function onAnalyticsGranted() {
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+    loadGTM();
     if (analyticsLoaded) return;
     analyticsLoaded = true;
     listeners.forEach((fn) => { try { fn(); } catch (e) {} });
+  }
+  function onAnalyticsDenied() {
+    gtag('consent', 'update', { analytics_storage: 'denied' });
+    clearTrackingCookies();
   }
 
   window.consent = {
@@ -118,7 +138,7 @@
   function close() { box.classList.remove('open'); }
 
   box.querySelector('.cc-accept').addEventListener('click', () => { store('granted'); close(); onAnalyticsGranted(); });
-  box.querySelector('.cc-reject').addEventListener('click', () => { store('denied'); close(); clearTrackingCookies(); });
+  box.querySelector('.cc-reject').addEventListener('click', () => { store('denied'); close(); onAnalyticsDenied(); });
 
   window.openCookieSettings = () => open(true);
   document.addEventListener('click', (e) => {
@@ -130,5 +150,5 @@
 
   const saved = readStored();
   if (!saved) open();
-  else { render(); if (saved.status === 'granted') onAnalyticsGranted(); else clearTrackingCookies(); }
+  else { render(); if (saved.status === 'granted') onAnalyticsGranted(); else onAnalyticsDenied(); }
 })();
