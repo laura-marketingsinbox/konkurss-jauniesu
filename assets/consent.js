@@ -62,25 +62,13 @@
   const listeners = [];
   let analyticsLoaded = false;
 
-  // ---------- Google Tag Manager (ielādējas TIKAI pēc piekrišanas) ----------
-  const GTM_ID = 'GTM-P26P2R9C';
+  // ---------- Google Tag Manager ----------
+  // GTM kods un Consent Mode noklusējums (viss liegts) ir lapas <head>; šeit tikai atjaunojam piekrišanu.
   window.dataLayer = window.dataLayer || [];
   function gtag() { window.dataLayer.push(arguments); }
-  // Google Consent Mode v2: pēc noklusējuma viss liegts; tiek atļauts tikai tas, kam lietotājs piekrīt.
-  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-
-  function loadGTM() {
-    if (document.getElementById('gtmScript')) return;
-    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-    const j = document.createElement('script');
-    j.id = 'gtmScript'; j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
-    document.head.appendChild(j);
-  }
 
   function onAnalyticsGranted() {
     gtag('consent', 'update', { analytics_storage: 'granted' });
-    loadGTM();
     if (analyticsLoaded) return;
     analyticsLoaded = true;
     listeners.forEach((fn) => { try { fn(); } catch (e) {} });
