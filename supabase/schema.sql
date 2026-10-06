@@ -114,6 +114,13 @@ create policy "public can view approved" on public.submissions
   for select to anon
   using (status = 'approved');
 
+-- PRIVĀTUMS: publiskā (anon) atslēga drīkst nolasīt TIKAI drošos laukus.
+-- Bez šī ikviens ar API atslēgu varēja nolasīt e-pastus un nepilngadīgo vecāku datus
+-- no apstiprinātajiem pieteikumiem (RLS ierobežo rindas, nevis kolonnas).
+-- Administratori (authenticated) netiek ietekmēti.
+revoke select on public.submissions from anon;
+grant select (id, created_at, status, mascot_name, display_name, story, file_path, file_type, is_finalist, winner_rank, prize_label) on public.submissions to anon;
+
 -- Administratori redz un pārvalda visu
 drop policy if exists "admins manage all" on public.submissions;
 create policy "admins manage all" on public.submissions
