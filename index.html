@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radi nākamo Inbox.lv talismanu - dizaina makets</title>
+<title>Radi nākamo Inbox.lv talismanu | Konkurss jauniešiem</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
@@ -113,6 +113,7 @@
     transition: transform .15s ease, box-shadow .15s ease;
   }
   .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(108,79,224,0.4); }
+  .fin-disclaimer { margin: 14px auto 0; max-width: 60ch; font-size: 12px; color: rgba(255,255,255,0.5); }
   .finalists-vote-btn { display: inline-block; margin-top: 32px; text-decoration: none; }
   .hero-dates { font-size: 14px; color: rgba(255,255,255,0.65); }
   .hero-dates b { color: var(--gold); }
@@ -381,6 +382,7 @@
     <p class="sub" data-key="finS">Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!</p>
     <div class="finalists-grid" id="finalistsGrid"></div>
     <a class="btn-primary finalists-vote-btn" href="https://www.instagram.com/inbox_lv/" target="_blank" rel="noopener" data-key="finVoteBtn">Balsot Instagram</a>
+    <p class="fin-disclaimer" data-key="finDisclaimer">Šo konkursu nekādā veidā nesponsorē, neatbalsta un neadministrē Instagram, un tas nav ar to saistīts.</p>
   </div>
 </section>
 
@@ -403,7 +405,7 @@
       <div class="step" data-stage="3">
         <div class="num">03</div>
         <h3 data-key="s3t">Balso</h3>
-        <p data-key="s3d">Latvija balso par favorītu sociālajos tīklos.</p>
+        <p data-key="s3d">Latvija balso par favorītu Instagram.</p>
         <span class="tag"></span>
       </div>
       <div class="step" data-stage="4">
@@ -553,7 +555,7 @@
 <script>
 window.dict = {
   lv: {
-    audience: 'KONKURSS JAUNIEŠIEM', pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
+    audience: 'KONKURSS JAUNIEŠIEM', pageTitle: 'Radi nākamo Inbox.lv talismanu | Konkurss jauniešiem', pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
     sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
     cta: 'Piesakies konkursam', dates: '06.10.–31.10.2026', dates2: '· pieteikšanās periods',
     philTitle: 'AI palīdz. Ideja ir tava.',
@@ -561,7 +563,7 @@ window.dict = {
     journeyTitle: 'Konkursa gaita',
     s1t:'Radi', s1d:'Izveido tēlu, vārdu un stāstu ar AI palīdzību un iesniedz to (6.–31. oktobris).', tagNow:'Notiek tagad', tagDone:'Pabeigts', tagSoon:'Drīzumā',
     s2t:'Atklāj', s2d:'Žūrija izvēlas TOP 5 spēcīgākos konceptus par finālistiem (2.–6. novembris), kurus atklājam 9. novembrī.',
-    s3t:'Balso', s3d:'Latvija balso par favorītu sociālajos tīklos (9.–15. novembris).',
+    s3t:'Balso', s3d:'Latvija balso par favorītu Instagram (9.–15. novembris).',
     s4t:'Atklāšana', s4d:'Uzvarētājs tiek paziņots 16. novembrī.',
     s5t:'Iedzīvina', s5d:'Koncepts kļūst par īstu Inbox.lv zīmola tēlu.',
     partTitle: 'Ekskluzīvs tehnoloģiju partneris',
@@ -588,12 +590,12 @@ window.dict = {
     msgErrFile:'Fails ir pārāk liels (maks. 50MB) vai nav atbalstīta formāta.',
     msgSending:'Sūta...',
     galT:'Dalībnieku darbi', galS:'Šeit pēc 6. oktobra parādīsies iesniegtie talismani. Pirmais taps tavs?', gEmpty:'Gaida pirmo iesniegumu', gMore:'Ielādēt vairāk',
-    finT:'TOP 5 finālisti', finS:'Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!', finVoteBtn:'Balsot Instagram',
+    finT:'TOP 5 finālisti', finS:'Žūrija izvēlējusies spēcīgākos konceptus. Tagad Latvija balso par favorītu!', finVoteBtn:'Balsot Instagram', finDisclaimer:'Šo konkursu nekādā veidā nesponsorē, neatbalsta un neadministrē Instagram, un tas nav ar to saistīts.',
     winT:'Uzvarētāji', winS:'Apsveicam! Šie ir konkursa uzvarētāji.',
     fRules:'Nolikums', fPrivacy:'Privātuma politika', fContact:'Sazināties'
   },
   ru: {
-    audience: 'МОЛОДЕЖНЫЙ КОНКУРС', pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
+    audience: 'МОЛОДЕЖНЫЙ КОНКУРС', pageTitle: 'Создай нового талисмана Inbox.lv | Молодежный конкурс', pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
     sub: 'С помощью ИИ создай образ, имя и историю - твоя идея может стать настоящим лицом бренда Inbox.lv.',
     cta: 'Участвовать', dates: '06.10–31.10.2026', dates2: '· приём заявок',
     philTitle: 'ИИ помогает. Идея - твоя.',
@@ -601,7 +603,7 @@ window.dict = {
     journeyTitle: 'Этапы конкурса',
     s1t:'Создай', s1d:'Создай образ, имя и историю с помощью ИИ и отправь заявку (6–31 октября).', tagNow:'Идёт сейчас', tagDone:'Завершено', tagSoon:'Скоро',
     s2t:'Отбор', s2d:'Жюри выбирает ТОП-5 сильнейших идей в финал (2–6 ноября), которые объявим 9 ноября.',
-    s3t:'Голосование', s3d:'Латвия голосует за фаворита в соцсетях (9–15 ноября).',
+    s3t:'Голосование', s3d:'Латвия голосует за фаворита в Instagram (9–15 ноября).',
     s4t:'Раскрытие', s4d:'Победитель объявляется 16 ноября.',
     s5t:'Воплощение', s5d:'Идея становится настоящим героем бренда Inbox.lv.',
     partTitle: 'Эксклюзивный технологический партнёр',
@@ -628,12 +630,12 @@ window.dict = {
     msgErrFile:'Файл слишком большой (макс. 50МБ) или неподдерживаемый формат.',
     msgSending:'Отправка...',
     galT:'Работы участников', galS:'Здесь после 6 октября появятся присланные талисманы. Первым будешь ты?', gEmpty:'Ждём первую заявку', gMore:'Загрузить ещё',
-    finT:'ТОП 5 финалистов', finS:'Жюри выбрало сильнейшие идеи. Теперь Латвия голосует за фаворита!', finVoteBtn:'Голосовать в Instagram',
+    finT:'ТОП 5 финалистов', finS:'Жюри выбрало сильнейшие идеи. Теперь Латвия голосует за фаворита!', finVoteBtn:'Голосовать в Instagram', finDisclaimer:'Этот конкурс никаким образом не спонсируется, не поддерживается и не администрируется Instagram и не связан с ним.',
     winT:'Победители', winS:'Поздравляем! Это победители конкурса.',
     fRules:'Правила', fPrivacy:'Политика конфиденциальности', fContact:'Контакты'
   },
   en: {
-    audience: 'YOUTH CONTEST', pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
+    audience: 'YOUTH CONTEST', pageTitle: 'Create the next Inbox.lv mascot | Youth contest', pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
     sub: 'Using AI tools, design a character, name and story - your idea could become the real face of the Inbox.lv brand.',
     cta: 'Enter the contest', dates: '6–31 Oct 2026', dates2: '· submission period',
     philTitle: 'AI helps. The idea is yours.',
@@ -641,7 +643,7 @@ window.dict = {
     journeyTitle: 'How it works',
     s1t:'Create', s1d:'Design a character, name and story with AI and submit it (6–31 October).', tagNow:'Happening now', tagDone:'Completed', tagSoon:'Coming soon',
     s2t:'Discover', s2d:'A jury selects the TOP 5 strongest concepts as finalists (2–6 November), revealed on 9 November.',
-    s3t:'Vote', s3d:'Latvia votes for its favourite on social media (9–15 November).',
+    s3t:'Vote', s3d:'Latvia votes for its favourite on Instagram (9–15 November).',
     s4t:'Reveal', s4d:'The winner is announced on 16 November.',
     s5t:'Bring to life', s5d:'The concept becomes a real Inbox.lv brand character.',
     partTitle: 'Exclusive technology partner',
@@ -668,7 +670,7 @@ window.dict = {
     msgErrFile:'File is too large (max 50MB) or an unsupported format.',
     msgSending:'Sending...',
     galT:'Entries', galS:'Submitted mascots will appear here after 6 October. Will the first one be yours?', gEmpty:'Waiting for the first entry', gMore:'Load more',
-    finT:'TOP 5 Finalists', finS:'The jury has picked the strongest concepts. Now Latvia votes for its favourite!', finVoteBtn:'Vote on Instagram',
+    finT:'TOP 5 Finalists', finS:'The jury has picked the strongest concepts. Now Latvia votes for its favourite!', finVoteBtn:'Vote on Instagram', finDisclaimer:'This contest is in no way sponsored, endorsed or administered by, or associated with, Instagram.',
     winT:'Winners', winS:'Congratulations! These are the contest winners.',
     fRules:'Rules', fPrivacy:'Privacy Policy', fContact:'Contact'
   }
@@ -713,6 +715,7 @@ function setLang(lang) {
   });
   document.documentElement.lang = lang;
   updateJourney();
+  if (dict[lang].pageTitle) document.title = dict[lang].pageTitle;
   try { localStorage.setItem('inboxContestLang', lang); } catch (e) {}
 }
 document.querySelectorAll('#langSwitch button').forEach(b => {

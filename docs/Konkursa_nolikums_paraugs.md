@@ -67,6 +67,8 @@ Konkurss norisinās piecos posmos:
 
 5.2. Konkursa uzvarētāju izvēlas žūrija (TOP 5 atlase) un publiska balsošana, nevis nejaušības princips (izloze). Tāpēc Konkurss nav uzskatāms par izloti Izložu un azartspēļu likuma izpratnē un tam nav nepieciešama Izložu un azartspēļu uzraudzības inspekcijas licence.
 
+5.3. Šo konkursu nekādā veidā nesponsorē, neatbalsta un neadministrē Instagram, un tas nav ar to saistīts. Balsošanā piedalās Instagram lietotāji saskaņā ar Instagram lietošanas noteikumiem.
+
 ## 6. Balvas
 
 6.1. Konkursa galvenā balva — **Samsung Galaxy S26 Ultra** (1. vieta).
@@ -85,9 +87,9 @@ Konkurss norisinās piecos posmos:
 
 ### 7.3. Pilna tiesību nodošana — tikai Konkursa uzvarētājam
 
-Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, saņemot balvu, nodod Organizētāja īpašumā visas ar iesniegto darbu saistītās izmantošanas (mantiskās) tiesības**, lai Organizētājs varētu iesniegto konceptu profesionāli tālāk attīstīt un brīvi izmantot kā oficiālu Inbox.lv zīmola tēlu jebkādā veidā un jebkuros kanālos, arī pēc Konkursa noslēguma, bez papildu atlīdzības, izņemot šajā nolikumā paredzēto balvu.
+Papildus 7.2. punktā minētajai licencei, **Konkursa uzvarētājs, pirms balvas izsniegšanas parakstot rakstveida līgumu (nepilngadīgā gadījumā arī ar vecāka vai likumiskā aizbildņa parakstu), nodod Organizētāja īpašumā visas ar iesniegto darbu saistītās izmantošanas (mantiskās) tiesības**, lai Organizētājs varētu iesniegto konceptu profesionāli tālāk attīstīt un brīvi izmantot kā oficiālu Inbox.lv zīmola tēlu jebkādā veidā un jebkuros kanālos, arī pēc Konkursa noslēguma, bez papildu atlīdzības, izņemot šajā nolikumā paredzēto balvu. Uzvarētājs piekrīt, ka Organizētājs drīkst darbu pārveidot, papildināt un adaptēt, tostarp mainīt talismana vizuālo izskatu, vārdu un stāstu, un izmantot atvasinātos darbos.
 
-7.4. Autora personiskās (morālās) tiesības — tiesības uz autorību un darba integritāti —, kuras saskaņā ar Autortiesību likuma 14. panta piekto daļu nav atsavināmas, vienmēr paliek pie Dalībnieka/uzvarētāja neatkarīgi no 7.2. un 7.3. punktā minētās licences vai tiesību nodošanas.
+7.4. Autora personiskās (morālās) tiesības — tiesības uz autorību un darba integritāti —, kuras saskaņā ar Autortiesību likuma 14. panta piekto daļu nav atsavināmas, vienmēr paliek pie Dalībnieka/uzvarētāja neatkarīgi no 7.2. un 7.3. punktā minētās licences vai tiesību nodošanas, ievērojot uzvarētāja piekrišanu darba pārveidošanai saskaņā ar 7.3. punktu.
 
 7.5. Ja Dalībnieks/uzvarētājs Konkursa pieteikšanās vai balvas saņemšanas brīdī ir jaunāks par 18 gadiem, gan 7.2., gan 7.3. punkta spēkā esamībai nepieciešama arī vecāka vai likumiskā aizbildņa piekrišana (skat. 2.2.).
 
