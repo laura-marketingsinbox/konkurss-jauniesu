@@ -10,6 +10,12 @@ function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
 try{var c=JSON.parse(localStorage.getItem('inboxContestConsent')||'null');if(c&&c.status==='granted'&&Date.now()-c.ts<31536000000)gtag('consent','update',{analytics_storage:'granted'});}catch(e){}
 </script>
+<!-- Google Analytics 4 (gtag.js): darbojas ar Consent Mode — bez piekrišanas netiek lietotas sīkdatnes -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PV10GRFK74"></script>
+<script>
+gtag('js', new Date());
+gtag('config', 'G-PV10GRFK74');
+</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
