@@ -133,6 +133,8 @@
       console.error(err);
       if (err && (err.statusCode === '413' || err.error === 'Payload too large')) {
         showMsg(t('msgErrFile'), false);
+      } else if (err && (String(err.statusCode) === '402' || /restricted/i.test(err.message || ''))) {
+        showMsg(t('msgErrDown'), false);
       } else {
         const detail = err && (err.message || err.error_description || err.statusCode);
         showMsg(t('msgErr') + (detail ? ` (${detail})` : ''), false);
@@ -246,7 +248,11 @@
       .range(galleryLoaded, galleryLoaded + GALLERY_PAGE);
     galleryMoreBtn.disabled = false;
 
-    if (error || !data) return;
+    if (error) {
+      if (galleryLoaded === 0) grid.querySelectorAll('.gcard:not(.filled)').forEach((c) => { c.textContent = t('gUnavail'); });
+      return;
+    }
+    if (!data) return;
     if (data.length === 0) { galleryMoreBtn.hidden = true; return; }
 
     const hasMore = data.length > GALLERY_PAGE;
