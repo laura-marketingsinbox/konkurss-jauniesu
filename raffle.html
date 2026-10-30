@@ -76,14 +76,20 @@
   .hint { font-size: 12px; color: var(--gray-3); margin-top: 6px; line-height: 1.45; }
   .hint a { color: var(--white); }
 
-  .tabs { display: flex; background: var(--black); border-radius: 10px; padding: 4px; margin-bottom: 16px; }
-  .tabs button {
-    flex: 1; padding: 9px 8px; border-radius: 7px; background: transparent; color: var(--gray-3);
-    font-weight: 700; font-size: 13px;
+  .drop {
+    display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+    margin: 16px 0 0; padding: 28px 16px; border: 2px dashed var(--gray-2); border-radius: 12px;
+    background: var(--black); color: var(--white); cursor: pointer; transition: border-color .15s, background .15s;
   }
-  .tabs button.active { background: var(--gray-1); color: var(--white); }
-  .tab-body[hidden] { display: none; }
-
+  .drop:hover, .drop.over { border-color: var(--red); background: #160304; }
+  .drop-title { font-family: var(--font-display); font-size: 20px; text-transform: uppercase; letter-spacing: .03em; }
+  .drop-sub { font-size: 13px; color: var(--gray-3); }
+  .drop-file { font-size: 13px; color: var(--white); font-weight: 700; margin-top: 6px; word-break: break-all; }
+  .drop-file:empty { display: none; }
+  .manual { margin-top: 14px; }
+  .manual summary { cursor: pointer; font-size: 13px; color: var(--gray-3); }
+  .manual summary:hover { color: var(--white); }
+  .manual textarea { margin-top: 10px; }
   .check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gray-4); margin: 10px 0 0; cursor: pointer; }
   .check input { accent-color: var(--red); width: 16px; height: 16px; }
 
@@ -177,44 +183,28 @@
   <section class="panel">
     <h2>1. Dalībnieki</h2>
 
-    <label for="postUrl">Ieraksta saite (Instagram vai Facebook)</label>
+    <label for="postUrl">Ieraksta saite (neobligāti, uzvarētāju sarakstam)</label>
     <input type="text" id="postUrl" placeholder="https://www.instagram.com/p/…">
 
-    <div class="tabs" style="margin-top:16px">
-      <button type="button" data-tab="api" class="active">Ielādēt automātiski</button>
-      <button type="button" data-tab="paste">Ielīmēt sarakstu</button>
-    </div>
+    <label class="drop" id="drop" for="csvFile">
+      <input type="file" id="csvFile" accept=".csv,.txt,text/csv" hidden>
+      <span class="drop-title">Ievelc CSV failu šeit</span>
+      <span class="drop-sub">vai <u>izvēlies failu</u></span>
+      <span class="drop-file" id="dropFile"></span>
+    </label>
+    <p class="hint">
+      CSV failu dabū no jebkura komentāru eksporta rīka (meklē “Instagram comments export” vai “Facebook comments export”).
+      Lapa pati atrod kolonnu ar lietotājvārdu un komentāru.
+    </p>
 
-    <div class="tab-body" data-body="api">
-      <label for="token">Meta piekļuves atslēga (access token)</label>
-      <input type="password" id="token" placeholder="EAAG…" autocomplete="off">
-      <p class="hint">
-        Instagram un Facebook neļauj nolasīt komentārus bez atļaujas, tāpēc vajag lietotāja atslēgu no
-        <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a>
-        ar tiesībām <b>pages_show_list</b>, <b>pages_read_engagement</b>, <b>pages_read_user_content</b>,
-        <b>instagram_basic</b>, <b>instagram_manage_comments</b>. Ieraksts jābūt jūsu pārvaldītā lapā vai IG biznesa kontā.
-        Atslēga netiek saglabāta.
-      </p>
-      <label class="check"><input type="checkbox" id="includeReplies"> Iekļaut arī atbildes uz komentāriem</label>
-      <button class="btn red" id="loadApi" type="button">Ielādēt komentārus</button>
-    </div>
-
-    <div class="tab-body" data-body="paste" hidden>
-      <label for="pasteBox">Komentētāji — katrā rindā viens</label>
+    <details class="manual">
+      <summary>Vai ieraksti vārdus ar roku</summary>
       <textarea id="pasteBox" placeholder="janis_berzins&#10;anna.k: Es gribu uzvarēt! @draugs&#10;…"></textarea>
-      <p class="hint">
-        Der arī formāts <b>vārds: komentārs</b> vai CSV fails no komentāru eksporta rīka.
-        Trokšņa rindas (“Atbildēt”, “2 d.”, “Patīk” u.tml.) tiek izmestas.
-      </p>
-      <div class="row">
-        <button class="btn red" id="loadPaste" type="button">Pievienot</button>
-        <label class="btn" style="margin:10px 0 0; color:var(--white); font-size:14px">
-          CSV fails<input type="file" id="csvFile" accept=".csv,.txt,text/csv" hidden>
-        </label>
-      </div>
-    </div>
+      <p class="hint">Katrā rindā viens dalībnieks, var arī <b>vārds: komentārs</b>.</p>
+      <button class="btn" id="loadPaste" type="button">Pievienot</button>
+    </details>
 
-    <label for="exclude" style="margin-top:20px">Neiekļaut (piem., paša konta vārds) — atdalīt ar komatu</label>
+    <label for="exclude">Neiekļaut (piem., paša konta vārds) — atdalīt ar komatu</label>
     <input type="text" id="exclude" placeholder="inbox.lv, inboxlv">
 
     <label for="keyword">Komentārā jābūt (neobligāti)</label>
@@ -263,7 +253,6 @@
 
 <script>
 (() => {
-  const GRAPH = 'https://graph.facebook.com/v23.0';
   const STORE_KEY = 'inboxRaffleState';
   const SEG_COLORS = ['#CC0717', '#0E0E0E', '#5A5A5A', '#FFFFFF', '#2E2E2E', '#9A9A9A'];
   const $ = id => document.getElementById(id);
@@ -320,7 +309,8 @@
     state.entries = list;
     save();
     const p = pool();
-    setStatus(`${sourceLabel}: ${list.length} komentāri → ${p.length} dalībnieki ratā.`, 'ok');
+    const prev = state.winners.length ? ` ${state.winners.length} jau izvilkti iepriekš netiek iekļauti — spied “Sākt no jauna”, ja šī ir jauna izloze.` : '';
+    setStatus(`${sourceLabel}: ${list.length} komentāri → ${p.length} dalībnieki ratā.${prev}`, 'ok');
     refresh();
   }
 
@@ -340,154 +330,63 @@
     return list;
   }
 
-  function parseCsvRow(line) {
-    const cells = []; let cur = '', q = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
+  // pilns CSV parsētājs: pēdiņās drīkst būt komati un jaunas rindas
+  function csvRows(text, delim) {
+    const rows = []; let row = [], cur = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
       if (q) {
-        if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+        if (c === '"' && text[i + 1] === '"') { cur += '"'; i++; }
         else if (c === '"') q = false;
         else cur += c;
       } else if (c === '"') q = true;
-      else if (c === ',' || c === ';' || c === '\t') { cells.push(cur); cur = ''; }
-      else cur += c;
+      else if (c === delim) { row.push(cur); cur = ''; }
+      else if (c === '\n' || c === '\r') {
+        if (c === '\r' && text[i + 1] === '\n') i++;
+        row.push(cur); rows.push(row); row = []; cur = '';
+      } else cur += c;
     }
-    cells.push(cur);
-    return cells.map(s => s.trim());
+    row.push(cur); rows.push(row);
+    return rows.map(r => r.map(x => x.trim())).filter(r => r.some(Boolean));
+  }
+
+  function detectDelim(text) {
+    const first = text.split(/\r?\n/).slice(0, 15).join('\n');
+    const counts = [',', ';', '\t'].map(d => [d, first.split(d).length]);
+    return counts.sort((x, y) => y[1] - x[1])[0][0];
+  }
+
+  // kolonnu nosaukumi, sākot ar ticamāko
+  const NAME_COLS = [/^(user ?name|lietotājvārds|lietotajvards|username)$/, /user ?name|lietotājvārd/, /^(name|author|autors|vārds|full name|profile name|commenter|user)$/, /author|autors|name|vārds|commenter/];
+  const TEXT_COLS = [/^(comment|comment text|text|message|komentārs|teksts)$/, /comment|text|message|komentār|teksts/];
+  const LINK_COLS = [/profile ?(url|link)|user ?(url|link)|profila saite/];
+
+  function pickCol(head, patterns, skip) {
+    for (const re of patterns) {
+      const i = head.findIndex((h, j) => j !== skip && re.test(h) && !/\b(id|url|link|count|date|time|likes?)\b/.test(h.replace(re, '')));
+      if (i >= 0) return i;
+    }
+    return -1;
   }
 
   function parseCsv(text) {
-    const rows = text.split(/\r?\n/).filter(r => r.trim()).map(parseCsvRow);
+    text = text.replace(/^﻿/, '');
+    const rows = csvRows(text, detectDelim(text));
     if (!rows.length) return [];
-    const head = rows[0].map(h => h.toLowerCase());
-    const find = re => head.findIndex(h => re.test(h));
-    let ni = find(/user ?name|lietot|username|author|autors|^name$|vārds|profile/);
-    let ti = find(/comment|text|message|komentār|teksts/);
-    if (ni < 0) return parseLines(text); // nav galvenes — apstrādā kā vienkāršu sarakstu
-    return rows.slice(1).map(r => ({ name: (r[ni] || '').replace(/^@/, ''), text: ti >= 0 ? r[ti] || '' : '' }))
+    // eksporta rīki bieži liek dažas info rindas pirms galvenes
+    let hi = -1, ni = -1;
+    for (let r = 0; r < Math.min(rows.length, 20); r++) {
+      const head = rows[r].map(h => h.toLowerCase());
+      ni = pickCol(head, NAME_COLS);
+      if (ni >= 0) { hi = r; break; }
+    }
+    if (hi < 0) return parseLines(rows.map(r => r[0]).join('\n')); // nav galvenes — pirmā kolonna ir vārdi
+    const head = rows[hi].map(h => h.toLowerCase());
+    const ti = pickCol(head, TEXT_COLS, ni);
+    const li = pickCol(head, LINK_COLS, ni);
+    return rows.slice(hi + 1)
+      .map(r => ({ name: (r[ni] || '').replace(/^@/, ''), text: ti >= 0 ? r[ti] || '' : '', link: li >= 0 && /^https?:\/\//.test(r[li] || '') ? r[li] : '' }))
       .filter(e => e.name);
-  }
-
-  // ---------- Meta Graph API ----------
-  async function graph(path, params, token) {
-    const u = new URL(path.startsWith('http') ? path : GRAPH + path);
-    if (params) for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
-    if (!u.searchParams.has('access_token')) u.searchParams.set('access_token', token);
-    const res = await fetch(u);
-    const json = await res.json();
-    if (json.error) throw new Error(json.error.message);
-    return json;
-  }
-
-  async function graphAll(path, params, token, onPage) {
-    let json = await graph(path, params, token);
-    const all = [];
-    while (true) {
-      all.push(...(json.data || []));
-      if (onPage && onPage(json.data || [], all)) break;
-      if (!json.paging || !json.paging.next) break;
-      json = await graph(json.paging.next, null, token);
-    }
-    return all;
-  }
-
-  function parsePostUrl(url) {
-    let u;
-    try { u = new URL(url); } catch (e) { return null; }
-    const host = u.hostname.replace(/^www\.|^m\.|^web\./, '');
-    if (host === 'instagram.com' || host === 'instagr.am') {
-      const m = u.pathname.match(/\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/);
-      return m ? { platform: 'ig', shortcode: m[1] } : null;
-    }
-    if (host === 'facebook.com' || host === 'fb.com' || host === 'fb.watch') {
-      const ids = [];
-      for (const k of ['story_fbid', 'fbid', 'v']) if (u.searchParams.get(k)) ids.push(u.searchParams.get(k));
-      const pm = u.pathname.match(/\/(?:posts|videos|photos|permalink|reel)\/(?:[^/]+\/)?([A-Za-z0-9]+)/);
-      if (pm) ids.push(pm[1]);
-      return { platform: 'fb', ids, path: u.pathname.replace(/\/$/, '') };
-    }
-    return null;
-  }
-
-  async function loadFromApi() {
-    const url = $('postUrl').value.trim();
-    const token = $('token').value.trim();
-    const parsed = parsePostUrl(url);
-    if (!parsed) return setStatus('Saite neizskatās pēc Instagram vai Facebook ieraksta.', 'err');
-    if (!token) return setStatus('Ievadi Meta piekļuves atslēgu.', 'err');
-
-    const btn = $('loadApi'); btn.disabled = true;
-    try {
-      setStatus('Meklēju tavas lapas un kontus…');
-      const pages = await graphAll('/me/accounts', { fields: 'id,name,access_token,instagram_business_account{id,username}', limit: 100 }, token);
-      if (!pages.length) throw new Error('Šai atslēgai nav pieejamas nevienas Facebook lapas.');
-      const replies = $('includeReplies').checked;
-      let entries = null, owner = '';
-
-      if (parsed.platform === 'ig') {
-        for (const pg of pages) {
-          const ig = pg.instagram_business_account;
-          if (!ig) continue;
-          setStatus(`Meklēju ierakstu @${ig.username} kontā…`);
-          let media = null;
-          await graphAll(`/${ig.id}/media`, { fields: 'id,shortcode,permalink', limit: 100 }, token, data => {
-            media = data.find(m => m.shortcode === parsed.shortcode || (m.permalink || '').includes('/' + parsed.shortcode));
-            return !!media;
-          });
-          if (!media) continue;
-          owner = ig.username;
-          setStatus('Ielādēju komentārus…');
-          const fields = 'id,username,text,timestamp' + (replies ? ',replies.limit(100){id,username,text,timestamp}' : '');
-          const comments = await graphAll(`/${media.id}/comments`, { fields, limit: 100 }, token, (d, all) => { setStatus(`Ielādēti ${all.length} komentāri…`); });
-          entries = [];
-          for (const c of comments) {
-            entries.push({ name: c.username, text: c.text || '', link: 'https://www.instagram.com/' + c.username + '/' });
-            if (replies && c.replies) for (const r of c.replies.data) entries.push({ name: r.username, text: r.text || '', link: 'https://www.instagram.com/' + r.username + '/' });
-          }
-          break;
-        }
-        if (!entries) throw new Error('Ieraksts netika atrasts nevienā no taviem Instagram biznesa kontiem.');
-      } else {
-        for (const pg of pages) {
-          setStatus(`Meklēju ierakstu lapā “${pg.name}”…`);
-          let post = null;
-          const match = p => {
-            const id = p.id.split('_')[1];
-            if (parsed.ids.includes(id)) return true;
-            try {
-              const pp = new URL(p.permalink_url).pathname.replace(/\/$/, '');
-              return pp === parsed.path || parsed.ids.some(x => pp.endsWith('/' + x));
-            } catch (e) { return false; }
-          };
-          await graphAll(`/${pg.id}/posts`, { fields: 'id,permalink_url', limit: 100, access_token: pg.access_token }, pg.access_token, data => {
-            post = data.find(match);
-            return !!post;
-          });
-          if (!post) continue;
-          owner = pg.name;
-          setStatus('Ielādēju komentārus…');
-          const comments = await graphAll(`/${post.id}/comments`, {
-            fields: 'id,message,from{id,name},created_time', filter: replies ? 'stream' : 'toplevel', limit: 100, access_token: pg.access_token
-          }, pg.access_token, (d, all) => { setStatus(`Ielādēti ${all.length} komentāri…`); });
-          entries = comments.filter(c => c.from).map(c => ({ name: c.from.name, id: c.from.id, text: c.message || '' }));
-          if (comments.length && !entries.length) throw new Error('Facebook neatgrieza komentētāju vārdus — pārbaudi, vai atslēga ir ar pages_read_user_content tiesībām.');
-          break;
-        }
-        if (!entries) throw new Error('Ieraksts netika atrasts nevienā no tavām Facebook lapām.');
-      }
-
-      // Konta īpašnieku automātiski neiekļauj
-      if (owner) {
-        const ex = $('exclude');
-        const list = ex.value.split(',').map(s => s.trim()).filter(Boolean);
-        if (!list.map(norm).includes(norm(owner))) { list.push(owner); ex.value = list.join(', '); saveSettings(); }
-      }
-      addEntries(entries, parsed.platform === 'ig' ? 'Instagram' : 'Facebook');
-    } catch (e) {
-      setStatus('Kļūda: ' + e.message, 'err');
-    } finally {
-      btn.disabled = false;
-    }
   }
 
   // ---------- Rata zīmēšana ----------
@@ -742,24 +641,26 @@
   }
 
   // ---------- Notikumi ----------
-  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('active', x === b));
-    document.querySelectorAll('.tab-body').forEach(x => x.hidden = x.dataset.body !== b.dataset.tab);
-  }));
+  async function loadFile(f) {
+    if (!f) return;
+    $('dropFile').textContent = f.name;
+    const list = parseCsv(await f.text());
+    if (!list.length) return setStatus('Failā netika atrasts neviens dalībnieks.', 'err');
+    addEntries(list, f.name);
+  }
 
-  $('loadApi').addEventListener('click', loadFromApi);
+  $('csvFile').addEventListener('change', ev => { loadFile(ev.target.files[0]); ev.target.value = ''; });
+  const drop = $('drop');
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => loadFile(e.dataTransfer.files[0]));
+  // ja fails nomests garām laukam, pārlūks to neatvērs
+  ['dragover', 'drop'].forEach(t => window.addEventListener(t, e => e.preventDefault()));
+
   $('loadPaste').addEventListener('click', () => {
     const list = parseLines($('pasteBox').value);
     if (!list.length) return setStatus('Sarakstā nav neviena vārda.', 'err');
     addEntries(list, 'Saraksts');
-  });
-  $('csvFile').addEventListener('change', async ev => {
-    const f = ev.target.files[0];
-    if (!f) return;
-    const list = parseCsv(await f.text());
-    ev.target.value = '';
-    if (!list.length) return setStatus('Failā netika atrasts neviens dalībnieks.', 'err');
-    addEntries(list, f.name);
   });
   ['exclude', 'keyword'].forEach(id => $(id).addEventListener('input', () => { saveSettings(); if (!spinning) refresh(); }));
   $('uniqueUsers').addEventListener('change', () => { saveSettings(); if (!spinning) refresh(); });
@@ -782,7 +683,7 @@
     if (!confirm('Dzēst visus dalībniekus un uzvarētājus?')) return;
     state = { url: '', entries: [], winners: [], settings: state.settings };
     save();
-    $('postUrl').value = ''; $('pasteBox').value = '';
+    $('postUrl').value = ''; $('pasteBox').value = ''; $('dropFile').textContent = '';
     setStatus('');
     rotation = 0;
     refresh();
