@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<title>Laimes rats | Inbox.lv</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-display: 'Oswald', Impact, var(--font-base);
+    --red: #CC0717;
+    --black: #0E0E0E;
+    --ink: #1C1C1C;
+    --gray-1: #2E2E2E;
+    --gray-2: #5A5A5A;
+    --gray-3: #9A9A9A;
+    --gray-4: #D9D9D9;
+    --gray-5: #F2F2F2;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  .layout > * { min-width: 0; }
+  body {
+    margin: 0;
+    font-family: var(--font-base);
+    color: var(--white);
+    background: var(--black);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0;
+  }
+  p { margin: 0; line-height: 1.5; }
+  button { font-family: var(--font-base); cursor: pointer; border: none; }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 20px 28px; border-bottom: 1px solid var(--gray-1);
+  }
+  header h1 { font-size: 26px; letter-spacing: .02em; }
+  header h1 span { color: var(--red); }
+  header .count { color: var(--gray-3); font-size: 14px; }
+
+  .layout {
+    display: grid; grid-template-columns: 380px 1fr 320px; gap: 24px;
+    padding: 24px 28px; max-width: 1500px; margin: 0 auto;
+  }
+  @media (max-width: 1180px) { .layout { grid-template-columns: 1fr 1fr; } .stage { grid-column: 1 / -1; order: -1; } }
+  @media (max-width: 720px) { .layout { grid-template-columns: 1fr; padding: 16px; } header { padding: 16px; } }
+
+  .panel {
+    background: var(--ink); border: 1px solid var(--gray-1); border-radius: 14px; padding: 20px;
+    align-self: start;
+  }
+  .panel h2 { font-size: 18px; margin-bottom: 14px; letter-spacing: .03em; }
+  label { display: block; font-size: 13px; color: var(--gray-3); margin: 14px 0 6px; }
+  label:first-of-type { margin-top: 0; }
+  input[type=text], input[type=password], textarea {
+    width: 100%; background: var(--black); color: var(--white);
+    border: 1px solid var(--gray-1); border-radius: 8px; padding: 10px 12px;
+    font: inherit; font-size: 14px;
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--red); outline-offset: -1px; border-color: transparent; }
+  textarea { resize: vertical; min-height: 120px; font-family: ui-monospace, Menlo, monospace; font-size: 13px; }
+  .hint { font-size: 12px; color: var(--gray-3); margin-top: 6px; line-height: 1.45; }
+  .hint a { color: var(--white); }
+
+  .tabs { display: flex; background: var(--black); border-radius: 10px; padding: 4px; margin-bottom: 16px; }
+  .tabs button {
+    flex: 1; padding: 9px 8px; border-radius: 7px; background: transparent; color: var(--gray-3);
+    font-weight: 700; font-size: 13px;
+  }
+  .tabs button.active { background: var(--gray-1); color: var(--white); }
+  .tab-body[hidden] { display: none; }
+
+  .check { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gray-4); margin: 10px 0 0; cursor: pointer; }
+  .check input { accent-color: var(--red); width: 16px; height: 16px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 18px; border-radius: 10px; font-weight: 800; font-size: 14px;
+    background: var(--gray-1); color: var(--white); width: 100%; margin-top: 14px;
+  }
+  .btn:hover:not(:disabled) { background: var(--gray-2); }
+  .btn.red { background: var(--red); }
+  .btn.red:hover:not(:disabled) { background: #a80513; }
+  .btn.ghost { background: transparent; border: 1px solid var(--gray-1); color: var(--gray-3); }
+  .btn.ghost:hover:not(:disabled) { color: var(--white); border-color: var(--gray-2); background: transparent; }
+  .row { display: flex; gap: 10px; }
+  .row .btn { margin-top: 10px; }
+
+  .status { font-size: 13px; margin-top: 12px; min-height: 18px; color: var(--gray-3); }
+  .status.err { color: #ff6b75; }
+  .status.ok { color: var(--white); }
+
+  /* Ratas skatuve */
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .wheel-wrap { position: relative; width: min(100%, 620px); aspect-ratio: 1; }
+  .wheel-wrap canvas { width: 100%; height: 100%; display: block; border-radius: 50%; box-shadow: 0 0 0 8px var(--ink), 0 0 0 10px var(--gray-1), 0 30px 80px rgba(0,0,0,.6); }
+  .pointer {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    width: 0; height: 0; border-left: 22px solid transparent; border-right: 22px solid transparent;
+    border-top: 44px solid var(--red); filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)); z-index: 2;
+  }
+  .pointer.tick { animation: tick .12s ease-out; }
+  @keyframes tick { 50% { transform: translateX(-50%) rotate(-12deg); } }
+  .hub {
+    position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+    width: 22%; aspect-ratio: 1; border-radius: 50%; background: var(--white); color: var(--black);
+    display: grid; place-items: center; text-align: center; box-shadow: 0 0 0 6px var(--black), 0 8px 24px rgba(0,0,0,.5);
+    font-family: var(--font-display); font-size: clamp(14px, 2.4vw, 22px); text-transform: uppercase; line-height: 1;
+    border: none; padding: 0;
+  }
+  .hub:hover:not(:disabled) { background: var(--gray-5); }
+  .hub span { color: var(--red); display: block; font-size: .6em; margin-top: 4px; letter-spacing: .05em; }
+  .empty-msg { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; color: var(--gray-3); padding: 25%; font-size: 15px; pointer-events: none; }
+  .stage .spin-btn { max-width: 320px; font-size: 18px; padding: 16px; font-family: var(--font-display); letter-spacing: .05em; text-transform: uppercase; }
+
+  /* Uzvarētāji */
+  .winners { list-style: none; margin: 0; padding: 0; counter-reset: w; }
+  .winners li {
+    counter-increment: w; display: grid; grid-template-columns: 34px 1fr; gap: 10px;
+    padding: 12px 0; border-top: 1px solid var(--gray-1);
+  }
+  .winners li:first-child { border-top: none; padding-top: 0; }
+  .winners li::before {
+    content: counter(w); width: 30px; height: 30px; border-radius: 50%; background: var(--red);
+    display: grid; place-items: center; font-weight: 800; font-size: 14px;
+  }
+  .winners .name { font-weight: 800; word-break: break-word; }
+  .winners .name a { color: inherit; text-decoration: none; }
+  .winners .name a:hover { text-decoration: underline; }
+  .winners .text { font-size: 13px; color: var(--gray-3); margin-top: 2px; word-break: break-word; }
+  .winners .time { font-size: 11px; color: var(--gray-2); margin-top: 4px; }
+  .no-winners { color: var(--gray-3); font-size: 14px; }
+
+  .pool-list { max-height: 240px; overflow: auto; margin-top: 10px; font-size: 13px; color: var(--gray-4); border-top: 1px solid var(--gray-1); padding-top: 8px; }
+  .pool-list div { padding: 3px 0; display: flex; justify-content: space-between; gap: 8px; }
+  .pool-list div span:last-child { color: var(--gray-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55%; }
+
+  /* Uzvarētāja logs */
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,.78); display: grid; place-items: center; z-index: 50; padding: 16px; }
+  .modal[hidden] { display: none; }
+  .modal-card {
+    background: var(--white); color: var(--black); border-radius: 18px; padding: 36px 32px 28px;
+    width: min(100%, 480px); text-align: center; animation: pop .4s cubic-bezier(.2,1.4,.4,1);
+  }
+  @keyframes pop { from { transform: scale(.6); opacity: 0; } }
+  .modal-card .label { color: var(--red); font-family: var(--font-display); font-size: 18px; text-transform: uppercase; letter-spacing: .08em; }
+  .modal-card .winner-name { font-family: var(--font-display); font-size: clamp(32px, 7vw, 52px); text-transform: uppercase; margin: 10px 0 12px; word-break: break-word; line-height: 1.05; }
+  .modal-card .winner-text { color: var(--gray-2); font-size: 15px; max-height: 120px; overflow: auto; }
+  .modal-card .btn.ghost { color: var(--gray-2); border-color: var(--gray-4); }
+  .modal-card .btn.ghost:hover { color: var(--black); border-color: var(--gray-3); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Laimes <span>rats</span></h1>
+  <div class="count" id="headerCount"></div>
+</header>
+
+<main class="layout">
+
+  <!-- 1. Dalībnieku ielāde -->
+  <section class="panel">
+    <h2>1. Dalībnieki</h2>
+
+    <label for="postUrl">Ieraksta saite (Instagram vai Facebook)</label>
+    <input type="text" id="postUrl" placeholder="https://www.instagram.com/p/…">
+
+    <div class="tabs" style="margin-top:16px">
+      <button type="button" data-tab="api" class="active">Ielādēt automātiski</button>
+      <button type="button" data-tab="paste">Ielīmēt sarakstu</button>
+    </div>
+
+    <div class="tab-body" data-body="api">
+      <label for="token">Meta piekļuves atslēga (access token)</label>
+      <input type="password" id="token" placeholder="EAAG…" autocomplete="off">
+      <p class="hint">
+        Instagram un Facebook neļauj nolasīt komentārus bez atļaujas, tāpēc vajag lietotāja atslēgu no
+        <a href="https://developers.facebook.com/tools/explorer/" target="_blank" rel="noopener">Graph API Explorer</a>
+        ar tiesībām <b>pages_show_list</b>, <b>pages_read_engagement</b>, <b>pages_read_user_content</b>,
+        <b>instagram_basic</b>, <b>instagram_manage_comments</b>. Ieraksts jābūt jūsu pārvaldītā lapā vai IG biznesa kontā.
+        Atslēga netiek saglabāta.
+      </p>
+      <label class="check"><input type="checkbox" id="includeReplies"> Iekļaut arī atbildes uz komentāriem</label>
+      <button class="btn red" id="loadApi" type="button">Ielādēt komentārus</button>
+    </div>
+
+    <div class="tab-body" data-body="paste" hidden>
+      <label for="pasteBox">Komentētāji — katrā rindā viens</label>
+      <textarea id="pasteBox" placeholder="janis_berzins&#10;anna.k: Es gribu uzvarēt! @draugs&#10;…"></textarea>
+      <p class="hint">
+        Der arī formāts <b>vārds: komentārs</b> vai CSV fails no komentāru eksporta rīka.
+        Trokšņa rindas (“Atbildēt”, “2 d.”, “Patīk” u.tml.) tiek izmestas.
+      </p>
+      <div class="row">
+        <button class="btn red" id="loadPaste" type="button">Pievienot</button>
+        <label class="btn" style="margin:10px 0 0; color:var(--white); font-size:14px">
+          CSV fails<input type="file" id="csvFile" accept=".csv,.txt,text/csv" hidden>
+        </label>
+      </div>
+    </div>
+
+    <label for="exclude" style="margin-top:20px">Neiekļaut (piem., paša konta vārds) — atdalīt ar komatu</label>
+    <input type="text" id="exclude" placeholder="inbox.lv, inboxlv">
+
+    <label for="keyword">Komentārā jābūt (neobligāti)</label>
+    <input type="text" id="keyword" placeholder="piem., @ vai #inbox">
+
+    <label class="check"><input type="checkbox" id="uniqueUsers" checked> Katram dalībniekam viena iespēja</label>
+
+    <div class="status" id="status"></div>
+    <div class="pool-list" id="poolList" hidden></div>
+  </section>
+
+  <!-- 2. Rats -->
+  <section class="stage">
+    <div class="wheel-wrap">
+      <div class="pointer" id="pointer"></div>
+      <canvas id="wheel"></canvas>
+      <div class="empty-msg" id="emptyMsg">Ielādē dalībniekus, lai sāktu</div>
+      <button class="hub" id="hub" type="button" disabled>Griezt<span id="hubCount"></span></button>
+    </div>
+    <button class="btn red spin-btn" id="spinBtn" type="button" disabled>Izvilkt uzvarētāju</button>
+  </section>
+
+  <!-- 3. Uzvarētāji -->
+  <section class="panel">
+    <h2>Uzvarētāji</h2>
+    <ol class="winners" id="winners"></ol>
+    <p class="no-winners" id="noWinners">Vēl neviens nav izvilkts.</p>
+    <div class="row">
+      <button class="btn" id="copyWinners" type="button" disabled>Kopēt sarakstu</button>
+      <button class="btn ghost" id="resetAll" type="button">Sākt no jauna</button>
+    </div>
+  </section>
+</main>
+
+<canvas id="confetti" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60"></canvas>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="winnerName">
+    <div class="label" id="winnerLabel">Uzvarētājs</div>
+    <div class="winner-name" id="winnerName"></div>
+    <p class="winner-text" id="winnerText"></p>
+    <button class="btn red" id="nextBtn" type="button">Vilkt nākamo</button>
+    <button class="btn ghost" id="closeModal" type="button">Aizvērt</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const GRAPH = 'https://graph.facebook.com/v23.0';
+  const STORE_KEY = 'inboxRaffleState';
+  const SEG_COLORS = ['#CC0717', '#0E0E0E', '#5A5A5A', '#FFFFFF', '#2E2E2E', '#9A9A9A'];
+  const $ = id => document.getElementById(id);
+
+  // entries: visi ielādētie komentāri {name, text, link}; winners: izvilktie
+  let state = { url: '', entries: [], winners: [], settings: {} };
+  let rotation = 0;
+  let spinning = false;
+
+  // ---------- Saglabāšana ----------
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function load() {
+    try {
+      const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (s && Array.isArray(s.entries)) state = { url: s.url || '', entries: s.entries, winners: s.winners || [], settings: s.settings || {} };
+    } catch (e) {}
+  }
+
+  // ---------- Dalībnieku kopa ----------
+  const norm = n => String(n || '').trim().replace(/^@/, '').toLowerCase();
+
+  function saveSettings() {
+    state.settings = { exclude: $('exclude').value, keyword: $('keyword').value, unique: $('uniqueUsers').checked };
+    save();
+  }
+
+  function pool() {
+    const excluded = new Set($('exclude').value.split(',').map(norm).filter(Boolean));
+    const won = new Set(state.winners.map(w => norm(w.name)));
+    const kw = $('keyword').value.trim().toLowerCase();
+    const unique = $('uniqueUsers').checked;
+    const seen = new Set();
+    const out = [];
+    for (const e of state.entries) {
+      const key = norm(e.name);
+      if (!key || excluded.has(key) || won.has(key)) continue;
+      if (kw && !(e.text || '').toLowerCase().includes(kw)) continue;
+      if (unique) { if (seen.has(key)) continue; seen.add(key); }
+      out.push(e);
+    }
+    return out;
+  }
+
+  function setStatus(msg, kind) {
+    const el = $('status');
+    el.textContent = msg;
+    el.className = 'status' + (kind ? ' ' + kind : '');
+  }
+
+  function addEntries(list, sourceLabel) {
+    state.url = $('postUrl').value.trim();
+    state.entries = list;
+    save();
+    const p = pool();
+    setStatus(`${sourceLabel}: ${list.length} komentāri → ${p.length} dalībnieki ratā.`, 'ok');
+    refresh();
+  }
+
+  // ---------- Ielīmēts teksts / CSV ----------
+  const NOISE = /^(reply|replies|atbildēt|atbildes|like|likes|patīk|see translation|skatīt tulkojumu|view (all )?\d* ?repl(y|ies)|skatīt (visas )?\d* ?atbild\S*|hide replies|slēpt atbildes|edited|rediģēts|author|autors|verified|follow|sekot|·|•|\d+|\d+\s*(s|m|h|d|w|y|min\.?|st\.?|d\.|ned\.?|nedēļ\S*|stund\S*|dien\S*|minūt\S*|likes?|patīk\S*|atzīm\S*)( ago)?)$/i;
+
+  function parseLines(text) {
+    const list = [];
+    for (let raw of text.split(/\r?\n/)) {
+      const line = raw.trim();
+      if (!line || NOISE.test(line)) continue;
+      let name = line, comment = '';
+      const m = line.match(/^@?([^\s:\t,;]+)\s*[:\t,;]\s*(.*)$/) || line.match(/^@?([A-Za-z0-9._]+)\s+(.+)$/);
+      if (m) { name = m[1]; comment = m[2]; }
+      list.push({ name: name.replace(/^@/, ''), text: comment });
+    }
+    return list;
+  }
+
+  function parseCsvRow(line) {
+    const cells = []; let cur = '', q = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (q) {
+        if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+        else if (c === '"') q = false;
+        else cur += c;
+      } else if (c === '"') q = true;
+      else if (c === ',' || c === ';' || c === '\t') { cells.push(cur); cur = ''; }
+      else cur += c;
+    }
+    cells.push(cur);
+    return cells.map(s => s.trim());
+  }
+
+  function parseCsv(text) {
+    const rows = text.split(/\r?\n/).filter(r => r.trim()).map(parseCsvRow);
+    if (!rows.length) return [];
+    const head = rows[0].map(h => h.toLowerCase());
+    const find = re => head.findIndex(h => re.test(h));
+    let ni = find(/user ?name|lietot|username|author|autors|^name$|vārds|profile/);
+    let ti = find(/comment|text|message|komentār|teksts/);
+    if (ni < 0) return parseLines(text); // nav galvenes — apstrādā kā vienkāršu sarakstu
+    return rows.slice(1).map(r => ({ name: (r[ni] || '').replace(/^@/, ''), text: ti >= 0 ? r[ti] || '' : '' }))
+      .filter(e => e.name);
+  }
+
+  // ---------- Meta Graph API ----------
+  async function graph(path, params, token) {
+    const u = new URL(path.startsWith('http') ? path : GRAPH + path);
+    if (params) for (const [k, v] of Object.entries(params)) u.searchParams.set(k, v);
+    if (!u.searchParams.has('access_token')) u.searchParams.set('access_token', token);
+    const res = await fetch(u);
+    const json = await res.json();
+    if (json.error) throw new Error(json.error.message);
+    return json;
+  }
+
+  async function graphAll(path, params, token, onPage) {
+    let json = await graph(path, params, token);
+    const all = [];
+    while (true) {
+      all.push(...(json.data || []));
+      if (onPage && onPage(json.data || [], all)) break;
+      if (!json.paging || !json.paging.next) break;
+      json = await graph(json.paging.next, null, token);
+    }
+    return all;
+  }
+
+  function parsePostUrl(url) {
+    let u;
+    try { u = new URL(url); } catch (e) { return null; }
+    const host = u.hostname.replace(/^www\.|^m\.|^web\./, '');
+    if (host === 'instagram.com' || host === 'instagr.am') {
+      const m = u.pathname.match(/\/(?:p|reel|reels|tv)\/([A-Za-z0-9_-]+)/);
+      return m ? { platform: 'ig', shortcode: m[1] } : null;
+    }
+    if (host === 'facebook.com' || host === 'fb.com' || host === 'fb.watch') {
+      const ids = [];
+      for (const k of ['story_fbid', 'fbid', 'v']) if (u.searchParams.get(k)) ids.push(u.searchParams.get(k));
+      const pm = u.pathname.match(/\/(?:posts|videos|photos|permalink|reel)\/(?:[^/]+\/)?([A-Za-z0-9]+)/);
+      if (pm) ids.push(pm[1]);
+      return { platform: 'fb', ids, path: u.pathname.replace(/\/$/, '') };
+    }
+    return null;
+  }
+
+  async function loadFromApi() {
+    const url = $('postUrl').value.trim();
+    const token = $('token').value.trim();
+    const parsed = parsePostUrl(url);
+    if (!parsed) return setStatus('Saite neizskatās pēc Instagram vai Facebook ieraksta.', 'err');
+    if (!token) return setStatus('Ievadi Meta piekļuves atslēgu.', 'err');
+
+    const btn = $('loadApi'); btn.disabled = true;
+    try {
+      setStatus('Meklēju tavas lapas un kontus…');
+      const pages = await graphAll('/me/accounts', { fields: 'id,name,access_token,instagram_business_account{id,username}', limit: 100 }, token);
+      if (!pages.length) throw new Error('Šai atslēgai nav pieejamas nevienas Facebook lapas.');
+      const replies = $('includeReplies').checked;
+      let entries = null, owner = '';
+
+      if (parsed.platform === 'ig') {
+        for (const pg of pages) {
+          const ig = pg.instagram_business_account;
+          if (!ig) continue;
+          setStatus(`Meklēju ierakstu @${ig.username} kontā…`);
+          let media = null;
+          await graphAll(`/${ig.id}/media`, { fields: 'id,shortcode,permalink', limit: 100 }, token, data => {
+            media = data.find(m => m.shortcode === parsed.shortcode || (m.permalink || '').includes('/' + parsed.shortcode));
+            return !!media;
+          });
+          if (!media) continue;
+          owner = ig.username;
+          setStatus('Ielādēju komentārus…');
+          const fields = 'id,username,text,timestamp' + (replies ? ',replies.limit(100){id,username,text,timestamp}' : '');
+          const comments = await graphAll(`/${media.id}/comments`, { fields, limit: 100 }, token, (d, all) => { setStatus(`Ielādēti ${all.length} komentāri…`); });
+          entries = [];
+          for (const c of comments) {
+            entries.push({ name: c.username, text: c.text || '', link: 'https://www.instagram.com/' + c.username + '/' });
+            if (replies && c.replies) for (const r of c.replies.data) entries.push({ name: r.username, text: r.text || '', link: 'https://www.instagram.com/' + r.username + '/' });
+          }
+          break;
+        }
+        if (!entries) throw new Error('Ieraksts netika atrasts nevienā no taviem Instagram biznesa kontiem.');
+      } else {
+        for (const pg of pages) {
+          setStatus(`Meklēju ierakstu lapā “${pg.name}”…`);
+          let post = null;
+          const match = p => {
+            const id = p.id.split('_')[1];
+            if (parsed.ids.includes(id)) return true;
+            try {
+              const pp = new URL(p.permalink_url).pathname.replace(/\/$/, '');
+              return pp === parsed.path || parsed.ids.some(x => pp.endsWith('/' + x));
+            } catch (e) { return false; }
+          };
+          await graphAll(`/${pg.id}/posts`, { fields: 'id,permalink_url', limit: 100, access_token: pg.access_token }, pg.access_token, data => {
+            post = data.find(match);
+            return !!post;
+          });
+          if (!post) continue;
+          owner = pg.name;
+          setStatus('Ielādēju komentārus…');
+          const comments = await graphAll(`/${post.id}/comments`, {
+            fields: 'id,message,from{id,name},created_time', filter: replies ? 'stream' : 'toplevel', limit: 100, access_token: pg.access_token
+          }, pg.access_token, (d, all) => { setStatus(`Ielādēti ${all.length} komentāri…`); });
+          entries = comments.filter(c => c.from).map(c => ({ name: c.from.name, id: c.from.id, text: c.message || '' }));
+          if (comments.length && !entries.length) throw new Error('Facebook neatgrieza komentētāju vārdus — pārbaudi, vai atslēga ir ar pages_read_user_content tiesībām.');
+          break;
+        }
+        if (!entries) throw new Error('Ieraksts netika atrasts nevienā no tavām Facebook lapām.');
+      }
+
+      // Konta īpašnieku automātiski neiekļauj
+      if (owner) {
+        const ex = $('exclude');
+        const list = ex.value.split(',').map(s => s.trim()).filter(Boolean);
+        if (!list.map(norm).includes(norm(owner))) { list.push(owner); ex.value = list.join(', '); saveSettings(); }
+      }
+      addEntries(entries, parsed.platform === 'ig' ? 'Instagram' : 'Facebook');
+    } catch (e) {
+      setStatus('Kļūda: ' + e.message, 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // ---------- Rata zīmēšana ----------
+  const canvas = $('wheel');
+  const ctx = canvas.getContext('2d');
+  let current = [];
+
+  function sizeCanvas() {
+    const r = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = Math.round(r.width * dpr);
+    canvas.height = Math.round(r.height * dpr);
+    draw();
+  }
+
+  function segColor(i, n) {
+    // lai blakus esošie segmenti (arī pirmais un pēdējais) nesakrīt
+    let c = i % SEG_COLORS.length;
+    if (i === n - 1 && n % SEG_COLORS.length === 1 && n > 1) c = 2;
+    return SEG_COLORS[c];
+  }
+
+  function draw() {
+    const W = canvas.width, R = W / 2;
+    ctx.clearRect(0, 0, W, W);
+    const n = current.length;
+    if (!n) {
+      ctx.fillStyle = '#1C1C1C';
+      ctx.beginPath(); ctx.arc(R, R, R, 0, Math.PI * 2); ctx.fill();
+      return;
+    }
+    const seg = Math.PI * 2 / n;
+    ctx.save();
+    ctx.translate(R, R);
+    ctx.rotate(rotation);
+    for (let i = 0; i < n; i++) {
+      const col = segColor(i, n);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, R, i * seg, (i + 1) * seg);
+      ctx.closePath();
+      ctx.fillStyle = col;
+      ctx.fill();
+      if (n > 1 && n <= 400) {
+        ctx.strokeStyle = 'rgba(0,0,0,.25)';
+        ctx.lineWidth = Math.max(1, W / 900);
+        ctx.stroke();
+      }
+      // teksts tikai, ja segments ir pietiekami plats
+      const arcPx = seg * R * 0.62;
+      if (arcPx >= 9) {
+        const fs = Math.min(R * 0.075, arcPx * 0.8);
+        ctx.save();
+        ctx.rotate(i * seg + seg / 2);
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = (col === '#FFFFFF' || col === '#9A9A9A') ? '#0E0E0E' : '#FFFFFF';
+        ctx.font = `700 ${fs}px ${getComputedStyle(document.body).fontFamily}`;
+        let label = current[i].name;
+        const maxW = R * 0.62;
+        while (label.length > 2 && ctx.measureText(label).width > maxW) label = label.slice(0, -2) + '…';
+        ctx.fillText(label, R * 0.92, 0);
+        ctx.restore();
+      }
+    }
+    ctx.restore();
+    // ārējā mala
+    ctx.beginPath(); ctx.arc(R, R, R - W / 400, 0, Math.PI * 2);
+    ctx.strokeStyle = '#0E0E0E'; ctx.lineWidth = W / 200; ctx.stroke();
+  }
+
+  // ---------- Griešana ----------
+  function secureRandomInt(max) {
+    const buf = new Uint32Array(1);
+    const limit = Math.floor(0x100000000 / max) * max;
+    do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+    return buf[0] % max;
+  }
+
+  const TAU = Math.PI * 2;
+  // segments zem rādītāja (rādītājs ir augšā, leņķis -π/2)
+  function indexAt(rot, n) {
+    const a = ((-Math.PI / 2 - rot) % TAU + TAU) % TAU;
+    return Math.floor(a / (TAU / n)) % n;
+  }
+
+  function spin() {
+    if (spinning) return;
+    current = pool();
+    const n = current.length;
+    if (!n) return;
+    spinning = true;
+    updateButtons();
+
+    const winnerIdx = secureRandomInt(n);
+    const seg = TAU / n;
+    const jitter = (Math.random() * 0.7 - 0.35) * seg;
+    const targetMod = ((-Math.PI / 2 - (winnerIdx + 0.5) * seg - jitter) % TAU + TAU) % TAU;
+    const curMod = ((rotation % TAU) + TAU) % TAU;
+    const spins = 6 + secureRandomInt(3);
+    const start = rotation;
+    const end = rotation + spins * TAU + ((targetMod - curMod + TAU) % TAU);
+    const duration = 6500 + Math.random() * 1500;
+    const t0 = performance.now();
+    let lastIdx = indexAt(start, n);
+    const pointer = $('pointer');
+
+    function frame(now) {
+      const t = Math.min(1, (now - t0) / duration);
+      const eased = 1 - Math.pow(1 - t, 4);
+      rotation = start + (end - start) * eased;
+      draw();
+      const idx = indexAt(rotation, n);
+      if (idx !== lastIdx && n <= 200) {
+        lastIdx = idx;
+        pointer.classList.remove('tick'); void pointer.offsetWidth; pointer.classList.add('tick');
+      }
+      if (t < 1) requestAnimationFrame(frame);
+      else finish(current[winnerIdx]);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function finish(entry) {
+    rotation = rotation % TAU;
+    const w = { name: entry.name, text: entry.text || '', link: entry.link || '', at: new Date().toISOString() };
+    state.winners.push(w);
+    save();
+    spinning = false;
+
+    $('winnerLabel').textContent = state.winners.length === 1 ? 'Uzvarētājs' : `${state.winners.length}. uzvarētājs`;
+    $('winnerName').textContent = (state.url.includes('instagram') && !w.name.includes(' ') ? '@' : '') + w.name;
+    $('winnerText').textContent = w.text ? '“' + w.text + '”' : '';
+    $('modal').hidden = false;
+    $('nextBtn').disabled = pool().length === 0;
+    $('nextBtn').focus();
+    celebrate();
+    refresh(false);
+  }
+
+  // ---------- Konfeti ----------
+  const fx = $('confetti');
+  const fctx = fx.getContext('2d');
+  let parts = [], fxRunning = false;
+
+  function addBurst(x, y, count, angle, spread, speed) {
+    const colors = ['#CC0717', '#CC0717', '#FFFFFF', '#9A9A9A', '#5A5A5A'];
+    for (let i = 0; i < count; i++) {
+      const a = (angle + (Math.random() - 0.5) * spread) * Math.PI / 180;
+      const v = speed * (0.5 + Math.random() * 0.7);
+      parts.push({
+        x, y, vx: Math.cos(a) * v, vy: -Math.sin(a) * v,
+        w: 6 + Math.random() * 7, h: 4 + Math.random() * 5,
+        rot: Math.random() * TAU, vr: (Math.random() - 0.5) * 0.4,
+        tilt: Math.random() * TAU, color: colors[Math.floor(Math.random() * colors.length)],
+        life: 0, max: 160 + Math.random() * 90
+      });
+    }
+  }
+
+  function fxLoop() {
+    const W = fx.width, H = fx.height;
+    fctx.clearRect(0, 0, W, H);
+    parts = parts.filter(p => p.life < p.max && p.y < H + 40);
+    for (const p of parts) {
+      p.life++;
+      p.vx *= 0.985; p.vy = p.vy * 0.985 + 0.28;
+      p.x += p.vx + Math.sin(p.life / 12) * 0.6; p.y += p.vy;
+      p.rot += p.vr; p.tilt += 0.12;
+      fctx.save();
+      fctx.globalAlpha = Math.min(1, (p.max - p.life) / 40);
+      fctx.translate(p.x, p.y); fctx.rotate(p.rot);
+      fctx.fillStyle = p.color;
+      fctx.fillRect(-p.w / 2, -p.h / 2 * Math.cos(p.tilt), p.w, p.h * Math.cos(p.tilt));
+      fctx.restore();
+    }
+    if (parts.length) requestAnimationFrame(fxLoop);
+    else { fxRunning = false; fctx.clearRect(0, 0, W, H); }
+  }
+
+  function celebrate() {
+    const dpr = window.devicePixelRatio || 1;
+    fx.width = innerWidth * dpr; fx.height = innerHeight * dpr;
+    const W = fx.width, H = fx.height, s = dpr * Math.max(1, innerWidth / 900);
+    addBurst(W / 2, H * 0.55, 180, 90, 110, 17 * s);
+    let n = 0;
+    const side = setInterval(() => {
+      addBurst(0, H * 0.75, 14, 60, 40, 19 * s);
+      addBurst(W, H * 0.75, 14, 120, 40, 19 * s);
+      if (++n > 12) clearInterval(side);
+    }, 110);
+    if (!fxRunning) { fxRunning = true; requestAnimationFrame(fxLoop); }
+  }
+
+  // ---------- Skats ----------
+  function updateButtons() {
+    const n = pool().length;
+    $('spinBtn').disabled = spinning || n === 0;
+    $('hub').disabled = spinning || n === 0;
+    $('spinBtn').textContent = state.winners.length ? 'Vilkt nākamo' : 'Izvilkt uzvarētāju';
+  }
+
+  function renderWinners() {
+    const ol = $('winners');
+    ol.innerHTML = '';
+    for (const w of state.winners) {
+      const li = document.createElement('li');
+      const box = document.createElement('div');
+      const name = document.createElement('div');
+      name.className = 'name';
+      if (w.link) {
+        const a = document.createElement('a');
+        a.href = w.link; a.target = '_blank'; a.rel = 'noopener'; a.textContent = w.name;
+        name.appendChild(a);
+      } else name.textContent = w.name;
+      box.appendChild(name);
+      if (w.text) { const t = document.createElement('div'); t.className = 'text'; t.textContent = w.text; box.appendChild(t); }
+      const tm = document.createElement('div'); tm.className = 'time';
+      tm.textContent = new Date(w.at).toLocaleString('lv-LV');
+      box.appendChild(tm);
+      li.appendChild(box);
+      ol.appendChild(li);
+    }
+    $('noWinners').hidden = state.winners.length > 0;
+    $('copyWinners').disabled = !state.winners.length;
+  }
+
+  function renderPool(p) {
+    const el = $('poolList');
+    el.hidden = !p.length;
+    el.innerHTML = '';
+    for (const e of p.slice(0, 1000)) {
+      const d = document.createElement('div');
+      const a = document.createElement('span'); a.textContent = e.name;
+      const b = document.createElement('span'); b.textContent = e.text || '';
+      d.append(a, b); el.appendChild(d);
+    }
+    if (p.length > 1000) { const d = document.createElement('div'); d.textContent = `… un vēl ${p.length - 1000}`; el.appendChild(d); }
+  }
+
+  function refresh(redraw = true) {
+    const p = pool();
+    if (redraw) { current = p; draw(); }
+    $('emptyMsg').hidden = p.length > 0 || current.length > 0;
+    if (!p.length && state.entries.length) { $('emptyMsg').hidden = false; $('emptyMsg').textContent = 'Visi dalībnieki jau izvilkti'; }
+    else $('emptyMsg').textContent = 'Ielādē dalībniekus, lai sāktu';
+    $('hubCount').textContent = p.length ? p.length : '';
+    $('headerCount').textContent = state.entries.length ? `${p.length} ratā · ${state.winners.length} izvilkti` : '';
+    renderPool(p);
+    renderWinners();
+    updateButtons();
+  }
+
+  // ---------- Notikumi ----------
+  document.querySelectorAll('.tabs button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.tabs button').forEach(x => x.classList.toggle('active', x === b));
+    document.querySelectorAll('.tab-body').forEach(x => x.hidden = x.dataset.body !== b.dataset.tab);
+  }));
+
+  $('loadApi').addEventListener('click', loadFromApi);
+  $('loadPaste').addEventListener('click', () => {
+    const list = parseLines($('pasteBox').value);
+    if (!list.length) return setStatus('Sarakstā nav neviena vārda.', 'err');
+    addEntries(list, 'Saraksts');
+  });
+  $('csvFile').addEventListener('change', async ev => {
+    const f = ev.target.files[0];
+    if (!f) return;
+    const list = parseCsv(await f.text());
+    ev.target.value = '';
+    if (!list.length) return setStatus('Failā netika atrasts neviens dalībnieks.', 'err');
+    addEntries(list, f.name);
+  });
+  ['exclude', 'keyword'].forEach(id => $(id).addEventListener('input', () => { saveSettings(); if (!spinning) refresh(); }));
+  $('uniqueUsers').addEventListener('change', () => { saveSettings(); if (!spinning) refresh(); });
+
+  $('spinBtn').addEventListener('click', spin);
+  $('hub').addEventListener('click', spin);
+  $('closeModal').addEventListener('click', () => { $('modal').hidden = true; refresh(); });
+  $('nextBtn').addEventListener('click', () => { $('modal').hidden = true; refresh(); setTimeout(spin, 350); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !$('modal').hidden) { $('modal').hidden = true; refresh(); } });
+
+  $('copyWinners').addEventListener('click', async () => {
+    const txt = (state.url ? `Ieraksts: ${state.url}\n` : '') +
+      state.winners.map((w, i) => `${i + 1}. ${w.name}${w.text ? ' — ' + w.text : ''} (${new Date(w.at).toLocaleString('lv-LV')})`).join('\n');
+    try { await navigator.clipboard.writeText(txt); $('copyWinners').textContent = 'Nokopēts!'; }
+    catch (e) { prompt('Nokopē sarakstu:', txt); }
+    setTimeout(() => $('copyWinners').textContent = 'Kopēt sarakstu', 1600);
+  });
+
+  $('resetAll').addEventListener('click', () => {
+    if (!confirm('Dzēst visus dalībniekus un uzvarētājus?')) return;
+    state = { url: '', entries: [], winners: [], settings: state.settings };
+    save();
+    $('postUrl').value = ''; $('pasteBox').value = '';
+    setStatus('');
+    rotation = 0;
+    refresh();
+  });
+
+  window.addEventListener('resize', sizeCanvas);
+
+  load();
+  $('postUrl').value = state.url;
+  const st = state.settings || {};
+  if (st.exclude != null) $('exclude').value = st.exclude;
+  if (st.keyword != null) $('keyword').value = st.keyword;
+  if (st.unique != null) $('uniqueUsers').checked = st.unique;
+  if (state.entries.length) setStatus(`Atjaunots iepriekšējais vilkšanas stāvoklis (${state.entries.length} komentāri).`, 'ok');
+  sizeCanvas();
+  refresh();
+})();
+</script>
+</body>
+</html>
