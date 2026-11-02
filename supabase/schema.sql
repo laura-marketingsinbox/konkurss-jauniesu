@@ -106,6 +106,8 @@ create policy "public can submit" on public.submissions
     consent_rules = true
     and consent_rights_transfer = true
     and (is_minor = false or (parent_name is not null and parent_email is not null))
+    -- pieteikšanās noslēdzās 31.10.2026 (Rīgas laiks); esošie pieteikumi netiek skarti
+    and now() < timestamptz '2026-11-01 00:00:00 Europe/Riga'
   );
 
 -- Publiski redzami tikai apstiprinātie darbi (galerijai)
@@ -162,7 +164,7 @@ on conflict (id) do update set
 drop policy if exists "public can upload submissions" on storage.objects;
 create policy "public can upload submissions" on storage.objects
   for insert to anon, authenticated
-  with check (bucket_id = 'submissions');
+  with check (bucket_id = 'submissions' and now() < timestamptz '2026-11-01 00:00:00 Europe/Riga');
 
 drop policy if exists "admins can read submissions" on storage.objects;
 create policy "admins can read submissions" on storage.objects

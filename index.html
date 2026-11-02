@@ -252,6 +252,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .form-msg.err { display: block; background: #fbeceb; color: #8a2a22; }
   .submit-btn { background: var(--red); color: var(--white); font-weight: 700; font-size: 15px; padding: 14px 26px; border-radius: 10px; width: 100%; }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  /* Pieteikšanās noslēgta: forma paliek HTML (dati, analītika, kods nemainās), tikai paslēpta un atslēgta */
+  .closed-note { display: none; background: var(--bg-light); border-radius: 16px; padding: 40px 30px; border: 1px solid rgba(0,0,0,0.06); text-align: center; }
+  .submit.is-closed .form-mock,
+  .submit.is-closed .consent-note { display: none; }
+  .submit.is-closed .closed-note { display: block; }
+  .closed-note .closed-badge { display: inline-block; background: var(--red); color: var(--white); font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; margin-bottom: 18px; }
+  .closed-note h3 { font-size: 24px; margin-bottom: 10px; }
+  .closed-note p { color: #514c47; font-size: 15px; max-width: 40ch; margin: 0 auto 24px; }
   .gcard.filled { border-style: solid; overflow: hidden; padding: 0; position: relative; cursor: zoom-in; }
   .gcard.filled img, .gcard.filled video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
   .gcard.filled .gname { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(0deg, rgba(0,0,0,0.65), transparent); color: #fff; font-size: 12.5px; padding: 8px 10px; text-align: left; }
@@ -550,10 +558,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <button type="submit" class="submit-btn" data-key="fSubmit">Iesniegt pieteikumu</button>
       <div class="form-msg" id="formMsg"></div>
     </form>
+    <div class="closed-note" id="closedNote" role="status">
+      <div class="closed-badge" data-key="closedBadge">Pieteikšanās noslēgusies</div>
+      <h3 data-key="closedT">Paldies visiem dalībniekiem!</h3>
+      <p data-key="closedS">Tagad žūrija izvēlas TOP 5 finālistus, kurus atklāsim 9. novembrī. Seko līdzi!</p>
+      <button type="button" class="btn-primary" data-key="closedBtn" onclick="document.getElementById('gallerySection').scrollIntoView({behavior:'smooth'})">Skatīt dalībnieku darbus</button>
+    </div>
   </div>
 </section>
 
-<section class="gallery">
+<section class="gallery" id="gallerySection">
   <div class="wrap">
     <h2 data-key="galT">Dalībnieku darbi</h2>
     <p class="sub" data-key="galS">Šeit pēc 30. septembra parādīsies iesniegtie talismani. Pirmais taps tavs?</p>
@@ -589,6 +603,9 @@ window.dict = {
   lv: {
     audience: 'KONKURSS JAUNIEŠIEM', pageTitle: 'Radi nākamo Inbox.lv talismanu | Konkurss jauniešiem', pill: 'Sadarbībā ar <b>Samsung</b>', title: 'Radi nākamo<br>Inbox.lv talismanu',
     sub: 'Ar mākslīgā intelekta rīkiem izveido tēlu, vārdu un stāstu - tavs koncepts var kļūt par īstu Inbox.lv zīmola seju.',
+    ctaClosed: 'Pieteikšanās noslēgusies', dates2Closed: '· pieteikšanās noslēgusies',
+    subTClosed: 'Pieteikšanās ir noslēgusies', subSClosed: 'Pieteikumus pieņēmām no 6. līdz 31. oktobrim. Paldies visiem, kas iesniedza savus talismanus!',
+    closedBadge: 'Pieteikšanās noslēgusies', closedT: 'Paldies visiem dalībniekiem!', closedS: 'Tagad žūrija izvēlas TOP 5 finālistus, kurus atklāsim 9. novembrī. Seko līdzi!', closedBtn: 'Skatīt dalībnieku darbus',
     cta: 'Piesakies konkursam', dates: '06.10.–31.10.2026', dates2: '· pieteikšanās periods',
     philTitle: 'AI palīdz. Ideja ir tava.',
     philSub: 'Izmantojot AI rīkus, tu izveido sava talismana vizuālo tēlu, dod tam vārdu un uzraksti tā personību un stāstu. Rezultāts - jauns Inbox.lv zīmola varonis, ko izvēlēsies Latvija.',
@@ -631,6 +648,9 @@ window.dict = {
   ru: {
     audience: 'МОЛОДЕЖНЫЙ КОНКУРС', pageTitle: 'Создай нового талисмана Inbox.lv | Молодежный конкурс', pill: 'В партнёрстве с <b>Samsung</b>', title: 'Создай нового<br>талисмана Inbox.lv',
     sub: 'С помощью ИИ создай образ, имя и историю - твоя идея может стать настоящим лицом бренда Inbox.lv.',
+    ctaClosed: 'Приём заявок завершён', dates2Closed: '· приём заявок завершён',
+    subTClosed: 'Приём заявок завершён', subSClosed: 'Заявки принимались с 6 по 31 октября. Спасибо всем, кто прислал своих талисманов!',
+    closedBadge: 'Приём заявок завершён', closedT: 'Спасибо всем участникам!', closedS: 'Сейчас жюри выбирает TOP 5 финалистов, которых мы представим 9 ноября. Следи за новостями!', closedBtn: 'Смотреть работы участников',
     cta: 'Участвовать', dates: '06.10–31.10.2026', dates2: '· приём заявок',
     philTitle: 'ИИ помогает. Идея - твоя.',
     philSub: 'С помощью ИИ ты создаёшь визуальный образ талисмана, придумываешь имя и пишешь его характер и историю. Результат - новый герой бренда Inbox.lv, которого выберет Латвия.',
@@ -673,6 +693,9 @@ window.dict = {
   en: {
     audience: 'YOUTH CONTEST', pageTitle: 'Create the next Inbox.lv mascot | Youth contest', pill: 'In partnership with <b>Samsung</b>', title: 'Create the next<br>Inbox.lv mascot',
     sub: 'Using AI tools, design a character, name and story - your idea could become the real face of the Inbox.lv brand.',
+    ctaClosed: 'Submissions closed', dates2Closed: '· submissions closed',
+    subTClosed: 'Submissions are closed', subSClosed: 'We accepted entries from 6 to 31 October. Thank you to everyone who sent in a mascot!',
+    closedBadge: 'Submissions closed', closedT: 'Thank you to all participants!', closedS: 'The jury is now choosing the TOP 5 finalists, revealed on 9 November. Stay tuned!', closedBtn: 'See the entries',
     cta: 'Enter the contest', dates: '6–31 Oct 2026', dates2: '· submission period',
     philTitle: 'AI helps. The idea is yours.',
     philSub: 'Using AI tools, you create your mascot\'s visual character, give it a name, and write its personality and story. The result - a new Inbox.lv brand hero, chosen by Latvia.',
@@ -725,6 +748,17 @@ const STAGES = [
 function rigaToday() {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Riga' }).format(new Date());
 }
+// Pieteikšanās noslēdzas līdz ar 1. posmu. Forma netiek dzēsta (iesniegtie dati, GA4 un kods paliek),
+// to tikai paslēpj un atslēdz, un tās vietā rāda paziņojumu.
+const SUBMISSIONS_CLOSED = rigaToday() > STAGES[0].to;
+if (SUBMISSIONS_CLOSED) {
+  document.querySelector('section.submit').classList.add('is-closed');
+  const entryForm = document.getElementById('entryForm');
+  entryForm.dataset.closed = '1';
+  entryForm.inert = true;
+  entryForm.setAttribute('aria-hidden', 'true');
+  entryForm.querySelectorAll('input, select, textarea, button').forEach(el => { el.disabled = true; });
+}
 function updateJourney(today) {
   today = today || rigaToday();
   const d = dict[document.documentElement.lang] || dict.lv;
@@ -745,7 +779,8 @@ function updateJourney(today) {
 
 function setLang(lang) {
   document.querySelectorAll('[data-key]').forEach(el => {
-    const key = el.getAttribute('data-key');
+    let key = el.getAttribute('data-key');
+    if (SUBMISSIONS_CLOSED && dict[lang][key + 'Closed'] !== undefined) key += 'Closed';
     if (dict[lang][key] !== undefined) el.innerHTML = dict[lang][key];
   });
   document.querySelectorAll('#langSwitch button').forEach(b => {

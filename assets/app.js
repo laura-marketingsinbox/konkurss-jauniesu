@@ -69,6 +69,7 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (form.dataset.closed) return; // pieteikšanās noslēgusies
     msgBox.className = 'form-msg';
 
     if (!form.reportValidity()) return;
