@@ -177,7 +177,7 @@
       const url = pub && pub.publicUrl;
       const media = url
         ? (row.file_type === 'video'
-            ? `<video src="${url}" muted playsinline preload="metadata"></video>`
+            ? `<video src="${url}#t=0.1" muted playsinline preload="metadata"></video>`
             : `<img src="${url}" alt="${esc(row.mascot_name)}">`)
         : '';
       const rank = Number(row.winner_rank) || 0;
@@ -215,8 +215,8 @@
       const url = pub && pub.publicUrl;
       const media = url
         ? (row.file_type === 'video'
-            ? `<video src="${url}" muted playsinline preload="metadata"></video>`
-            : `<img src="${url}" alt="${esc(row.mascot_name)}" loading="lazy">`)
+            ? `<video src="${url}#t=0.1" muted playsinline preload="metadata"></video>`
+            : `<img src="${url}" alt="${esc(row.mascot_name)}">`)
         : '';
       return `<div class="fcard" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${media}<div class="fname">${esc(row.mascot_name)}</div></div>`;
     }));
@@ -264,7 +264,7 @@
       const { data: pub } = sb.storage.from(SUPABASE_PUBLIC_BUCKET).getPublicUrl(row.file_path);
       const url = pub && pub.publicUrl;
       const media = row.file_type === 'video'
-        ? `<video src="${url}" muted playsinline preload="metadata"></video>`
+        ? `<video src="${url}#t=0.1" muted playsinline preload="metadata"></video>`
         : `<img src="${url}" alt="${esc(row.mascot_name)}" loading="lazy">`;
       return `<div class="gcard filled" data-media-url="${esc(url || '')}" data-media-type="${row.file_type}" data-media-label="${esc(row.mascot_name)}">${url ? media : ''}<div class="gname">${esc(row.mascot_name)}</div></div>`;
     }).join('');
